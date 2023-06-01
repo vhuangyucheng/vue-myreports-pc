@@ -12,19 +12,19 @@ import {
 } from '@ant-design/icons-vue';
 
 const router = useRouter();
-const itemClick = ({ item, key, keyPath }) => {
+const itemClick = ({item, key, keyPath}) => {
   console.log(key);
   router.push({path: key})
 }
 </script>
 <template>
-  <a-layout has-sider>
+  <a-layout>
     <a-layout-sider
         collapsible
         :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0 }"
     >
       <div class="logo"/>
-      <a-menu  theme="dark" mode="inline" @click="itemClick">
+      <a-menu theme="dark" mode="inline" @click="itemClick">
 
         <a-menu-item key="/announcement">
           <appstore-outlined/>
@@ -33,7 +33,7 @@ const itemClick = ({ item, key, keyPath }) => {
 
         <a-sub-menu key="sub2">
           <template #icon>
-            <MailOutlined />
+            <MailOutlined/>
           </template>
           <template #title>line#2</template>
           <a-menu-item key="/dailyReport2">
@@ -55,7 +55,7 @@ const itemClick = ({ item, key, keyPath }) => {
         </a-sub-menu>
         <a-sub-menu key="sub1">
           <template #icon>
-            <MailOutlined />
+            <MailOutlined/>
           </template>
           <template #title>line#1</template>
           <a-menu-item key="/dailyReport1">
@@ -77,19 +77,22 @@ const itemClick = ({ item, key, keyPath }) => {
         </a-sub-menu>
       </a-menu>
     </a-layout-sider>
-    <a-layout :style="{ marginLeft: '200px' }">
-      <a-layout-header :style="{ background: '#fff', padding: 0 }"/>
+    <a-layout>
+      <a-layout-header style="background: #fff; padding: 0">
+        header
+      </a-layout-header>
       <a-layout-content :style="{ margin: '24px 16px 0', overflow: 'initial' }">
         <div :style="{ padding: '24px', background: '#fff', textAlign: 'center' }">
-          content
-          <RouterView></RouterView>
+          <router-view></router-view>
         </div>
       </a-layout-content>
-      <a-layout-footer :style="{ textAlign: 'center' }">
-        footfootfootfootfootfoot
+      <a-layout-footer style="text-align: center">
+        Ant Design ©2018 Created by Ant UED
       </a-layout-footer>
     </a-layout>
   </a-layout>
+
+
 </template>
 
 <style>
