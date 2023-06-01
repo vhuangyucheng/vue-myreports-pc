@@ -1,30 +1,109 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
+import {
+  UserOutlined,
+  VideoCameraOutlined,
+  UploadOutlined,
+  BarChartOutlined,
+  CloudOutlined,
+  AppstoreOutlined,
+  TeamOutlined,
+  MailOutlined,
+  ShopOutlined
+} from '@ant-design/icons-vue';
 
+const router = useRouter();
+const itemClick = ({ item, key, keyPath }) => {
+  console.log(key);
+  router.push({path: key})
+}
+</script>
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <a-layout has-sider>
+    <a-layout-sider
+        collapsible
+        :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0 }"
+    >
+      <div class="logo"/>
+      <a-menu  theme="dark" mode="inline" @click="itemClick">
+
+        <a-menu-item key="/announcement">
+          <appstore-outlined/>
+          <span class="nav-text">announcement</span>
+        </a-menu-item>
+
+        <a-sub-menu key="sub2">
+          <template #icon>
+            <MailOutlined />
+          </template>
+          <template #title>line#2</template>
+          <a-menu-item key="/dailyReport2">
+            <user-outlined/>
+            <span class="nav-text">daily report</span>
+          </a-menu-item>
+          <a-menu-item key="/weeklyReport2">
+            <video-camera-outlined/>
+            <span class="nav-text">weekly report</span>
+          </a-menu-item>
+          <a-menu-item key="/monthlyReport2">
+            <upload-outlined/>
+            <span class="nav-text">monthly report</span>
+          </a-menu-item>
+          <a-menu-item key="/selectedReport2">
+            <bar-chart-outlined/>
+            <span class="nav-text">selected report</span>
+          </a-menu-item>
+        </a-sub-menu>
+        <a-sub-menu key="sub1">
+          <template #icon>
+            <MailOutlined />
+          </template>
+          <template #title>line#1</template>
+          <a-menu-item key="/dailyReport1">
+            <user-outlined/>
+            <span class="nav-text">daily report</span>
+          </a-menu-item>
+          <a-menu-item key="/weeklyReport1">
+            <video-camera-outlined/>
+            <span class="nav-text">weekly report</span>
+          </a-menu-item>
+          <a-menu-item key="/monthlyReport1">
+            <upload-outlined/>
+            <span class="nav-text">monthly report</span>
+          </a-menu-item>
+          <a-menu-item key="/selectedReport1">
+            <bar-chart-outlined/>
+            <span class="nav-text">selected report</span>
+          </a-menu-item>
+        </a-sub-menu>
+      </a-menu>
+    </a-layout-sider>
+    <a-layout :style="{ marginLeft: '200px' }">
+      <a-layout-header :style="{ background: '#fff', padding: 0 }"/>
+      <a-layout-content :style="{ margin: '24px 16px 0', overflow: 'initial' }">
+        <div :style="{ padding: '24px', background: '#fff', textAlign: 'center' }">
+          content
+          <RouterView></RouterView>
+        </div>
+      </a-layout-content>
+      <a-layout-footer :style="{ textAlign: 'center' }">
+        footfootfootfootfootfoot
+      </a-layout-footer>
+    </a-layout>
+  </a-layout>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style>
+#components-layout-demo-fixed-sider .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.site-layout .site-layout-background {
+  background: #fff;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+[data-theme='dark'] .site-layout .site-layout-background {
+  background: #141414;
 }
 </style>
