@@ -1,5 +1,6 @@
 <script setup>
-import CellDefectChat from "./CellDefectChat.vue";
+import CellDefectChat1 from "./CellDefectChat1.vue";
+import CellDefectChat2 from "./CellDefectChat2.vue";
 </script>
 <template>
   <a-row type="flex" justify="space-around" align="middle">
@@ -121,7 +122,17 @@ import CellDefectChat from "./CellDefectChat.vue";
       <div>后道不良分布</div>
     </a-col>
   </a-row>
-  <CellDefectChat/>
+  <a-row>
+    <a-col :span="8" :offset="3">
+      <CellDefectChat1/>
+      <div>后道不良分布</div>
+    </a-col>
+    <a-col :span="9">
+      <div>后道不良分布</div>
+    </a-col>
+
+  </a-row>
+
 
 
 </template>
