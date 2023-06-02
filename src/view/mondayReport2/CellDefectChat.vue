@@ -1,4 +1,4 @@
-<script >
+<script setup>
 import {Column} from '@antv/g2plot';
 
 const data = [
@@ -109,25 +109,29 @@ const data = [
   },
 ];
 
-const columnPlot = new Column('container', {
-  data,
-  xField: 'year',
-  yField: 'value',
-  seriesField: 'country',
-  isPercent: true,
-  isStack: true,
-  label: {
-    position: 'middle',
-    content: (item) => {
-      return item.value.toFixed(2);
-    },
-    style: {
-      fill: '#fff',
-    },
-  },
-});
 
-columnPlot.render();
+
+onMounted(() => {
+  const columnPlot = new Column('container', {
+    data,
+    xField: 'year',
+    yField: 'value',
+    seriesField: 'country',
+    isPercent: true,
+    isStack: true,
+    label: {
+      position: 'middle',
+      content: (item) => {
+        return item.value.toFixed(2);
+      },
+      style: {
+        fill: '#fff',
+      },
+    },
+  });
+  columnPlot.render();
+})
+
 </script>
 
 <template>
