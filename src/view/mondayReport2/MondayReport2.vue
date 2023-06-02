@@ -1,6 +1,10 @@
 <script setup>
-import CellDefectChat1 from "./CellDefectChat1.vue";
-import CellDefectChat2 from "./CellDefectChat2.vue";
+import CellDefectChat1 from "./chat/CellDefectChat1.vue";
+import CellDefectChat2 from "./chat/CellDefectChat2.vue";
+import CellDefectChat3 from "./chat/CellDefectChat3.vue";
+import FirstELChat from "./chat/FirstELChat.vue";
+import TargetFulfillment from "./chat/TargetFulfillment.vue";
+import InputAndFinishedGoods from "./chat/InputAndFinishedGoods.vue";
 </script>
 <template>
   <a-row type="flex" justify="space-around" align="middle">
@@ -11,13 +15,13 @@ import CellDefectChat2 from "./CellDefectChat2.vue";
       />
     </a-col>
     <a-col :span="8" :style="{ fontSize: '30px'}" push="1">
-      <div> wip: 新线晚班贴条码：550W
+      <div> 2线晚班贴条码：550W
         <br/>
         SCE22300001038P2F0
         <br/>
         SCE2230001310P2F0
         <br/>
-        共273件
+        Input: 273件
         <br/>
         finished goods: xxx
       </div>
@@ -32,13 +36,13 @@ import CellDefectChat2 from "./CellDefectChat2.vue";
       />
     </a-col>
     <a-col :span="8" :style="{ fontSize: '30px'}" push="1">
-      wip: 新线晚班贴条码：550W
+      2线晚班贴条码：550W
       <br/>
       SCE22300001038P2F0
       <br/>
       SCE2230001310P2F0
       <br/>
-      共273件
+      Input: 共273件
       <br/>
       finished goods: xxx
     </a-col>
@@ -51,13 +55,13 @@ import CellDefectChat2 from "./CellDefectChat2.vue";
       />
     </a-col>
     <a-col :span="8" :style="{ fontSize: '30px'}" push="1">
-      wip: 新线晚班贴条码：550W
+      2线晚班贴条码：550W
       <br/>
       SCE22300001038P2F0
       <br/>
       SCE2230001310P2F0
       <br/>
-      共273件
+      Input: 共273件
       <br/>
       finished goods: xxx
     </a-col>
@@ -70,7 +74,7 @@ import CellDefectChat2 from "./CellDefectChat2.vue";
       />
     </a-col>
     <a-col :span="8" :style="{ fontSize: '30px'}" push="1">
-      wip: 新线晚班贴条码：550W
+      wip: 2线晚班贴条码：550W
       <br/>
       SCE22300001038P2F0
       <br/>
@@ -123,16 +127,36 @@ import CellDefectChat2 from "./CellDefectChat2.vue";
     </a-col>
   </a-row>
   <a-row>
-    <a-col :span="8" :offset="3">
-      <CellDefectChat1/>
-      <div>后道不良分布</div>
+    <a-col :span="7" :offset="3">
+      <cell-defect-chat1></cell-defect-chat1>
+      <div>电池片来料合格</div>
     </a-col>
-    <a-col :span="9">
-      <div>后道不良分布</div>
+    <a-col :span="7">
+      <CellDefectChat2/>
+      <div>电池片制程合格</div>
     </a-col>
+    <a-col :span="7">
+      <cell-defect-chat3></cell-defect-chat3>
 
+      <div>电池串来料合格</div>
+    </a-col>
   </a-row>
 
+  <a-row>
+    <a-col :span="7" :offset="3">
+      <FirstELChat/>
+      <div>前道不良率对比</div>
+    </a-col>
+    <a-col :span="7">
+      <TargetFulfillment/>
+      <div>目标达成率</div>
+    </a-col>
+    <a-col :span="7">
+      <InputAndFinishedGoods/>
+
+      <div>input and finished goods</div>
+    </a-col>
+  </a-row>
 
 
 </template>

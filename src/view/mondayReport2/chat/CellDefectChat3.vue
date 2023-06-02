@@ -38,7 +38,7 @@ const data = [
 
 
 onMounted(() => {
-  const columnPlot = new Column('container', {
+  const columnPlot = new Column('container3', {
     data,
     xField: 'shift',
     yField: 'value',
@@ -61,7 +61,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="container" />
+  <div id="container3" />
 </template>
 
 

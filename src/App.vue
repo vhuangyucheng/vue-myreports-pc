@@ -40,6 +40,30 @@ const itemClick = ({item, key, keyPath}) => {
             <user-outlined/>
             <span class="nav-text">Monday report</span>
           </a-menu-item>
+          <a-menu-item key="/mondayReport2">
+            <user-outlined/>
+            <span class="nav-text">Tuesday report</span>
+          </a-menu-item>
+          <a-menu-item key="/mondayReport2">
+            <user-outlined/>
+            <span class="nav-text">Wednesday report</span>
+          </a-menu-item>
+          <a-menu-item key="/mondayReport2">
+            <user-outlined/>
+            <span class="nav-text">Thursday report</span>
+          </a-menu-item>
+          <a-menu-item key="/mondayReport2">
+            <user-outlined/>
+            <span class="nav-text">Friday report</span>
+          </a-menu-item>
+          <a-menu-item key="/mondayReport2">
+            <user-outlined/>
+            <span class="nav-text">Saturday report</span>
+          </a-menu-item>
+          <a-menu-item key="/mondayReport2">
+            <user-outlined/>
+            <span class="nav-text">Sunday report</span>
+          </a-menu-item>
           <a-menu-item key="/weeklyReport2">
             <video-camera-outlined/>
             <span class="nav-text">weekly report</span>
