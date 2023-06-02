@@ -1,4 +1,4 @@
-<script setup>
+<script >
 import {Column} from '@antv/g2plot';
 
 const data = [
@@ -131,7 +131,7 @@ columnPlot.render();
 </script>
 
 <template>
-  <div id="container"></div>
+  <div id="container" />
 </template>
 
 
