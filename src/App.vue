@@ -36,9 +36,9 @@ const itemClick = ({item, key, keyPath}) => {
             <MailOutlined/>
           </template>
           <template #title>line#2</template>
-          <a-menu-item key="/dailyReport2">
+          <a-menu-item key="/mondayReport2">
             <user-outlined/>
-            <span class="nav-text">daily report</span>
+            <span class="nav-text">Monday report</span>
           </a-menu-item>
           <a-menu-item key="/weeklyReport2">
             <video-camera-outlined/>
@@ -58,9 +58,9 @@ const itemClick = ({item, key, keyPath}) => {
             <MailOutlined/>
           </template>
           <template #title>line#1</template>
-          <a-menu-item key="/dailyReport1">
+          <a-menu-item key="/mondayReport1">
             <user-outlined/>
-            <span class="nav-text">daily report</span>
+            <span class="nav-text">MOnday report</span>
           </a-menu-item>
           <a-menu-item key="/weeklyReport1">
             <video-camera-outlined/>

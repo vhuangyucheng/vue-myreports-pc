@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DailyReport2 from '/src/view/DailyReport2.vue'
+import MondayReport2 from '/src/view/mondayReport2/MondayReport2.vue'
 import MonthlyReport2 from '/src/view/MonthlyReport2.vue'
 import SelectedReport2 from '/src/view/SelectedReport2.vue'
 import WeeklyReport2 from '/src/view/WeeklyReport2.vue'
-import DailyReport1 from '/src/view/DailyReport1.vue'
+import MondayReport1 from '/src/view/MondayReport1.vue'
 import MonthlyReport1 from '/src/view/MonthlyReport1.vue'
 import SelectedReport1 from '/src/view/SelectedReport1.vue'
 import WeeklyReport1 from '/src/view/WeeklyReport1.vue'
@@ -13,9 +13,9 @@ const myRouter = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/dailyReport2',
-      name: 'DailyReport2',
-      component: DailyReport2
+      path: '/mondayReport2',
+      name: 'mondayReport2',
+      component: MondayReport2
     },
     {
       path: '/monthlyReport2',
@@ -33,9 +33,9 @@ const myRouter = createRouter({
       component: WeeklyReport2
     },
     {
-      path: '/dailyReport1',
-      name: 'DailyReport1',
-      component: DailyReport1
+      path: '/mondayReport1',
+      name: 'MondayReport1',
+      component: MondayReport1
     },
     {
       path: '/monthlyReport1',
