@@ -31,6 +31,18 @@ const itemClick = ({item, key, keyPath}) => {
           <span class="nav-text">announcement</span>
         </a-menu-item>
 
+        <a-sub-menu key="sub0">
+          <template #icon>
+            <MailOutlined/>
+          </template>
+          <template #title>Example</template>
+          <a-menu-item key="/DailyReportDemo1">
+            <user-outlined/>
+            <span class="nav-text">DailyReportDemo01</span>
+          </a-menu-item>
+
+
+        </a-sub-menu>
         <a-sub-menu key="sub2">
           <template #icon>
             <MailOutlined/>
