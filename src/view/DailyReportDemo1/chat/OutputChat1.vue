@@ -123,7 +123,8 @@ const data = [
 onMounted(() => {
   const annotations = [];
   each(groupBy(data, 'product_sub_type'), (values, k) => {
-    const value = values.reduce((a, b) => a + b.value, 0);
+    console.log(values)
+    const value = values.reduce((a, b) => a.order_amt + b.order_amt, 0);
     annotations.push({
       type: 'text',
       position: [k, value],
@@ -132,7 +133,7 @@ onMounted(() => {
       offsetY: -10,
     });
   });
-
+  console.log(annotations)
   const column = new Column('container12', {
     data,
     xField: 'product_type',
@@ -141,7 +142,7 @@ onMounted(() => {
     isStack: true,
     seriesField: 'product_sub_type',
     groupField: 'sex',
-    conversionTag: {},
+
     label: {
       // 可手动配置 label 数据标签位置
       position: 'top', // 'top', 'bottom', 'middle'
