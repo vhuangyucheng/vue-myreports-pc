@@ -1,6 +1,7 @@
 <script setup>
 import OutputChat1 from "./chat/OutputChat1.vue";
 import ELDefectChat01 from "./chat/ELDefectChat01.vue";
+import DefectChart01 from "./chat/DefectChart01.vue";
 </script>
 
 
@@ -48,6 +49,17 @@ import ELDefectChat01 from "./chat/ELDefectChat01.vue";
     </a-col>
   </a-row>
   <a-row>
+    <a-col :span="18" :offset="3">
+      <div :style="{fontSize:'53px'}">Individual Station Defect Rate</div>
+    </a-col>
+  </a-row>
+  <a-row a-row type="flex">
+    <a-col :span="21" :offset="3">
+      <DefectChart01/>
+    </a-col>
+
+  </a-row>
+  <a-row>
     <a-col :span="17" :offset="4">
       <div :style="{fontSize:'53px'}">EL1 Defect</div>
     </a-col>
@@ -65,6 +77,7 @@ import ELDefectChat01 from "./chat/ELDefectChat01.vue";
       <br/>
     </a-col>
   </a-row>
+
 
 
 </template>
