@@ -2,17 +2,20 @@
 import {Column} from '@antv/g2plot';
 import {each, groupBy} from '@antv/util';
 
+const FIRST_AMOUNT = 600;
+const SECOND_AMOUNT = 600;
+const THIRD_AMOUNT = 300;
 const data = [
   {
     "product_type": "First",
     "sex": "input",
-    "order_amt": 80,
+    "order_amt": FIRST_AMOUNT-444,
     "product_sub_type": "to target"
   },
   {
     "product_type": "First",
     "sex": "input",
-    "order_amt": 300,
+    "order_amt": 444,
     "product_sub_type": "output"
   },
 
@@ -20,103 +23,103 @@ const data = [
   {
     "product_type": "First",
     "sex": "mid",
-    "order_amt": 21,
+    "order_amt": FIRST_AMOUNT - 452,
     "product_sub_type": "to target"
   },
   {
     "product_type": "First",
     "sex": "mid",
-    "order_amt": 350,
+    "order_amt": 452,
     "product_sub_type": "output"
   },
   {
     "product_type": "First",
     "sex": "finished goods",
-    "order_amt": 28,
+    "order_amt": FIRST_AMOUNT-419,
     "product_sub_type": "to target"
   },
   {
     "product_type": "First",
     "sex": "finished goods",
-    "order_amt": 261,
+    "order_amt": 419,
     "product_sub_type": "output"
   },
-  {
-    "product_type": "Second",
-    "sex": "input",
-    "order_amt": 80,
-    "product_sub_type": "to target"
-  },
-  {
-    "product_type": "Second",
-    "sex": "input",
-    "order_amt": 300,
-    "product_sub_type": "output"
-  },
-
-
-  {
-    "product_type": "Second",
-    "sex": "mid",
-    "order_amt": 21,
-    "product_sub_type": "to target"
-  },
-  {
-    "product_type": "Second",
-    "sex": "mid",
-    "order_amt": 350,
-    "product_sub_type": "output"
-  },
-  {
-    "product_type": "Second",
-    "sex": "finished goods",
-    "order_amt": 28,
-    "product_sub_type": "to target"
-  },
-  {
-    "product_type": "Second",
-    "sex": "finished goods",
-    "order_amt": 261,
-    "product_sub_type": "output"
-  },
-  {
-    "product_type": "Third",
-    "sex": "input",
-    "order_amt": 80,
-    "product_sub_type": "to target"
-  },
-  {
-    "product_type": "Third",
-    "sex": "input",
-    "order_amt": 300,
-    "product_sub_type": "output"
-  },
-
-
-  {
-    "product_type": "Third",
-    "sex": "mid",
-    "order_amt": 21,
-    "product_sub_type": "to target"
-  },
-  {
-    "product_type": "Third",
-    "sex": "mid",
-    "order_amt": 350,
-    "product_sub_type": "output"
-  },
-  {
-    "product_type": "Third",
-    "sex": "finished goods",
-    "order_amt": 28,
-    "product_sub_type": "to target"
-  },
-  {
-    "product_type": "Third",
-    "sex": "finished goods",
-    "order_amt": 261,
-    "product_sub_type": "output"
-  }
+  // {
+  //   "product_type": "Second",
+  //   "sex": "input",
+  //   "order_amt": 80,
+  //   "product_sub_type": "to target"
+  // },
+  // {
+  //   "product_type": "Second",
+  //   "sex": "input",
+  //   "order_amt": 300,
+  //   "product_sub_type": "output"
+  // },
+  //
+  //
+  // {
+  //   "product_type": "Second",
+  //   "sex": "mid",
+  //   "order_amt": 21,
+  //   "product_sub_type": "to target"
+  // },
+  // {
+  //   "product_type": "Second",
+  //   "sex": "mid",
+  //   "order_amt": 350,
+  //   "product_sub_type": "output"
+  // },
+  // {
+  //   "product_type": "Second",
+  //   "sex": "finished goods",
+  //   "order_amt": 28,
+  //   "product_sub_type": "to target"
+  // },
+  // {
+  //   "product_type": "Second",
+  //   "sex": "finished goods",
+  //   "order_amt": 261,
+  //   "product_sub_type": "output"
+  // },
+  // {
+  //   "product_type": "Third",
+  //   "sex": "input",
+  //   "order_amt": 80,
+  //   "product_sub_type": "to target"
+  // },
+  // {
+  //   "product_type": "Third",
+  //   "sex": "input",
+  //   "order_amt": 300,
+  //   "product_sub_type": "output"
+  // },
+  //
+  //
+  // {
+  //   "product_type": "Third",
+  //   "sex": "mid",
+  //   "order_amt": 21,
+  //   "product_sub_type": "to target"
+  // },
+  // {
+  //   "product_type": "Third",
+  //   "sex": "mid",
+  //   "order_amt": 350,
+  //   "product_sub_type": "output"
+  // },
+  // {
+  //   "product_type": "Third",
+  //   "sex": "finished goods",
+  //   "order_amt": 28,
+  //   "product_sub_type": "to target"
+  // },
+  // {
+  //   "product_type": "Third",
+  //   "sex": "finished goods",
+  //   "order_amt": 261,
+  //   "product_sub_type": "output"
+  // }
 ]
 
 

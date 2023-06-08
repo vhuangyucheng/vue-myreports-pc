@@ -8,7 +8,7 @@ import DefectChart01 from "./chat/DefectChart01.vue";
 <template>
   <a-row>
     <a-col :span="17" :offset="4">
-      <div :style="{fontSize:'53px'}">today output</div>
+      <div :style="{fontSize:'53px'}">06/07/2023  Productivity</div>
     </a-col>
   </a-row>
   <a-row>
@@ -16,36 +16,36 @@ import DefectChart01 from "./chat/DefectChart01.vue";
       <OutputChat1/>
     </a-col>
     <a-col :span="10">
-      input: 2线晚班贴条码：550W
+      input: 2线早班贴条码：550W
       <br/>
-      SCE22300001038P2F0
+      SCE2230001977P2F0
       <br/>
-      SCE2230001310P2F0
+      SCE2230002420P2F0
       <br/>
-      共273件
+      共444件
       <br/>
-      finished goods: xxx
-      <br/>
-      input: 2线晚班贴条码：550W
-      <br/>
-      SCE22300001038P2F0
-      <br/>
-      SCE2230001310P2F0
-      <br/>
-      共273件
-      <br/>
-      finished goods: xxx
-      <br/>
-      input: 2线晚班贴条码：550W
-      <br/>
-      SCE22300001038P2F0
-      <br/>
-      SCE2230001310P2F0
-      <br/>
-      共273件
-      <br/>
-      finished goods: xxx
-      <br/>
+      finished goods: 419
+<!--      <br/>-->
+<!--      input: 2线晚班贴条码：550W-->
+<!--      <br/>-->
+<!--      SCE22300001038P2F0-->
+<!--      <br/>-->
+<!--      SCE2230001310P2F0-->
+<!--      <br/>-->
+<!--      共273件-->
+<!--      <br/>-->
+<!--      finished goods: xxx-->
+<!--      <br/>-->
+<!--      input: 2线晚班贴条码：550W-->
+<!--      <br/>-->
+<!--      SCE22300001038P2F0-->
+<!--      <br/>-->
+<!--      SCE2230001310P2F0-->
+<!--      <br/>-->
+<!--      共273件-->
+<!--      <br/>-->
+<!--      finished goods: xxx-->
+<!--      <br/>-->
     </a-col>
   </a-row>
   <a-row>
@@ -69,11 +69,11 @@ import DefectChart01 from "./chat/DefectChart01.vue";
       <ELDefectChat01/>
     </a-col>
     <a-col :span="10">
-      前道EL产量487，不良110，不良率: 22.58%
-      <br/>
-      前道EL产量487，不良110，不良率: 22.58%
-      <br/>
-      前道EL产量487，不良110，不良率: 22.58%
+      前道EL产量459，不良83，不良率: 18.08%
+<!--      <br/>-->
+<!--      前道EL产量487，不良110，不良率: 22.58%-->
+<!--      <br/>-->
+<!--      前道EL产量487，不良110，不良率: 22.58%-->
       <br/>
     </a-col>
   </a-row>

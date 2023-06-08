@@ -6,34 +6,41 @@ const data = [
   {
     name: 'Miss-welding',
     月份: 'First',
-    月均降雨量: 18.9,
+    月均降雨量: 27,
   },
   {
-    name: 'Miss-welding',
-    月份: 'Second',
-    月均降雨量: 28.8,
-  },
-  {
-    name: 'Miss-welding',
-    月份: 'Third',
-    月均降雨量: 39.3,
-  },
-
-  {
-    name: 'Over-Welding',
+    name: 'crack',
     月份: 'First',
-    月均降雨量: 12.4,
+    月均降雨量: 33,
   },
   {
-    name: 'Over-Welding',
-    月份: 'Second',
-    月均降雨量: 23.2,
+    name: 'others',
+    月份: 'First',
+    月均降雨量: 33,
   },
-  {
-    name: 'Over-Welding',
-    月份: 'Third',
-    月均降雨量: 34.5,
-  },
+  // {
+  //   name: 'Miss-welding',
+  //   月份: 'Second',
+  //   月均降雨量: 28.8,
+  // },
+  // {
+  //   name: 'Over-Welding',
+  //   月份: 'Second',
+  //   月均降雨量: 23.2,
+  // },
+  // {
+  //   name: 'Miss-welding',
+  //   月份: 'Third',
+  //   月均降雨量: 39.3,
+  // },
+  //
+  //
+  //
+  // {
+  //   name: 'Over-Welding',
+  //   月份: 'Third',
+  //   月均降雨量: 34.5,
+  // },
  
 ];
 
