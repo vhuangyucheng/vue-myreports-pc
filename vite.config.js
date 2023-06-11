@@ -12,6 +12,8 @@ import {
 
 import {AntDesignVueResolver} from 'unplugin-vue-components/resolvers';
 
+import postcssPxToRem from 'postcss-pxtorem'
+
 // https://vitejs.dev/config/
 export default defineConfig({
     server: {
@@ -28,8 +30,6 @@ export default defineConfig({
             }
         }
     },
-
-
     plugins: [
         vue(),
         AutoImport({
@@ -59,15 +59,27 @@ export default defineConfig({
             // 需要去解析的文件
             include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
             resolvers: [
-              AntDesignVueResolver({
+                AntDesignVueResolver({
                     sideEffect: true
                 })
             ],
             VueUseComponentsResolver,
             VueUseDirectiveResolver
-        })
-    ]
-
+        }),
+    ],
+    // css: {
+    //     postcss: {
+    //         plugins: [
+    //             postcssPxToRem({
+    //                 // =========???????=========
+    //                 rootValue: 35,
+    //                 // 允许 px 转换为 rem 精确到小数点后几位
+    //                 // 存储哪些将被转换的属性列表，这里设置为 ['*'] 全部。
+    //                 propList: ['*'],
+    //             },)
+    //         ]
+    //     }
+    // },
     // ...
 })
 

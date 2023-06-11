@@ -282,7 +282,7 @@ onMounted(() => {
       position: [k, value],
       content: `${value}`,
       style: {textAlign: 'center', fontSize: 14, fill: 'rgba(0,0,0,0.85)'},
-      offsetY: -10,
+      // offsetY: -10,
     });
   });
   console.log(annotations)
