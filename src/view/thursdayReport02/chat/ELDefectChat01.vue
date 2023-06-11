@@ -4,53 +4,45 @@ import {each, groupBy} from '@antv/util';
 
 const data = [
   {
-    name: 'Miss-welding',
+    name: 'Miss-welding虚焊',
     月份: 'First',
-    月均降雨量: 27,
+    月均降雨量: 19,
   },
   {
-    name: 'Crack',
+    name: 'Split破片，裂片',
     月份: 'First',
-    月均降雨量: 33,
+    月均降雨量: 31,
   },
   {
-    name: 'others',
+    name: 'Others其他',
     月份: 'First',
-    月均降雨量: 33,
+    月均降雨量: 25,
   },
   {
-    name: 'Miss-welding',
+    name: 'Miss-welding虚焊',
     月份: 'Second',
-    月均降雨量: 6,
+    月均降雨量: 12,
   },
   {
-    name: 'Crack',
+    name: 'Split破片，裂片',
     月份: 'Second',
-    月均降雨量: 6,
-  },
-  {
-    name: 'Excessive corrosion',
-    月份: 'Second',
-    月均降雨量: 1,
-  },
-  {
-    name: 'Miss-welding',
-    月份: 'Third',
-    月均降雨量: 47,
+    月均降雨量: 14,
   },
 
-
-
   {
-    name: 'Crack',
-    月份: 'Third',
-    月均降雨量: 48,
-  },
-  {
-    name: 'Short',
+    name: 'Miss-welding虚焊',
     月份: 'Third',
     月均降雨量: 2,
   },
+
+
+
+  {
+    name: 'Split破片，裂片',
+    月份: 'Third',
+    月均降雨量: 1,
+  },
+
  
 ];
 

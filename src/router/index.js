@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MondayReport2 from '/src/view/mondayReport2/MondayReport2.vue'
+import WednesdayReport02 from "../view/wednesdayReport02/WednesdayReport02.vue";
 import MonthlyReport2 from '/src/view/MonthlyReport2.vue'
 import SelectedReport2 from '/src/view/SelectedReport2.vue'
 import WeeklyReport2 from '/src/view/weeklyReport2/WeeklyReport2.vue'
@@ -8,6 +9,7 @@ import MonthlyReport1 from '/src/view/MonthlyReport1.vue'
 import SelectedReport1 from '/src/view/SelectedReport1.vue'
 import WeeklyReport1 from '/src/view/WeeklyReport1.vue'
 import DailyReportDemo1 from "../view/DailyReportDemo1/DailyReportDemo1.vue";
+import ThursdayReport02 from "../view/thursdayReport02/ThursdayReport02.vue";
 
 
 const myRouter = createRouter({
@@ -17,6 +19,16 @@ const myRouter = createRouter({
       path: '/mondayReport2',
       name: 'mondayReport2',
       component: MondayReport2
+    },
+    {
+      path: '/wednesdayReport2',
+      name: 'wednesdayReport2',
+      component: WednesdayReport02
+    },
+    {
+      path: '/thursdayReport02',
+      name: 'thursdayReport02',
+      component: ThursdayReport02
     },
     {
       path: '/monthlyReport2',

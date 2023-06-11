@@ -8,7 +8,7 @@ import DefectChart01 from "./chat/DefectChart01.vue";
 <template>
   <a-row>
     <a-col :span="17" :offset="4">
-      <div :style="{fontSize:'53px'}">06/07/2023 Wednesday Productivity</div>
+      <div :style="{fontSize:'53px'}">06/08/2023 Thursday Productivity</div>
     </a-col>
   </a-row>
   <a-row>
@@ -18,52 +18,48 @@ import DefectChart01 from "./chat/DefectChart01.vue";
     <a-col :span="10">
       input: 2线早班贴条码：550W
       <br/>
-      SCE2230001977P2F0
+      SCE2230002931P2F0
       <br/>
-      SCE2230002420P2F0
+      SCE2230003308P2F0
       <br/>
-      共444件
+      共378件
       <br/>
-      finished goods: 419
-      <br/>
-      input: 2线晚班贴条码：550W
-      <br/>
-      SCF2230002421P2F0
-      <br/>
-      SCF2230002930P2F0
-      <br/>
-      共510件
-      <br/>
-      finished goods: 438
+      finished goods: 288
       <br/>
       input: 2线晚班贴条码：550W
       <br/>
-      SCF2230002931P2F0
+      SCF2230003309P2F0
       <br/>
-      SCF2230002935P2F0
+      SCF2230003585P2F0
       <br/>
-      共5件
+      共277件
       <br/>
-      finished goods: 267
+      finished goods: 281
       <br/>
-    </a-col>
-  </a-row>
-  <a-row>
-    <a-col :span="18" :offset="3">
-      <div :style="{fontSize:'53px'}">Individual Station Defect Rate</div>
-    </a-col>
-  </a-row>
-  <a-row>
-    <a-col :span="18" :offset="3">
-      <div :style="{fontSize:'53px'}">1st Defect Rate</div>
-    </a-col>
-  </a-row>
-  <a-row a-row type="flex">
-    <a-col :span="21" :offset="3">
-      <DefectChart01/>
-    </a-col>
+      input: 2线深夜班贴条码：550W
+      <br/>
 
+      <br/>
+      finished goods: 314
+      <br/>
+    </a-col>
   </a-row>
+  <a-row>
+    <a-col :span="18" :offset="3">
+      <div :style="{fontSize:'53px'}">Individual Station Defect Rate (Miss)</div>
+    </a-col>
+  </a-row>
+<!--  <a-row>-->
+<!--    <a-col :span="18" :offset="3">-->
+<!--      <div :style="{fontSize:'53px'}">1st Defect Rate</div>-->
+<!--    </a-col>-->
+<!--  </a-row>-->
+<!--  <a-row a-row type="flex">-->
+<!--    <a-col :span="21" :offset="3">-->
+<!--      <DefectChart01/>-->
+<!--    </a-col>-->
+
+<!--  </a-row>-->
   <a-row>
     <a-col :span="17" :offset="4">
       <div :style="{fontSize:'53px'}">EL1 Defect</div>
@@ -74,11 +70,11 @@ import DefectChart01 from "./chat/DefectChart01.vue";
       <ELDefectChat01/>
     </a-col>
     <a-col :span="10">
-      前道EL产量459，不良83，不良率: 18.08%
+      前道EL产量359，不良75，不良率: 20.89%
       <br/>
-      前道EL产量66，不良13，不良率: 19.69%
+      前道EL产量258，不良26，不良率: 10.07%
       <br/>
-      前道EL产量530，不良97，不良率: 18.30%
+      前道EL产量14，不良3，不良率: 21.42%
       <br/>
     </a-col>
   </a-row>

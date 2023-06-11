@@ -9,13 +9,13 @@ const data = [
   {
     "product_type": "First",
     "sex": "input",
-    "order_amt": FIRST_AMOUNT-444,
+    "order_amt": FIRST_AMOUNT-378,
     "product_sub_type": "to target"
   },
   {
     "product_type": "First",
     "sex": "input",
-    "order_amt": 444,
+    "order_amt": 378,
     "product_sub_type": "productivity"
   },
 
@@ -23,37 +23,37 @@ const data = [
   {
     "product_type": "First",
     "sex": "mid",
-    "order_amt": FIRST_AMOUNT - 452,
+    "order_amt": FIRST_AMOUNT - 395,
     "product_sub_type": "to target"
   },
   {
     "product_type": "First",
     "sex": "mid",
-    "order_amt": 452,
+    "order_amt": 395,
     "product_sub_type": "productivity"
   },
   {
     "product_type": "First",
     "sex": "finished goods",
-    "order_amt": FIRST_AMOUNT-419,
+    "order_amt": FIRST_AMOUNT-288,
     "product_sub_type": "to target"
   },
   {
     "product_type": "First",
     "sex": "finished goods",
-    "order_amt": 419,
+    "order_amt": 288,
     "product_sub_type": "productivity"
   },
   {
     "product_type": "Second",
     "sex": "input",
-    "order_amt": SECOND_AMOUNT -510,
+    "order_amt": SECOND_AMOUNT -277,
     "product_sub_type": "to target"
   },
   {
     "product_type": "Second",
     "sex": "input",
-    "order_amt": 510,
+    "order_amt": 277,
     "product_sub_type": "productivity"
   },
 
@@ -61,37 +61,37 @@ const data = [
   {
     "product_type": "Second",
     "sex": "mid",
-    "order_amt": SECOND_AMOUNT-502,
+    "order_amt": SECOND_AMOUNT-395,
     "product_sub_type": "to target"
   },
   {
     "product_type": "Second",
     "sex": "mid",
-    "order_amt": 502,
+    "order_amt": 395,
     "product_sub_type": "productivity"
   },
   {
     "product_type": "Second",
     "sex": "finished goods",
-    "order_amt": SECOND_AMOUNT-438,
+    "order_amt": SECOND_AMOUNT-281,
     "product_sub_type": "to target"
   },
   {
     "product_type": "Second",
     "sex": "finished goods",
-    "order_amt": 438,
+    "order_amt": 281,
     "product_sub_type": "productivity"
   },
   {
     "product_type": "Third",
     "sex": "input",
-    "order_amt": THIRD_AMOUNT-5,
+    "order_amt": THIRD_AMOUNT-0,
     "product_sub_type": "to target"
   },
   {
     "product_type": "Third",
     "sex": "input",
-    "order_amt": 5,
+    "order_amt": 0,
     "product_sub_type": "productivity"
   },
 
@@ -99,25 +99,25 @@ const data = [
   {
     "product_type": "Third",
     "sex": "mid",
-    "order_amt": THIRD_AMOUNT - 93,
+    "order_amt": THIRD_AMOUNT - 87,
     "product_sub_type": "to target"
   },
   {
     "product_type": "Third",
     "sex": "mid",
-    "order_amt": 93,
+    "order_amt": 87,
     "product_sub_type": "productivity"
   },
   {
     "product_type": "Third",
     "sex": "finished goods",
-    "order_amt": THIRD_AMOUNT - 267,
+    "order_amt": 0,
     "product_sub_type": "to target"
   },
   {
     "product_type": "Third",
     "sex": "finished goods",
-    "order_amt": 267,
+    "order_amt": 314,
     "product_sub_type": "productivity"
   }
 ]

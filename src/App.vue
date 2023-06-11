@@ -56,11 +56,11 @@ const itemClick = ({item, key, keyPath}) => {
             <user-outlined/>
             <span class="nav-text">Tuesday report</span>
           </a-menu-item>
-          <a-menu-item key="/mondayReport2">
+          <a-menu-item key="/wednesdayReport2">
             <user-outlined/>
             <span class="nav-text">Wednesday report</span>
           </a-menu-item>
-          <a-menu-item key="/mondayReport2">
+          <a-menu-item key="/thursdayReport02">
             <user-outlined/>
             <span class="nav-text">Thursday report</span>
           </a-menu-item>
