@@ -10,6 +10,7 @@ import SelectedReport1 from '/src/view/SelectedReport1.vue'
 import WeeklyReport1 from '/src/view/WeeklyReport1.vue'
 import DailyReportDemo1 from "../view/DailyReportDemo1/DailyReportDemo1.vue";
 import ThursdayReport02 from "../view/thursdayReport02/ThursdayReport02.vue";
+import DailyReportDemo02 from "../view/DailyReportDemo2/DailyReportDemo02.vue";
 
 
 const myRouter = createRouter({
@@ -69,6 +70,11 @@ const myRouter = createRouter({
       path: '/DailyReportDemo1',
       name: 'DailyReportDemo1',
       component: DailyReportDemo1
+    },
+    {
+      path: '/DailyReportDemo02',
+      name: 'DailyReportDemo02',
+      component: DailyReportDemo02
     },
   ]
 })

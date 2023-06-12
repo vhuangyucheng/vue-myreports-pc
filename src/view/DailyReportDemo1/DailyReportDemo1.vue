@@ -12,8 +12,8 @@ import DefectChart01 from "./chat/DefectChart01.vue";
     </a-col>
   </a-row>
   <a-row>
-    <a-col :span="10" :offset="4">
-      <OutputChat1/>
+    <a-col :span="10" >
+      <OutputChat1 :style="{height:'100%'}"/>
     </a-col>
     <a-col :span="10">
       input: 2线早班贴条码：550W
@@ -59,7 +59,7 @@ import DefectChart01 from "./chat/DefectChart01.vue";
     </a-col>
   </a-row>
   <a-row a-row type="flex">
-    <a-col :span="21" :offset="3">
+    <a-col :span="24" >
       <DefectChart01/>
     </a-col>
 

@@ -18,12 +18,13 @@ const itemClick = ({item, key, keyPath}) => {
 }
 </script>
 <template>
-  <a-layout>
-    <a-layout-sider
-        collapsible
-        :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0 }"
-    >
-      <div class="logo"/>
+  <a-layout style="min-height: 100vh">
+
+    <a-layout-sider collapsible>
+      <div class="logo">
+        <div>Solar4America</div>
+      </div>
+
       <a-menu theme="dark" mode="inline" @click="itemClick">
 
         <a-menu-item key="/announcement">
@@ -31,18 +32,23 @@ const itemClick = ({item, key, keyPath}) => {
           <span class="nav-text">announcement</span>
         </a-menu-item>
 
-        <a-sub-menu key="sub0">
+        <a-sub-menu key="sub01">
           <template #icon>
             <MailOutlined/>
           </template>
           <template #title>Example</template>
           <a-menu-item key="/DailyReportDemo1">
             <user-outlined/>
-            <span class="nav-text">DailyReportDemo01</span>
+            <span class="nav-text">Demo01</span>
+          </a-menu-item>
+          <a-menu-item key="/DailyReportDemo02">
+            <user-outlined/>
+            <span class="nav-text">Demo02</span>
           </a-menu-item>
 
-
         </a-sub-menu>
+
+
         <a-sub-menu key="sub2">
           <template #icon>
             <MailOutlined/>
@@ -132,11 +138,12 @@ const itemClick = ({item, key, keyPath}) => {
 </template>
 
 <style>
-#components-layout-demo-fixed-sider .logo {
+.logo {
   height: 32px;
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
 }
+
 
 .site-layout .site-layout-background {
   background: #fff;
