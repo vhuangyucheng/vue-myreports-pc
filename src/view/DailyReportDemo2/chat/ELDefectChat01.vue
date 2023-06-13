@@ -4,63 +4,112 @@ import {each, groupBy} from '@antv/util';
 
 const data = [
   {
-    name: 'Miss-welding',
-    月份: 'First',
-    月均降雨量: 27,
+    reason: 'Miss-welding',
+    shift: 'First',
+    amount: 27,
   },
   {
-    name: 'Crack',
-    月份: 'First',
-    月均降雨量: 33,
+    reason: 'Crack',
+    shift: 'First',
+    amount: 33,
   },
   {
-    name: 'others',
-    月份: 'First',
-    月均降雨量: 33,
+    reason: 'others',
+    shift: 'First',
+    amount: 33,
   },
   {
-    name: 'Miss-welding',
-    月份: 'Second',
-    月均降雨量: 6,
+    reason: 'Miss-welding',
+    shift: 'Second',
+    amount: 6,
   },
   {
-    name: 'Crack',
-    月份: 'Second',
-    月均降雨量: 6,
+    reason: 'Crack',
+    shift: 'Second',
+    amount: 6,
   },
   {
-    name: 'Excessive corrosion',
-    月份: 'Second',
-    月均降雨量: 1,
+    reason: 'Excessive corrosion',
+    shift: 'Second',
+    amount: 1,
   },
   {
-    name: 'Miss-welding',
-    月份: 'Third',
-    月均降雨量: 47,
+    reason: 'Miss-welding',
+    shift: 'Third',
+    amount: 47,
   },
 
 
   {
-    name: 'Crack',
-    月份: 'Third',
-    月均降雨量: 48,
+    reason: 'Crack',
+    shift: 'Third',
+    amount: 48,
   },
   {
-    name: 'Short',
-    月份: 'Third',
-    月均降雨量: 2,
+    reason: 'Short',
+    shift: 'Third',
+    amount: 2,
   },
 
 ];
+const data2 = [
+  {
+    reason: 'Miss-welding',
+    shift: 'First',
+    amount: 27,
+  },
+  {
+    reason: 'Crack',
+    shift: 'First',
+    amount: 33,
+  },
+  {
+    reason: 'others',
+    shift: 'First',
+    amount: 33,
+  },
+  {
+    reason: 'Miss-welding',
+    shift: 'Second',
+    amount: 6,
+  },
+  {
+    reason: 'Crack',
+    shift: 'Second',
+    amount: 6,
+  },
+  {
+    reason: 'Excessive corrosion',
+    shift: 'Second',
+    amount: 1,
+  },
+  {
+    reason: 'Miss-welding',
+    shift: 'Third',
+    amount: 47,
+  },
 
+
+  {
+    reason: 'Crack',
+    shift: 'Third',
+    amount: 48,
+  },
+  {
+    reason: 'Short',
+    shift: 'Third',
+    amount: 4,
+  },
+
+];
 
 onMounted(() => {
   const stackedColumnPlot = new Column('ELDefectChat01', {
     data,
     isGroup: true,
-    xField: '月份',
-    yField: '月均降雨量',
-    seriesField: 'name',
+    xField: 'shift',
+    yField: 'amount',
+    seriesField: 'reason',
     /** 设置颜色 */
     //color: ['#1ca9e6', '#f88c24'],
     /** 设置间距 */
@@ -84,42 +133,13 @@ onMounted(() => {
 
 })
 
-onMounted(() => {
-  const stackedColumnPlot2 = new Column('ELDefectChat02', {
-    data,
-    isGroup: true,
-    xField: '月份',
-    yField: '月均降雨量',
-    seriesField: 'name',
-    /** 设置颜色 */
-    //color: ['#1ca9e6', '#f88c24'],
-    /** 设置间距 */
-    // marginRatio: 0.1,
-    label: {
-      // 可手动配置 label 数据标签位置
-      position: 'middle', // 'top', 'middle', 'bottom'
-      // 可配置附加的布局方法
-      layout: [
-        // 柱形图数据标签位置自动调整
-        {type: 'interval-adjust-position'},
-        // 数据标签防遮挡
-        {type: 'interval-hide-overlap'},
-        // 数据标签文颜色自动调整
-        {type: 'adjust-color'},
-      ],
-    },
-  });
 
-  stackedColumnPlot2.render();
-
-})
 
 </script>
 
 <template>
   <div >
     <div id="ELDefectChat01" :style="{height:'150px'}"/>
-    <div id="ELDefectChat02" :style="{height:'150px'}"/>
   </div>
 </template>
 

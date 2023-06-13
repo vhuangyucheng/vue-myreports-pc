@@ -1,214 +1,146 @@
 <script setup>
 import {Column} from '@antv/g2plot';
-
-const CELL_OOB = 99.7;
-const CELL_MANUFACTURE = 99.7;
-const CELL_STRING = 95;
-const CELL_EL1 = 95;
-const CELL_VQC = 99.9;
-const CELL_FRAMING = 100;
-const CELL_JBOX = 100;
-const CELL_JBOXSOLDING = 99.9;
-const CELL_IV = 100;
-const CELL_FQC = 99.8;
-const CELL_FIRST_PASS = 94;
+import {each, groupBy} from '@antv/util';
 
 const data = [
   {
-    country: 'To 100%',
-    year: '电池片合格率（来料）',
-    value: 100-99.77,
+    name: 'Miss-welding',
+    月份: 'First',
+    月均降雨量: 27,
   },
   {
-    country: 'To target',
-    year: '电池片合格率（来料）',
-    value: 0,
+    name: 'Crack',
+    月份: 'First',
+    月均降雨量: 33,
   },
   {
-    country: 'Defect Rate',
-    year: '电池片合格率（来料）',
-    value: 99.77,
+    name: 'others',
+    月份: 'First',
+    月均降雨量: 33,
   },
   {
-    country: 'To 100%',
-    year: '电池片合格率（制程）',
-    value: 100-99.88,
+    name: 'Miss-welding',
+    月份: 'Second',
+    月均降雨量: 6,
   },
   {
-    country: 'To target',
-    year: '电池片合格率（制程）',
-    value: 0,
+    name: 'Crack',
+    月份: 'Second',
+    月均降雨量: 6,
   },
   {
-    country: 'Defect Rate',
-    year: '电池片合格率（制程）',
-    value: 99.88,
+    name: 'Excessive corrosion',
+    月份: 'Second',
+    月均降雨量: 1,
   },
   {
-    country: 'To 100%',
-    year: '电池串合格率',
-    value: 100-97.14,
+    name: 'Miss-welding',
+    月份: 'Third',
+    月均降雨量: 47,
+  },
+
+
+  {
+    name: 'Crack',
+    月份: 'Third',
+    月均降雨量: 48,
   },
   {
-    country: 'To target',
-    year: '电池串合格率',
-    value: 0,
+    name: 'Short',
+    月份: 'Third',
+    月均降雨量: 2,
+  },
+
+];
+const data2 = [
+  {
+    name: 'Miss-welding',
+    月份: 'First',
+    月均降雨量: 27,
   },
   {
-    country: 'Defect Rate',
-    year: '电池串合格率',
-    value: 97.14,
+    name: 'Crack',
+    月份: 'First',
+    月均降雨量: 33,
   },
   {
-    country: 'To 100%',
-    year: '层前EL合格率',
-    value: 100-95,
+    name: 'others',
+    月份: 'First',
+    月均降雨量: 33,
   },
   {
-    country: 'To target',
-    year: '层前EL合格率',
-    value: 95-90.54,
+    name: 'Miss-welding',
+    月份: 'Second',
+    月均降雨量: 6,
   },
   {
-    country: 'Defect Rate',
-    year: '层前EL合格率',
-    value: 90.54,
+    name: 'Crack',
+    月份: 'Second',
+    月均降雨量: 6,
   },
   {
-    country: 'To target',
-    year: '外观检验合格率',
-    value: 0,
+    name: 'Excessive corrosion',
+    月份: 'Second',
+    月均降雨量: 1,
   },
   {
-    country: 'To 100%',
-    year: '外观检验合格率',
-    value: 100-99.78,
+    name: 'Miss-welding',
+    月份: 'Third',
+    月均降雨量: 47,
+  },
+
+
+  {
+    name: 'Crack',
+    月份: 'Third',
+    月均降雨量: 48,
   },
   {
-    country: 'Defect Rate',
-    year: '外观检验合格率',
-    value: 99.78,
+    name: 'Short',
+    月份: 'Third',
+    月均降雨量: 4,
   },
-  {
-    country: 'To 100%',
-    year: '组框合格率',
-    value: 0,
-  },
-  {
-    country: 'To target',
-    year: '组框合格率',
-    value: 0,
-  },
-  {
-    country: 'Defect Rate',
-    year: '组框合格率',
-    value: 100,
-  },
-  {
-    country: 'To 100%',
-    year: '接线盒合格率（安装）',
-    value: 0,
-  },
-  {
-    country: 'To target',
-    year: '接线盒合格率（安装）',
-    value: 0,
-  },
-  {
-    country: 'Defect Rate',
-    year: '接线盒合格率（安装）',
-    value: 100,
-  },
-  {
-    country: 'To 100%',
-    year: '接线盒合格率（焊接）',
-    value: 0,
-  },
-  {
-    country: 'To target',
-    year: '接线盒合格率（焊接）',
-    value: 0,
-  },
-  {
-    country: 'Defect Rate',
-    year: '接线盒合格率（焊接）',
-    value: 100,
-  },
-  {
-    country: 'To 100%',
-    year: '功率测试合格率',
-    value: 0,
-  },
-  {
-    country: 'To target',
-    year: '功率测试合格率',
-    value: 0,
-  },
-  {
-    country: 'Defect Rate',
-    year: '功率测试合格率',
-    value: 100,
-  },
-  {
-    country: 'To 100%',
-    year: '终检合格率',
-    value: 100-99.8,
-  },
-  {
-    country: 'To target',
-    year: '终检合格率',
-    value: 99.8-99.77,
-  },
-  {
-    country: 'Defect Rate',
-    year: '终检合格率',
-    value: 99.77,
-  },
-  {
-    country: 'To 100%',
-    year: '一次通过率',
-    value: 100-94,
-  },
-  {
-    country: 'To target',
-    year: '一次通过率',
-    value: 94-84.36,
-  },
-  {
-    country: 'Defect Rate',
-    year: '一次通过率',
-    value: 84.36,
-  }
+
 ];
 
-
-
 onMounted(() => {
-  const columnPlot = new Column('defectChart01', {
+  const stackedColumnPlot = new Column('defectChar01', {
     data,
-    xField: 'year',
-    yField: 'value',
-    seriesField: 'country',
-    isPercent: true,
-    isStack: true,
+    isGroup: true,
+    xField: '月份',
+    yField: '月均降雨量',
+    seriesField: 'name',
+    /** 设置颜色 */
+    //color: ['#1ca9e6', '#f88c24'],
+    /** 设置间距 */
+    // marginRatio: 0.1,
     label: {
-      position: 'middle',
-      content: (item) => {
-        return item.value.toFixed(4);
-      },
-      style: {
-        fill: '#fff',
-      },
+      // 可手动配置 label 数据标签位置
+      position: 'middle', // 'top', 'middle', 'bottom'
+      // 可配置附加的布局方法
+      layout: [
+        // 柱形图数据标签位置自动调整
+        {type: 'interval-adjust-position'},
+        // 数据标签防遮挡
+        {type: 'interval-hide-overlap'},
+        // 数据标签文颜色自动调整
+        {type: 'adjust-color'},
+      ],
     },
   });
 
-  columnPlot.render();
+  stackedColumnPlot.render();
+
 })
+
+
 
 </script>
 
 <template>
-  <div id="defectChart01" />
+  <div >
+    <div id="defectChar01" :style="{height:'150px'}"/>
+  </div>
 </template>
 
 

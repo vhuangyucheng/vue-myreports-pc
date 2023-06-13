@@ -5,111 +5,79 @@ import {each, groupBy} from '@antv/util';
 const FIRST_AMOUNT = 600;
 const SECOND_AMOUNT = 600;
 const THIRD_AMOUNT = 300;
-const data1 = [
+const data = [
 
   {
     "shift": "First",
-    "col_name": "layup",
+    "stringer": "String21",
     "amount": 444,
     "type": "productivity"
   },
 
   {
     "shift": "First",
-    "col_name": "framing",
+    "stringer": "String22",
     "amount": 452,
     "type": "productivity"
   },
 
   {
     "shift": "First",
-    "col_name": "sorting",
+    "stringer": "String23",
     "amount": 419,
     "type": "productivity"
   },
 
   {
     "shift": "Second",
-    "col_name": "layup",
+    "stringer": "String21",
     "amount": 510,
     "type": "productivity"
   },
 
+
+
   {
     "shift": "Second",
-    "col_name": "framing",
+    "stringer": "String22",
     "amount": 502,
     "type": "productivity"
   },
 
   {
     "shift": "Second",
-    "col_name": "sorting",
+    "stringer": "String23",
     "amount": 438,
     "type": "productivity"
   },
 
   {
     "shift": "Third",
-    "col_name": "layup",
+    "stringer": "String21",
     "amount": 5,
     "type": "productivity"
   },
 
-
   {
     "shift": "Third",
-    "col_name": "framing",
+    "stringer": "String22",
     "amount": 93,
     "type": "productivity"
   },
 
   {
     "shift": "Third",
-    "col_name": "sorting",
+    "stringer": "String23",
     "amount": 267,
     "type": "productivity"
   }
-];
-
-const dict = {
-  First: FIRST_AMOUNT,
-  Second: SECOND_AMOUNT,
-  Third: THIRD_AMOUNT,
-};
-const data2 = data1.filter(item => item.amount > 0).map(item => ({
-  ...item,
-  amount: dict[item.shift] - item.amount,
-  type: 'to target',
-}));
-
-// const dataTemp = JSON.parse(JSON.stringify(data1))
-// const data2 = dataTemp.map(item => {
-//   if (item.shift === "First" && (FIRST_AMOUNT - item.amount) > 0) {
-//     item.amount = FIRST_AMOUNT - item.amount;
-//     item.type = "to target";
-//     return item;
-//   }
-//   if (item.shift === "Second" && (SECOND_AMOUNT - item.amount) > 0) {
-//     item.amount = SECOND_AMOUNT - item.amount;
-//     item.type = "to target";
-//     return item;
-//   }
-//   if (item.shift === "Third" && (THIRD_AMOUNT - item.amount) > 0) {
-//     item.amount = THIRD_AMOUNT - item.amount;
-//     item.type = "to target";
-//     return item;
-//   }
-//   return null;
-// })
-console.log(data2)
-const data = [...data1, ...data2]
+]
 
 
 onMounted(() => {
   const annotations = [];
   each(groupBy(data, 'type'), (values, k) => {
-    const value = values.reduce((a, b) => a.amount + b.amount, 0);
+    const value = values.reduce((a, b) => a.productivity + b.productivity, 0);
     annotations.push({
       type: 'text',
       position: [k, value],
@@ -118,14 +86,14 @@ onMounted(() => {
       offsetY: -10,
     });
   });
-  const column = new Column('container12', {
+  const column = new Column('stringerOutput', {
     data,
     xField: 'shift',
     yField: 'amount',
     isGroup: true,
     isStack: true,
     seriesField: 'type',
-    groupField: 'col_name',
+    groupField: 'stringer',
 
     label: {
       // 可手动配置 label 数据标签位置
@@ -133,11 +101,11 @@ onMounted(() => {
       // 可配置附加的布局方法
       layout: [
         // 柱形图数据标签位置自动调整
-        {type: 'interval-adjust-position'},
+        { type: 'interval-adjust-position' },
         // 数据标签防遮挡
-        {type: 'interval-hide-overlap'},
+        { type: 'interval-hide-overlap' },
         // 数据标签文颜色自动调整
-        {type: 'adjust-color'},
+        { type: 'adjust-color' },
       ],
     },
     // 使用 annotation （图形标注）来展示：总数的 label
@@ -150,7 +118,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="container12"/>
+  <div id="stringerOutput"/>
 </template>
 
 
