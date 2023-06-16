@@ -45,6 +45,10 @@ const itemClick = ({item, key, keyPath}) => {
             <user-outlined/>
             <span class="nav-text">Demo02</span>
           </a-menu-item>
+          <a-menu-item key="/webSocketDemo">
+            <user-outlined/>
+            <span class="nav-text">webSocketDemo</span>
+          </a-menu-item>
 
         </a-sub-menu>
 
@@ -70,7 +74,7 @@ const itemClick = ({item, key, keyPath}) => {
             <user-outlined/>
             <span class="nav-text">Thursday report</span>
           </a-menu-item>
-          <a-menu-item key="/mondayReport2">
+          <a-menu-item key="/fridayReport02">
             <user-outlined/>
             <span class="nav-text">Friday report</span>
           </a-menu-item>

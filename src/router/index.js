@@ -11,6 +11,8 @@ import WeeklyReport1 from '/src/view/WeeklyReport1.vue'
 import DailyReportDemo1 from "../view/DailyReportDemo1/DailyReportDemo1.vue";
 import ThursdayReport02 from "../view/thursdayReport02/ThursdayReport02.vue";
 import DailyReportDemo02 from "../view/DailyReportDemo2/DailyReportDemo02.vue";
+import FridayReport02 from "../view/FridayReport02/FridayReport02.vue";
+import WebSocketDemo from "../view/WebSocketDemo/WebSocketDemo.vue";
 
 
 const myRouter = createRouter({
@@ -30,6 +32,11 @@ const myRouter = createRouter({
       path: '/thursdayReport02',
       name: 'thursdayReport02',
       component: ThursdayReport02
+    },
+    {
+      path: '/fridayReport02',
+      name: 'fridayReport02',
+      component: FridayReport02
     },
     {
       path: '/monthlyReport2',
@@ -75,6 +82,11 @@ const myRouter = createRouter({
       path: '/DailyReportDemo02',
       name: 'DailyReportDemo02',
       component: DailyReportDemo02
+    },
+    {
+      path: '/webSocketDemo',
+      name: 'webSocketDemo',
+      component: WebSocketDemo
     },
   ]
 })

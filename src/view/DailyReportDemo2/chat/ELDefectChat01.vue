@@ -139,7 +139,7 @@ onMounted(() => {
 
 <template>
   <div >
-    <div id="ELDefectChat01" :style="{height:'150px'}"/>
+    <div id="ELDefectChat01" :style="{height:'300px'}"/>
   </div>
 </template>
 
