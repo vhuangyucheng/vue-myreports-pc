@@ -15,7 +15,7 @@ import {AntDesignVueResolver} from 'unplugin-vue-components/resolvers';
 // https://vitejs.dev/config/
 export default defineConfig({
     server: {
-        //port: 3000,
+        port: 80,
         //open: true,
         cors: true,
         proxy: {
