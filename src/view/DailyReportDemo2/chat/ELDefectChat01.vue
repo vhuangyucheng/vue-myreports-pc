@@ -2,110 +2,63 @@
 import {Column} from '@antv/g2plot';
 import {each, groupBy} from '@antv/util';
 
-const data = [
-  {
-    reason: 'Miss-welding',
-    shift: 'First',
-    amount: 27,
-  },
-  {
-    reason: 'Crack',
-    shift: 'First',
-    amount: 33,
-  },
-  {
-    reason: 'others',
-    shift: 'First',
-    amount: 33,
-  },
-  {
-    reason: 'Miss-welding',
-    shift: 'Second',
-    amount: 6,
-  },
-  {
-    reason: 'Crack',
-    shift: 'Second',
-    amount: 6,
-  },
-  {
-    reason: 'Excessive corrosion',
-    shift: 'Second',
-    amount: 1,
-  },
-  {
-    reason: 'Miss-welding',
-    shift: 'Third',
-    amount: 47,
-  },
+const data = {
+  id: "Stringer21", //String21, Stringer21, Stringer21, Stringer22, Stringer23, Stringer23
+  defect: [
+    {
+      reason: 'Miss-welding',//不良原因
+      shift: 'First', //第几个班： First, Second, Third
+      amount: 27,  //这个原因的数量
+    },
+    {
+      reason: 'Crack',
+      shift: 'First',
+      amount: 33,
+    },
+    {
+      reason: 'others',
+      shift: 'First',
+      amount: 33,
+    },
+    {
+      reason: 'Miss-welding',
+      shift: 'Second',
+      amount: 6,
+    },
+    {
+      reason: 'Crack',
+      shift: 'Second',
+      amount: 6,
+    },
+    {
+      reason: 'Excessive corrosion',
+      shift: 'Second',
+      amount: 1,
+    },
+    {
+      reason: 'Miss-welding',
+      shift: 'Third',
+      amount: 47,
+    },
 
 
-  {
-    reason: 'Crack',
-    shift: 'Third',
-    amount: 48,
-  },
-  {
-    reason: 'Short',
-    shift: 'Third',
-    amount: 2,
-  },
+    {
+      reason: 'Crack',
+      shift: 'Third',
+      amount: 48,
+    },
+    {
+      reason: 'Short',
+      shift: 'Third',
+      amount: 2,
+    },
 
-];
-const data2 = [
-  {
-    reason: 'Miss-welding',
-    shift: 'First',
-    amount: 27,
-  },
-  {
-    reason: 'Crack',
-    shift: 'First',
-    amount: 33,
-  },
-  {
-    reason: 'others',
-    shift: 'First',
-    amount: 33,
-  },
-  {
-    reason: 'Miss-welding',
-    shift: 'Second',
-    amount: 6,
-  },
-  {
-    reason: 'Crack',
-    shift: 'Second',
-    amount: 6,
-  },
-  {
-    reason: 'Excessive corrosion',
-    shift: 'Second',
-    amount: 1,
-  },
-  {
-    reason: 'Miss-welding',
-    shift: 'Third',
-    amount: 47,
-  },
-
-
-  {
-    reason: 'Crack',
-    shift: 'Third',
-    amount: 48,
-  },
-  {
-    reason: 'Short',
-    shift: 'Third',
-    amount: 4,
-  },
-
-];
+  ]
+};
 
 onMounted(() => {
   const stackedColumnPlot = new Column('ELDefectChat01', {
-    data,
+    data: data.defect,
     isGroup: true,
     xField: 'shift',
     yField: 'amount',
@@ -134,11 +87,10 @@ onMounted(() => {
 })
 
 
-
 </script>
 
 <template>
-  <div >
+  <div>
     <div id="ELDefectChat01" :style="{height:'300px'}"/>
   </div>
 </template>
