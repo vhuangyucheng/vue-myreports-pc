@@ -13,6 +13,7 @@ import ThursdayReport02 from "../view/thursdayReport02/ThursdayReport02.vue";
 import DailyReportDemo02 from "../view/DailyReportDemo2/DailyReportDemo02.vue";
 import FridayReport02 from "../view/FridayReport02/FridayReport02.vue";
 import WebSocketDemo from "../view/WebSocketDemo/WebSocketDemo.vue";
+import StringerDemo01 from "../view/StringerDemo01/StringerDemo01.vue";
 
 
 const myRouter = createRouter({
@@ -87,6 +88,11 @@ const myRouter = createRouter({
       path: '/webSocketDemo',
       name: 'webSocketDemo',
       component: WebSocketDemo
+    },
+    {
+      path: '/StringerDemo01',
+      name: 'StringerDemo01',
+      component: StringerDemo01
     },
   ]
 })

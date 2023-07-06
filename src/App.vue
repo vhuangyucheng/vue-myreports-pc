@@ -49,6 +49,10 @@ const itemClick = ({item, key, keyPath}) => {
             <user-outlined/>
             <span class="nav-text">webSocketDemo</span>
           </a-menu-item>
+          <a-menu-item key="/stringerDemo01">
+            <user-outlined/>
+            <span class="nav-text">stringerDemo01</span>
+          </a-menu-item>
 
         </a-sub-menu>
 

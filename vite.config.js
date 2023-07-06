@@ -19,12 +19,12 @@ export default defineConfig({
         //open: true,
         cors: true,
         proxy: {
-            '/api': {
-                target: 'http://10.10.130.87:8080',    // 目标接口前缀
+            '/apiStringer': {
+                target: 'http://10.10.140.90:8080',    // 目标接口前缀
                 // target: 'http://localhost:8080',
-                //ws: true,       //  代理webscoked
+                ws: true,       //  代理webscoked
                 changeOrigin: true,   // 开启跨域
-                rewrite: (path) => path.replace(/\/api/, '')  // 路径重写
+                rewrite: (path) => path.replace(/\/apiStringer/, '')  // 路径重写
             }
         }
     },
