@@ -17,48 +17,56 @@ axios({
 }).then(function (response) {
   dataFromBack.value = response.data.result;
 });
-console.log(dataFromBack.value)
+// console.log(dataFromBack.value)
 
 import {Column} from '@antv/g2plot';
 import {each, groupBy} from '@antv/util';
 
 const data = {
-  id: "Stringer21", //String21, Stringer21, Stringer21, Stringer22, Stringer23, Stringer23
+  id: "Stringer21", //String21, , Stringer22, Stringer23,
   defect: [
     {
       reason: 'Miss-welding',//不良原因
       shift: 'First', //第几个班： First, Second, Third
       amount: 27,  //这个原因的数量
+      type:"A"// a侧b侧
     },
     {
       reason: 'Crack',
       shift: 'First',
       amount: 33,
+      type:"A"// a侧b侧
+
     },
     {
       reason: 'others',
       shift: 'First',
       amount: 33,
+      type:"A"// a侧b侧
     },
     {
       reason: 'Miss-welding',
       shift: 'Second',
       amount: 6,
+      type:"A"// a侧b侧
     },
     {
       reason: 'Crack',
       shift: 'Second',
       amount: 6,
+      type:"A"// a侧b侧
     },
     {
       reason: 'Excessive corrosion',
       shift: 'Second',
       amount: 1,
+      type:"A"// a侧b侧
     },
     {
       reason: 'Miss-welding',
       shift: 'Third',
       amount: 47,
+      type:"A"// a侧b侧
     },
 
 
@@ -66,11 +74,13 @@ const data = {
       reason: 'Crack',
       shift: 'Third',
       amount: 48,
+      type:"A"// a侧b侧
     },
     {
       reason: 'Short',
       shift: 'Third',
       amount: 2,
+      type:"A"// a侧b侧
     },
 
   ]
