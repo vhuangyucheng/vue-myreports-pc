@@ -1,4 +1,24 @@
 <script setup>
+import axios from "axios";
+
+let dataFromBack = ref([]);
+axios({
+  url: "/apiMes/api/services/MES2RPT/ProductionReportData/GetDetailDataList",
+  method: "GET",
+  params: {
+    StartTime: "2023/7/7 8:00:00",
+    EndTime: "2023/7/9 20:00:00",
+    TimesFlag: 7,
+    MaxResultCount: 1000
+  },
+  contentType: "json",
+  processData: false,
+  dataType: "json",
+}).then(function (response) {
+  dataFromBack.value = response.data.result;
+});
+console.log(dataFromBack.value)
+
 import {Column} from '@antv/g2plot';
 import {each, groupBy} from '@antv/util';
 

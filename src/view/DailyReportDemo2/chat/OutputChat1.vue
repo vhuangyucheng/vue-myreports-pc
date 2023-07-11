@@ -1,10 +1,68 @@
 <script setup>
+import axios from "axios";
+
+let dataFromBack = ref([]);
+axios({
+  url: "/apiMes/api/services/MES2RPT/ProductionReportData/GetSummaryDataList",
+  method: "GET",
+  params: {
+    StartTime: "2023/7/7 8:00:00",
+    EndTime: "2023/7/9 20:00:00",
+    TimesFlag: 7,
+    MaxResultCount: 1000
+
+  },
+  contentType: "json",
+  processData: false,
+  dataType: "json",
+}).then(function (response) {
+  dataFromBack.value = response.data.result;
+});
+// console.log(dataFromBack.value)
+let dataOutput = {};
+// dataFromBack.value.filter();
+// dataFromBack.value.forEach(item => {
+//       dataOutput = [...dataOutput,
+//         {
+//           shift: item.ShiftValue,
+//           col_name: "layup",
+//           amount: item.Layup,
+//           type: "productivity"
+//         },
+//         {
+//           shift: item.ShiftValue,
+//           col_name: "EL-1",
+//           amount: item.EL-1,
+//           type: "productivity"
+//         },
+//         {
+//           shift: item.ShiftValue,
+//           col_name: "Framing&JB",
+//           amount: Framing&JB,
+//           type: "productivity"
+//         },
+//         {
+//           shift: item.ShiftValue,
+//           col_name: "Sorting",
+//           amount: Sorting,
+//           type: "productivity"
+//         },
+//
+//
+//       ]
+//     }
+// )
+//
+// console.log(dataOutput);
+
 import {Column} from '@antv/g2plot';
 import {each, groupBy} from '@antv/util';
 
 const FIRST_AMOUNT = 600;
 const SECOND_AMOUNT = 600;
 const THIRD_AMOUNT = 300;
+
+
 const data1 = [
 
   {
@@ -83,26 +141,7 @@ const data2 = data1.filter(item => item.amount > 0).map(item => ({
   type: 'to target',
 }));
 
-// const dataTemp = JSON.parse(JSON.stringify(data1))
-// const data2 = dataTemp.map(item => {
-//   if (item.shift === "First" && (FIRST_AMOUNT - item.amount) > 0) {
-//     item.amount = FIRST_AMOUNT - item.amount;
-//     item.type = "to target";
-//     return item;
-//   }
-//   if (item.shift === "Second" && (SECOND_AMOUNT - item.amount) > 0) {
-//     item.amount = SECOND_AMOUNT - item.amount;
-//     item.type = "to target";
-//     return item;
-//   }
-//   if (item.shift === "Third" && (THIRD_AMOUNT - item.amount) > 0) {
-//     item.amount = THIRD_AMOUNT - item.amount;
-//     item.type = "to target";
-//     return item;
-//   }
-//   return null;
-// })
-console.log(data2)
+// console.log(data2)
 const data = [...data1, ...data2]
 
 
