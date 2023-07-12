@@ -6,75 +6,95 @@ import {each, groupBy} from '@antv/util';
 
 
 
+const dataToShow = ref([]);
+let column;
 
-let dataFromBack;
-let dataOutput = [];
+self.setInterval(() => {
+  axiosCall()
+  console.log("timer")
+}, 6000);
 
-axios({
-  url: "/apiMes/api/services/MES2RPT/ProductionReportData/GetSummaryDataList",
-  method: "GET",
-  params: {
-    StartTime: "2023/7/7 8:00:00",
-    EndTime: "2023/7/9 20:00:00",
-    TimesFlag: 7,
-    MaxResultCount: 1000
+function axiosCall() {
+  let dataFromBack;
+  let dataOutput = [];
+  axios({
+    url: "/apiMes/api/services/MES2RPT/ProductionReportData/GetSummaryDataList",
+    method: "GET",
+    params: {
+      // StartTime: "2023/7/7 8:00:00",
+      // EndTime: "2023/7/9 20:00:00",
+      TimesFlag: 7,
+      MaxResultCount: 1000
 
-  },
-  contentType: "json",
-  processData: false,
-  dataType: "json",
-}).then(function (response) {
-  dataFromBack = response.data.result.items;
-  console.log(dataFromBack)
-  dataFromBack.forEach(item => {
-        dataOutput = [...dataOutput,
-          {
-            shift: item.ShiftValue,
-            col_name: "layup",
-            amount: parseInt(item.Layup),
-            type: "productivity"
-          },
-          {
-            shift: item.ShiftValue,
-            col_name: "EL-1",
-            amount: parseInt(item["Framing&JB"]),
-            type: "productivity"
-          },
-          {
-            shift: item.ShiftValue,
-            col_name: "Framing&JB",
-            amount: parseInt(item["Framing&JB"]),
-            type: "productivity"
-          },
-          {
-            shift: item.ShiftValue,
-            col_name: "Sorting",
-            amount: parseInt(item.Sorting),
-            type: "productivity"
-          }
-        ]
-      }
-  )
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    dataFromBack = response.data.result.items;
+    console.log(dataFromBack)
+    dataFromBack.forEach(item => {
+          dataOutput = [...dataOutput,
+            {
+              shift: item.ShiftValue,
+              col_name: "layup",
+              amount: parseInt(item.Layup),
+              type: "productivity"
+            },
+            {
+              shift: item.ShiftValue,
+              col_name: "EL-1",
+              amount: parseInt(item["EL-1"]),
+              type: "productivity"
+            },
+            {
+              shift: item.ShiftValue,
+              col_name: "Framing&JB",
+              amount: parseInt(item["Framing&JB"]),
+              type: "productivity"
+            },
+            {
+              shift: item.ShiftValue,
+              col_name: "Sorting",
+              amount: parseInt(item.Sorting),
+              type: "productivity"
+            }
+          ]
+        }
+    )
 
-  const FIRST_AMOUNT = 600;
-  const SECOND_AMOUNT = 600;
-  const THIRD_AMOUNT = 300;
+    const FIRST_AMOUNT = 600;
+    const SECOND_AMOUNT = 600;
+    const THIRD_AMOUNT = 300;
 
-  const dict = {
-    Day: FIRST_AMOUNT,
-    Night: SECOND_AMOUNT,
-    NN: THIRD_AMOUNT,
-  };
-  const data2 = dataOutput.filter(item => (item.amount <= dict[item.shift])).map(item => ({
-    ...item,
-    amount: dict[item.shift] - item.amount,
-    type: 'to target',
-  }));
-  console.log(data2)
+    const dict = {
+      Day: FIRST_AMOUNT,
+      Night: SECOND_AMOUNT,
+      NN: THIRD_AMOUNT,
+    };
+    const data2 = dataOutput.filter(item => (item.amount <= dict[item.shift])).map(item => ({
+      ...item,
+      amount: dict[item.shift] - item.amount,
+      type: 'to target',
+    }));
+    console.log(data2)
 
-  const data = [...data2, ...dataOutput ]
-  const column = new Column('container12', {
-    data,
+    dataToShow.value = [...data2, ...dataOutput]
+    console.log(dataToShow)
+    column.changeData(dataToShow.value)
+
+  });
+}
+
+
+axiosCall()
+//render
+// console.log(data)
+
+
+onMounted(() => {
+  column = new Column('container12', {
+    data: dataToShow.value,
     xField: 'shift',
     yField: 'amount',
     isGroup: true,
@@ -96,92 +116,8 @@ axios({
       ],
     },
   });
-
   column.render();
-});
-
-
-const data1 = [
-
-  {
-    "shift": "First",
-    "col_name": "layup",
-    "amount": 444,
-    "type": "productivity"
-  },
-
-  {
-    "shift": "First",
-    "col_name": "framing",
-    "amount": 452,
-    "type": "productivity"
-  },
-
-  {
-    "shift": "First",
-    "col_name": "sorting",
-    "amount": 419,
-    "type": "productivity"
-  },
-
-  {
-    "shift": "Second",
-    "col_name": "layup",
-    "amount": 510,
-    "type": "productivity"
-  },
-
-  {
-    "shift": "Second",
-    "col_name": "framing",
-    "amount": 502,
-    "type": "productivity"
-  },
-
-  {
-    "shift": "Second",
-    "col_name": "sorting",
-    "amount": 438,
-    "type": "productivity"
-  },
-
-  {
-    "shift": "Third",
-    "col_name": "layup",
-    "amount": 5,
-    "type": "productivity"
-  },
-
-
-  {
-    "shift": "Third",
-    "col_name": "framing",
-    "amount": 93,
-    "type": "productivity"
-  },
-
-  {
-    "shift": "Third",
-    "col_name": "sorting",
-    "amount": 267,
-    "type": "productivity"
-  }
-];
-
-
-onMounted(() => {
-  // const annotations = [];
-  // each(groupBy(data, 'type'), (values, k) => {
-  //   const value = values.reduce((a, b) => a.amount + b.amount, 0);
-  //   annotations.push({
-  //     type: 'text',
-  //     position: [k, value],
-  //     content: `${value}`,
-  //     style: {textAlign: 'center', fontSize: 14, fill: 'rgba(0,0,0,0.85)'},
-  //     offsetY: -10,
-  //   });
-  // });
-
+  console.log("onMount")
 })
 
 </script>
