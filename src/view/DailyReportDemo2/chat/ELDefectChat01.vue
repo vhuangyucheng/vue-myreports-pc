@@ -1,4 +1,38 @@
 <script setup>
+var currentTime
+function dailyTask() {
+  // Your task logic goes here
+  console.log("Running daily task at 6:45 am");
+}
+
+function startDailyTask() {
+  // Get the current time
+  var currentTime = new Date();
+
+  // Calculate the time until the next 6:45 am
+  var targetTime = new Date();
+  targetTime.setHours(6);
+  targetTime.setMinutes(46);
+  targetTime.setSeconds(0);
+
+  // If the current time is already past 6:45 am, add 1 day to the target time
+  if (currentTime > targetTime) {
+    targetTime.setDate(targetTime.getDate() + 1);
+  }
+
+  // Calculate the time difference in milliseconds
+  var timeDifference = targetTime - currentTime;
+
+  // Start the interval to run the task at the specified time
+  setTimeout(function() {
+    dailyTask(); // Run the task immediately
+    setInterval(dailyTask, 24 * 60 * 60 * 1000); // Repeat the task every 24 hours
+  }, timeDifference);
+}
+
+// Start the daily task
+startDailyTask();
+
 import axios from "axios";
 
 let dataFromBack = ref([]);

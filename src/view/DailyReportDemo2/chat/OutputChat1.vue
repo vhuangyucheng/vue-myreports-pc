@@ -5,14 +5,13 @@ import {Column} from '@antv/g2plot';
 import {each, groupBy} from '@antv/util';
 
 
-
-const dataToShow = ref([]);
+let dataToShow = [] ;
 let column;
 
 self.setInterval(() => {
   axiosCall()
   console.log("timer")
-}, 6000);
+}, 1000 * 60 );
 
 function axiosCall() {
   let dataFromBack;
@@ -32,7 +31,7 @@ function axiosCall() {
     dataType: "json",
   }).then(function (response) {
     dataFromBack = response.data.result.items;
-    console.log(dataFromBack)
+    // console.log(dataFromBack)
     dataFromBack.forEach(item => {
           dataOutput = [...dataOutput,
             {
@@ -77,11 +76,11 @@ function axiosCall() {
       amount: dict[item.shift] - item.amount,
       type: 'to target',
     }));
-    console.log(data2)
+    // console.log(data2)
 
-    dataToShow.value = [...data2, ...dataOutput]
-    console.log(dataToShow)
-    column.changeData(dataToShow.value)
+    dataToShow = [...data2, ...dataOutput]
+    // console.log(dataToShow)
+    column.changeData(dataToShow)
 
   });
 }
@@ -94,7 +93,7 @@ axiosCall()
 
 onMounted(() => {
   column = new Column('container12', {
-    data: dataToShow.value,
+    data: dataToShow,
     xField: 'shift',
     yField: 'amount',
     isGroup: true,
@@ -117,7 +116,7 @@ onMounted(() => {
     },
   });
   column.render();
-  console.log("onMount")
+  // console.log("onMount")
 })
 
 </script>
