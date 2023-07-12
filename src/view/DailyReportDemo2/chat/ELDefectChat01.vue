@@ -1,15 +1,23 @@
 <script setup>
-var currentTime
+
+import {log} from "@antv/g2plot/lib/utils/index.js";
+
+let currentDay;
+let stackedColumnPlot;
+
 function dailyTask() {
   // Your task logic goes here
-  console.log("Running daily task at 6:45 am");
+  var currentTime = new Date();
+  currentDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
+  // console.log(currentDay);
 }
 
 function startDailyTask() {
+  axiosCall();
   // Get the current time
   var currentTime = new Date();
 
-  // Calculate the time until the next 6:45 am
+  // Calculate the time until the next 6:46 am
   var targetTime = new Date();
   targetTime.setHours(6);
   targetTime.setMinutes(46);
@@ -24,7 +32,7 @@ function startDailyTask() {
   var timeDifference = targetTime - currentTime;
 
   // Start the interval to run the task at the specified time
-  setTimeout(function() {
+  setTimeout(function () {
     dailyTask(); // Run the task immediately
     setInterval(dailyTask, 24 * 60 * 60 * 1000); // Repeat the task every 24 hours
   }, timeDifference);
@@ -34,27 +42,76 @@ function startDailyTask() {
 startDailyTask();
 
 import axios from "axios";
-
-let dataFromBack = ref([]);
-axios({
-  url: "/apiMes/api/services/MES2RPT/ProductionReportData/GetDetailDataList",
-  method: "GET",
-  params: {
-    StartTime: "2023/7/7 8:00:00",
-    EndTime: "2023/7/9 20:00:00",
-    TimesFlag: 7,
-    MaxResultCount: 1000
-  },
-  contentType: "json",
-  processData: false,
-  dataType: "json",
-}).then(function (response) {
-  dataFromBack.value = response.data.result;
-});
-// console.log(dataFromBack.value)
-
 import {Column} from '@antv/g2plot';
-import {each, groupBy} from '@antv/util';
+
+self.setInterval(() => {
+  axiosCall();
+  console.log("EL-defect timer")
+}, 1000 * 60);
+
+
+let dataFromBack = [];
+
+function axiosCall() {
+  let dataFromBack1;
+  let dataFromBack2;
+  axios({
+    url: "/apiMes/api/services/MES2RPT/ProductionReportData/GetDetailDataList",
+    method: "GET",
+    params: {
+      StartTime: "2023/7/7 8:00:00",
+      EndTime: "2023/7/9 20:00:00",
+      TimesFlag: 7,
+      MaxResultCount: 1000,
+      RouteOperations: "EL-1",
+      SkipCount: 0
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    dataFromBack = [...response.data.result.items];
+    console.log("0 aixos");
+    //todo 不会在两个promise写
+    // if (response.data.result.totalCount > 600) {
+    axios({
+      url: "/apiMes/api/services/MES2RPT/ProductionReportData/GetDetailDataList",
+      method: "GET",
+      params: {
+        StartTime: "2023/7/7 8:00:00",
+        EndTime: "2023/7/9 20:00:00",
+        TimesFlag: 7,
+        MaxResultCount: 1000,
+        RouteOperations: "EL-1",
+        SkipCount: 1000
+      },
+      contentType: "json",
+      processData: false,
+      dataType: "json",
+    }).then(function (response) {
+      dataFromBack = [...dataFromBack, ...response.data.result.items];
+      console.log("1000 aixos");
+      console.log(dataFromBack)
+      //分shift
+      const shiftGroupedData = dataFromBack.reduce((groups, item) => {
+        const category = item.shiftValue;
+
+        // Create a new group if it doesn't exist
+        if (!groups[category]) {
+
+          groups[category] = {category, count: 0, items: [] };
+        }
+
+        // Increment the count and add the item to the group
+        groups[category].count++;
+        groups[category].items.push(item);
+        return groups;
+      }, {});
+      console.log(shiftGroupedData);
+    })
+  })
+};
+
 
 const data = {
   id: "Stringer21", //String21, , Stringer22, Stringer23,
@@ -63,44 +120,44 @@ const data = {
       reason: 'Miss-welding',//不良原因
       shift: 'First', //第几个班： First, Second, Third
       amount: 27,  //这个原因的数量
-      type:"A"// a侧b侧
+      type: "A"// a侧b侧
     },
     {
       reason: 'Crack',
       shift: 'First',
       amount: 33,
-      type:"A"// a侧b侧
+      type: "A"// a侧b侧
 
     },
     {
       reason: 'others',
       shift: 'First',
       amount: 33,
-      type:"A"// a侧b侧
+      type: "A"// a侧b侧
     },
     {
       reason: 'Miss-welding',
       shift: 'Second',
       amount: 6,
-      type:"A"// a侧b侧
+      type: "A"// a侧b侧
     },
     {
       reason: 'Crack',
       shift: 'Second',
       amount: 6,
-      type:"A"// a侧b侧
+      type: "A"// a侧b侧
     },
     {
       reason: 'Excessive corrosion',
       shift: 'Second',
       amount: 1,
-      type:"A"// a侧b侧
+      type: "A"// a侧b侧
     },
     {
       reason: 'Miss-welding',
       shift: 'Third',
       amount: 47,
-      type:"A"// a侧b侧
+      type: "A"// a侧b侧
     },
 
 
@@ -108,20 +165,20 @@ const data = {
       reason: 'Crack',
       shift: 'Third',
       amount: 48,
-      type:"A"// a侧b侧
+      type: "A"// a侧b侧
     },
     {
       reason: 'Short',
       shift: 'Third',
       amount: 2,
-      type:"A"// a侧b侧
+      type: "A"// a侧b侧
     },
 
   ]
 };
 
 onMounted(() => {
-  const stackedColumnPlot = new Column('ELDefectChat01', {
+  stackedColumnPlot = new Column('ELDefectChat01', {
     data: data.defect,
     isGroup: true,
     xField: 'shift',
