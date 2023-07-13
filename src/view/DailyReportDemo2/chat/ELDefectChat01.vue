@@ -3,24 +3,37 @@
 import {log} from "@antv/g2plot/lib/utils/index.js";
 
 let currentDay;
+let tomorrowDay;
 let stackedColumnPlot;
+
+let firstNGRate = ref(0);
+let secondNGRate = ref(0);
+let thirdNGRate = ref(0);
+
+let dataToShow = []
+
 
 function dailyTask() {
   // Your task logic goes here
   var currentTime = new Date();
   currentDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
-  // console.log(currentDay);
+  tomorrowDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + (currentTime.getDate() + 1)
+
 }
 
+//1,set定时任务，2，跑一下开机任务
 function startDailyTask() {
-  axiosCall();
+
   // Get the current time
   var currentTime = new Date();
+  currentDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
+  tomorrowDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + (currentTime.getDate() + 1)
+  axiosCall();
 
   // Calculate the time until the next 6:46 am
   var targetTime = new Date();
   targetTime.setHours(6);
-  targetTime.setMinutes(46);
+  targetTime.setMinutes(45);
   targetTime.setSeconds(0);
 
   // If the current time is already past 6:45 am, add 1 day to the target time
@@ -53,14 +66,12 @@ self.setInterval(() => {
 let dataFromBack = [];
 
 function axiosCall() {
-  let dataFromBack1;
-  let dataFromBack2;
   axios({
     url: "/apiMes/api/services/MES2RPT/ProductionReportData/GetDetailDataList",
     method: "GET",
     params: {
-      StartTime: "2023/7/7 8:00:00",
-      EndTime: "2023/7/9 20:00:00",
+      StartTime: currentDay + " 6:45:00",
+      EndTime: tomorrowDay + " 6:45:00",
       TimesFlag: 7,
       MaxResultCount: 1000,
       RouteOperations: "EL-1",
@@ -71,7 +82,7 @@ function axiosCall() {
     dataType: "json",
   }).then(function (response) {
     dataFromBack = [...response.data.result.items];
-    console.log("0 aixos");
+    // console.log("0 aixos");
     //todo 不会在两个promise写
     // if (response.data.result.totalCount > 600) {
     axios({
@@ -90,24 +101,80 @@ function axiosCall() {
       dataType: "json",
     }).then(function (response) {
       dataFromBack = [...dataFromBack, ...response.data.result.items];
-      console.log("1000 aixos");
-      console.log(dataFromBack)
+      // console.log("1000 aixos");
+      // console.log(dataFromBack)
+      dataFromBack.map(item => {
+
+      })
+      // 分shift和原因
+      const groupedData = dataFromBack.reduce((groups, item) => {
+        const key = item.shiftValue + '-' + item.description;
+
+        // Create a new group if it doesn't exist
+        if (!groups[key]) {
+          groups[key] = {shift: item.shiftValue, reason: item.description, count: 0, items: []};
+        }
+
+        // Increment the count and add the item to the group
+        groups[key].count++;
+        groups[key].items.push(item);
+
+        return groups;
+      }, {});
+      // console.log(groupedData)
       //分shift
       const shiftGroupedData = dataFromBack.reduce((groups, item) => {
         const category = item.shiftValue;
-
         // Create a new group if it doesn't exist
         if (!groups[category]) {
-
-          groups[category] = {category, count: 0, items: [] };
+          groups[category] = {category, count: 0, items: []};
         }
-
         // Increment the count and add the item to the group
         groups[category].count++;
         groups[category].items.push(item);
         return groups;
       }, {});
       console.log(shiftGroupedData);
+
+      firstNGRate.value = Number(1 - (groupedData["Day-A:正常"].count / shiftGroupedData["Day"].count).toFixed(3));
+      if (shiftGroupedData.hasOwnProperty("Night") ) {
+        secondNGRate.value = Number(1 - (groupedData["Night-A:正常"].count / shiftGroupedData["Night"].count).toFixed(3));
+      }
+      if (shiftGroupedData.hasOwnProperty("NN")  ) {
+        thirdNGRate.value = Number(1 - (groupedData["NN-A:正常"].count / shiftGroupedData["NN"].count).toFixed(3));
+      }
+
+      //empty data and format, todo:安排顺序
+      dataToShow = [
+        {
+          shift: 'Day', //第几个班： First, Second, Third
+        },
+        {
+          shift: 'Night',
+        },
+
+        {
+          shift: 'NN',
+        }
+      ]
+
+      Object.entries(groupedData).forEach(([key, value]) => {
+        // console.log(key + ': ' + value["shift"]);
+        // console.log(key + ': ' + value["reason"]);
+        // console.log(key + ': ' + value["count"]);
+        // console.log(key)
+        if ((key !== "Day-A:正常") && (key !== "Night-A:正常") && (key !== "NN-A:正常")) {
+
+          dataToShow.push({
+            shift: value["shift"], //第几个班： First, Second, Third
+            reason: value["reason"],//不良原因
+            amount: value["count"],  //这个原因的数量
+          })
+        }
+      });
+      // console.log(dataToShow)
+      stackedColumnPlot.changeData(dataToShow)
+
     })
   })
 };
@@ -179,7 +246,7 @@ const data = {
 
 onMounted(() => {
   stackedColumnPlot = new Column('ELDefectChat01', {
-    data: data.defect,
+    data: dataToShow,
     isGroup: true,
     xField: 'shift',
     yField: 'amount',
@@ -190,7 +257,7 @@ onMounted(() => {
     // marginRatio: 0.1,
     label: {
       // 可手动配置 label 数据标签位置
-      position: 'middle', // 'top', 'middle', 'bottom'
+      position: 'top', // 'top', 'middle', 'bottom'
       // 可配置附加的布局方法
       layout: [
         // 柱形图数据标签位置自动调整
@@ -202,9 +269,7 @@ onMounted(() => {
       ],
     },
   });
-
   stackedColumnPlot.render();
-
 })
 
 
@@ -212,6 +277,7 @@ onMounted(() => {
 
 <template>
   <div>
+    <div>不良率： day=“{{ firstNGRate }}”，night=“{{ secondNGRate }}”， NN=“{{ thirdNGRate }}”</div>
     <div id="ELDefectChat01" :style="{height:'300px'}"/>
   </div>
 </template>

@@ -22,11 +22,6 @@ import DefectChart03 from "./chat/DefectChart03.vue";
       </div>
     </a-col>
     <a-col :span="12">
-      <div>不良率: 18.08%&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp19.69%&nbsp&nbsp&nbsp&nbsp18.30%</div>
-      <div>不良率: 18.08%&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp19.69%&nbsp&nbsp&nbsp&nbsp18.30%</div>
-      <div>不良率: 18.08%&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp19.69%&nbsp&nbsp&nbsp&nbsp18.30%</div>
-      <div>不良率: 18.08%&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp19.69%&nbsp&nbsp&nbsp&nbsp18.30%</div>
-
       <ELDefectChat01 />
       <DefectChart01/>
     </a-col>
