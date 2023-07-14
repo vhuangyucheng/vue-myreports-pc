@@ -16,8 +16,9 @@ let dataToShow = []
 function dailyTask() {
   // Your task logic goes here
   var currentTime = new Date();
+  var nextDate = new Date(currentTime.getTime() + 24 * 60 * 60 * 1000);
   currentDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
-  tomorrowDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + (currentTime.getDate() + 1)
+  tomorrowDay = nextDate.getFullYear() + "/" + (nextDate.getMonth() + 1) + "/" + nextDate.getDate()
 
 }
 
@@ -26,8 +27,9 @@ function startDailyTask() {
 
   // Get the current time
   var currentTime = new Date();
+  var nextDate = new Date(currentTime.getTime() + 24 * 60 * 60 * 1000);
   currentDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
-  tomorrowDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + (currentTime.getDate() + 1)
+  tomorrowDay = nextDate.getFullYear() + "/" + (nextDate.getMonth() + 1) + "/" + (nextDate.getDate())
   axiosCall();
 
   // Calculate the time until the next 6:46 am
@@ -136,7 +138,9 @@ function axiosCall() {
       }, {});
       console.log(shiftGroupedData);
 
-      firstNGRate.value = (1 - (groupedData["Day-A:正常"].count / shiftGroupedData["Day"].count)).toFixed(3);
+      if(shiftGroupedData.hasOwnProperty("Day")){
+        firstNGRate.value = (1 - (groupedData["Day-A:正常"].count / shiftGroupedData["Day"].count)).toFixed(3);
+      }
       if (shiftGroupedData.hasOwnProperty("Night")) {
         secondNGRate.value = (1 - (groupedData["Night-A:正常"].count / shiftGroupedData["Night"].count)).toFixed(3);
       }
