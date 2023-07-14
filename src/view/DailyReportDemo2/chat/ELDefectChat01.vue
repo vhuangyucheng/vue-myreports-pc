@@ -136,12 +136,12 @@ function axiosCall() {
       }, {});
       console.log(shiftGroupedData);
 
-      firstNGRate.value = Number(1 - (groupedData["Day-A:正常"].count / shiftGroupedData["Day"].count).toFixed(3));
-      if (shiftGroupedData.hasOwnProperty("Night") ) {
-        secondNGRate.value = Number(1 - (groupedData["Night-A:正常"].count / shiftGroupedData["Night"].count).toFixed(3));
+      firstNGRate.value = (1 - (groupedData["Day-A:正常"].count / shiftGroupedData["Day"].count)).toFixed(3);
+      if (shiftGroupedData.hasOwnProperty("Night")) {
+        secondNGRate.value = (1 - (groupedData["Night-A:正常"].count / shiftGroupedData["Night"].count)).toFixed(3);
       }
-      if (shiftGroupedData.hasOwnProperty("NN")  ) {
-        thirdNGRate.value = Number(1 - (groupedData["NN-A:正常"].count / shiftGroupedData["NN"].count).toFixed(3));
+      if (shiftGroupedData.hasOwnProperty("NN")) {
+        thirdNGRate.value = (1 - (groupedData["NN-A:正常"].count / shiftGroupedData["NN"].count)).toFixed(3);
       }
 
       //empty data and format, todo:安排顺序
