@@ -5,23 +5,69 @@ import {Column} from '@antv/g2plot';
 import {each, groupBy} from '@antv/util';
 
 
-let dataToShow = [] ;
+let dataToShow = [];
 let column;
 
 self.setInterval(() => {
   axiosCall()
   console.log("timer")
-}, 1000 * 60 );
+}, 1000 * 60);
+
+let currentDay;
+let tomorrowDay;
+
+//1,set定时任务，2，跑一下开机任务
+function startDailyTask() {
+  var currentTime = new Date();
+  const time1 = new Date(); // Replace with your desired time
+  time1.setHours(0);       // Set the hours
+  time1.setMinutes(0);    // Set the minutes
+  const time2 = new Date(); // Replace with your desired time
+  time2.setHours(6);      // Set the hours
+  time2.setMinutes(45);     // Set the minutes
+  if (currentTime <= time2 && currentTime >= time1) {
+    currentTime = new Date(currentTime.getTime() - 24 * 60 * 60 * 1000);
+  }
+  var nextDate = new Date(currentTime.getTime() + 24 * 60 * 60 * 1000);
+  currentDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
+  tomorrowDay = nextDate.getFullYear() + "/" + (nextDate.getMonth() + 1) + "/" + (nextDate.getDate())
+  axiosCall();
+
+  // Calculate the time until the next 6:46 am
+  var targetTime = new Date();
+  targetTime.setHours(6);
+  targetTime.setMinutes(45);
+  targetTime.setSeconds(0);
+
+  // If the current time is already past 6:45 am, add 1 day to the target time
+  if (currentTime > targetTime) {
+    targetTime.setDate(targetTime.getDate() + 1);
+  }
+
+  // Calculate the time difference in milliseconds
+  var timeDifference = targetTime - currentTime;
+
+  // Start the interval to run the task at the specified time
+  setTimeout(function () {
+    dailyTask(); // Run the task immediately
+    setInterval(dailyTask, 24 * 60 * 60 * 1000); // Repeat the task every 24 hours
+  }, timeDifference);
+}
+
+// Start the daily task
+startDailyTask();
 
 function axiosCall() {
+  console.log("currentDay", currentDay)
+  console.log("tomorrowDay", tomorrowDay)
   let dataFromBack;
   let dataOutput = [];
   axios({
     url: "/apiMes/api/services/MES2RPT/ProductionReportData/GetSummaryDataList",
     method: "GET",
     params: {
-      // StartTime: "2023/7/7 8:00:00",
-      // EndTime: "2023/7/9 20:00:00",
+      StartTime: currentDay + " 6:45:00",
+      EndTime: tomorrowDay + " 6:45:00",
       TimesFlag: 7,
       MaxResultCount: 1000
 

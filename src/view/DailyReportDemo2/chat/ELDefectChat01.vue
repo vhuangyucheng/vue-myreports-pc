@@ -15,8 +15,10 @@ let dataToShow = []
 
 function dailyTask() {
   // Your task logic goes here
+  //todo 只能在白天开机
   var currentTime = new Date();
   var nextDate = new Date(currentTime.getTime() + 24 * 60 * 60 * 1000);
+
   currentDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
   tomorrowDay = nextDate.getFullYear() + "/" + (nextDate.getMonth() + 1) + "/" + nextDate.getDate()
 
@@ -27,6 +29,15 @@ function startDailyTask() {
 
   // Get the current time
   var currentTime = new Date();
+  const time1 = new Date(); // Replace with your desired time
+  time1.setHours(0);       // Set the hours
+  time1.setMinutes(0);    // Set the minutes
+  const time2 = new Date(); // Replace with your desired time
+  time2.setHours(6);      // Set the hours
+  time2.setMinutes(45);     // Set the minutes
+  if (currentTime <= time2 && currentTime >= time1) {
+    currentTime = new Date(currentTime.getTime() - 24 * 60 * 60 * 1000);
+  }
   var nextDate = new Date(currentTime.getTime() + 24 * 60 * 60 * 1000);
   currentDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
   tomorrowDay = nextDate.getFullYear() + "/" + (nextDate.getMonth() + 1) + "/" + (nextDate.getDate())
@@ -68,6 +79,8 @@ self.setInterval(() => {
 let dataFromBack = [];
 
 function axiosCall() {
+  console.log("currentDay", currentDay)
+  console.log("tomorrowDay", tomorrowDay)
   axios({
     url: "/apiMes/api/services/MES2RPT/ProductionReportData/GetDetailDataList",
     method: "GET",
@@ -91,8 +104,8 @@ function axiosCall() {
       url: "/apiMes/api/services/MES2RPT/ProductionReportData/GetDetailDataList",
       method: "GET",
       params: {
-        StartTime: "2023/7/7 8:00:00",
-        EndTime: "2023/7/9 20:00:00",
+        StartTime: currentDay + " 6:45:00",
+        EndTime: tomorrowDay + " 6:45:00",
         TimesFlag: 7,
         MaxResultCount: 1000,
         RouteOperations: "EL-1",
@@ -138,7 +151,7 @@ function axiosCall() {
       }, {});
       console.log(shiftGroupedData);
 
-      if(shiftGroupedData.hasOwnProperty("Day")){
+      if (shiftGroupedData.hasOwnProperty("Day")) {
         firstNGRate.value = (1 - (groupedData["Day-A:正常"].count / shiftGroupedData["Day"].count)).toFixed(3);
       }
       if (shiftGroupedData.hasOwnProperty("Night")) {
