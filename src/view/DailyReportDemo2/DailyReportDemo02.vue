@@ -5,6 +5,20 @@ import DefectChart01 from "./chat/DefectChart01.vue";
 import StringerOutput from "./chat/StringerOutput.vue";
 import DefectChart02 from "./chat/DefectChart02.vue";
 import DefectChart03 from "./chat/DefectChart03.vue";
+import {values} from "@antv/util";
+
+let date = ref();
+let currentTime = new Date();
+const time1 = new Date(); // Replace with your desired time
+time1.setHours(0);       // Set the hours
+time1.setMinutes(0);    // Set the minutes
+const time2 = new Date(); // Replace with your desired time
+time2.setHours(6);      // Set the hours
+time2.setMinutes(45);     // Set the minutes
+if (currentTime <= time2 && currentTime >= time1) {
+  currentTime = new Date(currentTime.getTime() - 24 * 60 * 60 * 1000);
+}
+ date.value = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
 </script>
 
 
@@ -16,7 +30,7 @@ import DefectChart03 from "./chat/DefectChart03.vue";
 <!--  </a-row>-->
   <a-row>
     <a-col :span="12"  >
-      <div>productivity</div>
+      <div>{{ date }} : floor productivity</div>
       <div >
         <OutputChat1 :style="{height:'300px'}"/>
       </div>
@@ -29,9 +43,9 @@ import DefectChart03 from "./chat/DefectChart03.vue";
 
   <a-row>
     <a-col :span="12"  >
-      <div>productivity</div>
+      <div>{{ date }} : Stringer productivity</div>
       <div >
-        <StringerOutput :style="{height:'300px'}"/>
+        <StringerOutput/>
       </div>
     </a-col>
     <a-col :span="12">

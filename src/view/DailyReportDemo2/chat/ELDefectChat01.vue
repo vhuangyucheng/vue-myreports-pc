@@ -72,15 +72,15 @@ import {Column} from '@antv/g2plot';
 
 self.setInterval(() => {
   axiosCall();
-  console.log("EL-defect timer")
+  // console.log("EL-defect timer")
 }, 1000 * 60);
 
 
 let dataFromBack = [];
 
 function axiosCall() {
-  console.log("currentDay", currentDay)
-  console.log("tomorrowDay", tomorrowDay)
+  // console.log("currentDay", currentDay)
+  // console.log("tomorrowDay", tomorrowDay)
   axios({
     url: "/apiMes/api/services/MES2RPT/ProductionReportData/GetDetailDataList",
     method: "GET",
@@ -149,7 +149,7 @@ function axiosCall() {
         groups[category].items.push(item);
         return groups;
       }, {});
-      console.log(shiftGroupedData);
+      // console.log(shiftGroupedData);
 
       if (shiftGroupedData.hasOwnProperty("Day")) {
         firstNGRate.value = (1 - (groupedData["Day-A:正常"].count / shiftGroupedData["Day"].count)).toFixed(3);
@@ -295,7 +295,7 @@ onMounted(() => {
 <template>
   <div>
     <div>不良率： day=“{{ firstNGRate }}”，night=“{{ secondNGRate }}”， NN=“{{ thirdNGRate }}”</div>
-    <div id="ELDefectChat01" :style="{height:'300px'}"/>
+    <div id="ELDefectChat01" :style="{height:'200px'}"/>
   </div>
 </template>
 

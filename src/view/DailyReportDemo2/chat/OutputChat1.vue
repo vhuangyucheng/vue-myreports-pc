@@ -10,7 +10,7 @@ let column;
 
 self.setInterval(() => {
   axiosCall()
-  console.log("timer")
+  // console.log("timer")
 }, 1000 * 60);
 
 let currentDay;
@@ -58,8 +58,8 @@ function startDailyTask() {
 startDailyTask();
 
 function axiosCall() {
-  console.log("currentDay", currentDay)
-  console.log("tomorrowDay", tomorrowDay)
+  // console.log("currentDay", currentDay)
+  // console.log("tomorrowDay", tomorrowDay)
   let dataFromBack;
   let dataOutput = [];
   axios({

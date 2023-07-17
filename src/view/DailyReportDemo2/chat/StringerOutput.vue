@@ -1,183 +1,229 @@
 <script setup>
 import {Column} from '@antv/g2plot';
 import {each, groupBy} from '@antv/util';
+import axios from "axios";
 
-const FIRST_AMOUNT = 600;
-const SECOND_AMOUNT = 600;
-const THIRD_AMOUNT = 300;
-//api:/mes2api/getStringerOutput
+let column;
+let NGList =  ref([]);
+let listFromBack;
+function axiosCall(){
+  axios({
+    url: "/apiStringer/stringer/getString",
+    method: "POST",
+    data: {},
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    listFromBack = response.data
+    // console.log(listFromBack);
+
+    const groupedList = Object.values(listFromBack).flatMap(stringer =>
+        Object.values(stringer).filter(obj => obj.hasOwnProperty("shiftName"))
+    );
+    console.log(groupedList);
+
+    let viewList = [];
+    const shiftNames = groupedList.map(shift => {
+      let aSide = {
+        stringer: shift.shiftName.split("-")[0],
+        shift: shift.shiftName.split("-")[1],
+        type: "A",
+        amount:shift.okstringA
+      }
+      let bSide = {
+        stringer: shift.shiftName.split("-")[0],
+        shift: shift.shiftName.split("-")[1],
+        type: "B",
+        amount:shift.okstringB
+      }
+      viewList.push(aSide, bSide);
+      let NGMessage = shift.shiftName
+          + " A : " + (shift.ngstringA / (shift.okstringA + shift.ngstringA)).toFixed(3) + " --------NGCells : " + shift.ngcellA + "      --------"
+          + " B : " + (shift.ngstringB / (shift.okstringB + shift.ngstringB)).toFixed(3) + " --------NGCells : " + shift.ngcellB
+      NGList.value.push(NGMessage)
+      return shift
+    });
+    column.changeData(viewList)
+    console.log(viewList);
+    console.log(NGList.value);
+  })
+}
+
+axiosCall();
+
+
 const data = [
-    {
-      shift: "First", //第几个班： First, Second, Third //这里厂商设置只保存当前班别，比如在Third班别时候，需要帮忙缓存一下First, Second的数据
-      stringer: "Stringer21", //String21, Stringer21, Stringer21, Stringer22, Stringer23, Stringer23
-      amount: 444, //数量
-      ng:32, //ng数量
-      type: "A", // A侧还是B侧, : A /B
-      status:"up", //当前是：up/ down
-      oee:"0.7", // 6:45以来， 正常运行时间 除以 总时间, 0~100
-    },
-
-    {
-      shift: "First",
-      stringer: "Stringer22",
-      amount: 452,
-      type: "A",
-      status:"up",
-      oee:"0.7",
-    },
-
-    {
-      shift: "First",
-      stringer: "Stringer23",
-      amount: 419,
-      type: "A",
-      status:"up",
-      oee:"0.7",
-    },
-
-    {
-      shift: "Second",
-      stringer: "Stringer21",
-      amount: 510,
-      type: "A",
-      status:"up",
-      oee:"0.7",
-    },
-
-
-    {
-      shift: "Second",
-      stringer: "Stringer22",
-      amount: 502,
-      type: "A",
-      status:"up",
-      oee:"0.7",
-    },
-
-    {
-      shift: "Second",
-      stringer: "Stringer23",
-      amount: 438,
-      type: "A",
-      status:"up",
-      oee:"0.7",
-    },
-
-    {
-      shift: "Third",
-      stringer: "Stringer21",
-      amount: 5,
-      type: "A",
-      status:"up",
-      oee:"0.7",
-    },
-
-    {
-      shift: "Third",
-      stringer: "Stringer22",
-      amount: 93,
-      type: "A",
-      status:"up",
-      oee:"0.7",
-    },
-
-    {
-      shift: "Third",
-      stringer: "Stringer23",
-      amount: 267,
-      type: "A",
-      status:"up",
-      oee:"0.7",
-    },
-    {
-      shift: "First",
-      stringer: "Stringer21",
-      amount: 444,
-      type: "B",
-      status:"up",
-      oee:"0.7",
-    },
-
-    {
-      shift: "First",
-      stringer: "Stringer22",
-      amount: 452,
-      type: "B",
-      status:"up",
-      oee:"0.7",
-    },
-
-    {
-      shift: "First",
-      stringer: "Stringer23",
-      amount: 419,
-      type: "B",
-      status:"up",
-      oee:"0.7",
-    },
-
-    {
-      shift: "Second",
-      stringer: "Stringer21",
-      amount: 510,
-      type: "B",
-      status:"up",
-      oee:"0.7",
-    },
-
-
-    {
-      shift: "Second",
-      stringer: "Stringer22",
-      amount: 502,
-      type: "B",
-      status:"up",
-      oee:"0.7",
-    },
-
-    {
-      shift: "Second",
-      stringer: "Stringer23",
-      amount: 438,
-      type: "B",
-      status:"up",
-      oee:"0.7",
-    },
-
-    {
-      shift: "Third",
-      stringer: "Stringer21",
-      amount: 5,
-      type: "B",
-      status:"up",
-      oee:"0.7",
-    },
-
-    {
-      shift: "Third",
-      stringer: "Stringer22",
-      amount: 93,
-      type: "B",
-      status:"up",
-      oee:"0.7",
-    },
-
-    {
-      shift: "Third",
-      stringer: "Stringer23",
-      amount: 267,
-      type: "B",
-      status:"up",
-      oee:"0.7",
-    }
-  ]
-
+  // {
+  //   shift: "First", //第几个班： First, Second, Third //这里厂商设置只保存当前班别，比如在Third班别时候，需要帮忙缓存一下First, Second的数据
+  //   stringer: "Stringer21", //String21, Stringer21, Stringer21, Stringer22, Stringer23, Stringer23
+  //   amount: 444, //数量
+  //   ng: 32, //ng数量
+  //   type: "A", // A侧还是B侧, : A /B
+  //   status: "up", //当前是：up/ down
+  //   oee: "0.7", // 6:45以来， 正常运行时间 除以 总时间, 0~100
+  // },
+  //
+  // {
+  //   shift: "First",
+  //   stringer: "Stringer22",
+  //   amount: 452,
+  //   type: "A",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  // {
+  //   shift: "First",
+  //   stringer: "Stringer23",
+  //   amount: 419,
+  //   type: "A",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  // {
+  //   shift: "Second",
+  //   stringer: "Stringer21",
+  //   amount: 510,
+  //   type: "A",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  //
+  // {
+  //   shift: "Second",
+  //   stringer: "Stringer22",
+  //   amount: 502,
+  //   type: "A",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  // {
+  //   shift: "Second",
+  //   stringer: "Stringer23",
+  //   amount: 438,
+  //   type: "A",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  // {
+  //   shift: "Third",
+  //   stringer: "Stringer21",
+  //   amount: 5,
+  //   type: "A",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  // {
+  //   shift: "Third",
+  //   stringer: "Stringer22",
+  //   amount: 93,
+  //   type: "A",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  // {
+  //   shift: "Third",
+  //   stringer: "Stringer23",
+  //   amount: 267,
+  //   type: "A",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  // {
+  //   shift: "First",
+  //   stringer: "Stringer21",
+  //   amount: 444,
+  //   type: "B",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  // {
+  //   shift: "First",
+  //   stringer: "Stringer22",
+  //   amount: 452,
+  //   type: "B",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  // {
+  //   shift: "First",
+  //   stringer: "Stringer23",
+  //   amount: 419,
+  //   type: "B",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  // {
+  //   shift: "Second",
+  //   stringer: "Stringer21",
+  //   amount: 510,
+  //   type: "B",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  //
+  // {
+  //   shift: "Second",
+  //   stringer: "Stringer22",
+  //   amount: 502,
+  //   type: "B",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  // {
+  //   shift: "Second",
+  //   stringer: "Stringer23",
+  //   amount: 438,
+  //   type: "B",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  // {
+  //   shift: "Third",
+  //   stringer: "Stringer21",
+  //   amount: 5,
+  //   type: "B",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  // {
+  //   shift: "Third",
+  //   stringer: "Stringer22",
+  //   amount: 93,
+  //   type: "B",
+  //   status: "up",
+  //   oee: "0.7",
+  // },
+  //
+  // {
+  //   shift: "Third",
+  //   stringer: "Stringer23",
+  //   amount: 267,
+  //   type: "B",
+  //   status: "up",
+  //   oee: "0.7",
+  // }
+]
 
 
 onMounted(() => {
   const annotations = [];
 
-  const column = new Column('stringerOutput', {
+  column = new Column('stringerOutput', {
     data: data,
     xField: 'shift',
     yField: 'amount',
@@ -209,7 +255,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="stringerOutput"/>
+  <div>
+    <div>不良率： </div>
+    <div>
+      <ul>
+        <li v-for="item in NGList" :key="item.id">{{ item }}</li>
+      </ul>
+    </div>
+    <div id="stringerOutput" :style="{height:'300px'}"/>
+  </div>
 </template>
 
 
