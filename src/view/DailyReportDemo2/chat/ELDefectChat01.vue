@@ -2,6 +2,10 @@
 
 import {log} from "@antv/g2plot/lib/utils/index.js";
 
+import getAlertList from '../../../store/getAlertList';
+const getAlertListStore = getAlertList();
+
+
 let currentDay;
 let tomorrowDay;
 let stackedColumnPlot;
@@ -15,7 +19,6 @@ let dataToShow = []
 
 function dailyTask() {
   // Your task logic goes here
-  //todo 只能在白天开机
   var currentTime = new Date();
   var nextDate = new Date(currentTime.getTime() + 24 * 60 * 60 * 1000);
 
@@ -46,7 +49,7 @@ function startDailyTask() {
   // Calculate the time until the next 6:46 am
   var targetTime = new Date();
   targetTime.setHours(6);
-  targetTime.setMinutes(45);
+  targetTime.setMinutes(46);
   targetTime.setSeconds(0);
 
   // If the current time is already past 6:45 am, add 1 day to the target time
@@ -72,7 +75,7 @@ import {Column} from '@antv/g2plot';
 
 self.setInterval(() => {
   axiosCall();
-  // console.log("EL-defect timer")
+  console.log("EL-defect timer")
 }, 1000 * 60);
 
 
@@ -152,13 +155,13 @@ function axiosCall() {
       // console.log(shiftGroupedData);
 
       if (shiftGroupedData.hasOwnProperty("Day")) {
-        firstNGRate.value = (1 - (groupedData["Day-A:正常"].count / shiftGroupedData["Day"].count)).toFixed(3);
+        firstNGRate.value = ((1 - (groupedData["Day-A:正常"].count / shiftGroupedData["Day"].count) )* 100).toFixed(1) + '%';
       }
       if (shiftGroupedData.hasOwnProperty("Night")) {
-        secondNGRate.value = (1 - (groupedData["Night-A:正常"].count / shiftGroupedData["Night"].count)).toFixed(3);
+        secondNGRate.value = ((1 - (groupedData["Night-A:正常"].count / shiftGroupedData["Night"].count) )* 100).toFixed(1) + '%';
       }
       if (shiftGroupedData.hasOwnProperty("NN")) {
-        thirdNGRate.value = (1 - (groupedData["NN-A:正常"].count / shiftGroupedData["NN"].count)).toFixed(3);
+        thirdNGRate.value = ((1 - (groupedData["NN-A:正常"].count / shiftGroupedData["NN"].count) )* 100).toFixed(1) + '%';
       }
 
       //empty data and format, todo:安排顺序
@@ -191,7 +194,8 @@ function axiosCall() {
       });
       // console.log(dataToShow)
       stackedColumnPlot.changeData(dataToShow)
-
+      // alert("FirstEL NG Rate: Day shift too high");
+      getAlertListStore.alertListPush("FirstEL NG Rate: Day shift too high")
     })
   })
 };
@@ -294,7 +298,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <div>不良率： day=“{{ firstNGRate }}”，night=“{{ secondNGRate }}”， NN=“{{ thirdNGRate }}”</div>
+    <div>First-EL NG Rate ： day=“{{ firstNGRate }}”，night=“{{ secondNGRate }}”， NN=“{{ thirdNGRate }}”</div>
     <div id="ELDefectChat01" :style="{height:'200px'}"/>
   </div>
 </template>

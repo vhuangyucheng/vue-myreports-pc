@@ -104,7 +104,7 @@ const data2 = [
 ];
 
 onMounted(() => {
-  const stackedColumnPlot = new Column('defectChar01', {
+  const stackedColumnPlot = new Column('defectChar02', {
     data,
     isGroup: true,
     xField: '月份',
@@ -139,7 +139,8 @@ onMounted(() => {
 
 <template>
   <div >
-    <div id="defectChar01" :style="{height:'150px'}"/>
+    <div>String22 Defect Breakdown(not done yet, fake data)</div>
+    <div id="defectChar02" :style="{height:'150px'}"/>
   </div>
 </template>
 

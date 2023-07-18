@@ -10,11 +10,21 @@ let column;
 
 self.setInterval(() => {
   axiosCall()
-  // console.log("timer")
+  console.log("output timer")
 }, 1000 * 60);
 
 let currentDay;
 let tomorrowDay;
+
+function dailyTask() {
+  // Your task logic goes here
+  var currentTime = new Date();
+  var nextDate = new Date(currentTime.getTime() + 24 * 60 * 60 * 1000);
+
+  currentDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
+  tomorrowDay = nextDate.getFullYear() + "/" + (nextDate.getMonth() + 1) + "/" + nextDate.getDate()
+
+}
 
 //1,set定时任务，2，跑一下开机任务
 function startDailyTask() {
@@ -36,7 +46,7 @@ function startDailyTask() {
   // Calculate the time until the next 6:46 am
   var targetTime = new Date();
   targetTime.setHours(6);
-  targetTime.setMinutes(45);
+  targetTime.setMinutes(46);
   targetTime.setSeconds(0);
 
   // If the current time is already past 6:45 am, add 1 day to the target time
@@ -81,25 +91,25 @@ function axiosCall() {
     dataFromBack.forEach(item => {
           dataOutput = [...dataOutput,
             {
-              shift: item.ShiftValue,
+              shift: item.ShiftValue + (" : Layup, FirstEL, Framing, Sorting"),
               col_name: "layup",
               amount: parseInt(item.Layup),
               type: "productivity"
             },
             {
-              shift: item.ShiftValue,
+              shift: item.ShiftValue + (" : Layup, FirstEL, Framing, Sorting"),
               col_name: "EL-1",
               amount: parseInt(item["EL-1"]),
               type: "productivity"
             },
             {
-              shift: item.ShiftValue,
+              shift: item.ShiftValue + (" : Layup, FirstEL, Framing, Sorting"),
               col_name: "Framing&JB",
               amount: parseInt(item["Framing&JB"]),
               type: "productivity"
             },
             {
-              shift: item.ShiftValue,
+              shift: item.ShiftValue + (" : Layup, FirstEL, Framing, Sorting"),
               col_name: "Sorting",
               amount: parseInt(item.Sorting),
               type: "productivity"
@@ -113,9 +123,9 @@ function axiosCall() {
     const THIRD_AMOUNT = 300;
 
     const dict = {
-      Day: FIRST_AMOUNT,
-      Night: SECOND_AMOUNT,
-      NN: THIRD_AMOUNT,
+      "Day : Layup, FirstEL, Framing, Sorting": FIRST_AMOUNT,
+      "Night : Layup, FirstEL, Framing, Sorting": SECOND_AMOUNT,
+      "NN : Layup, FirstEL, Framing, Sorting": THIRD_AMOUNT,
     };
     const data2 = dataOutput.filter(item => (item.amount <= dict[item.shift])).map(item => ({
       ...item,
@@ -152,14 +162,16 @@ onMounted(() => {
       position: 'top', // 'top', 'bottom', 'middle'
       // 可配置附加的布局方法
       layout: [
-        // 柱形图数据标签位置自动调整
+        // // 柱形图数据标签位置自动调整
         {type: 'interval-adjust-position'},
-        // 数据标签防遮挡
+        // // 数据标签防遮挡
         {type: 'interval-hide-overlap'},
-        // 数据标签文颜色自动调整
+        // // 数据标签文颜色自动调整
         {type: 'adjust-color'},
       ],
     },
+    colorField: 'type', // 部分图表使用 seriesField
+    color: ['#f391a9', '#00ae9d', '#000000'],
   });
   column.render();
   // console.log("onMount")

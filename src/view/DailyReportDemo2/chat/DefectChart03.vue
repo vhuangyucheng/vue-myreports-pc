@@ -2,6 +2,11 @@
 import {Column} from '@antv/g2plot';
 import {each, groupBy} from '@antv/util';
 
+import getAlertList from '../../../store/getAlertList';
+
+const getAlertListStore = getAlertList();
+
+
 const data = [
   {
     name: 'Miss-welding',
@@ -103,6 +108,7 @@ const data2 = [
 
 ];
 
+
 onMounted(() => {
   const stackedColumnPlot = new Column('defectChar03', {
     data,
@@ -134,12 +140,17 @@ onMounted(() => {
 })
 
 
-
 </script>
 
 <template>
-  <div >
+  <div>
+    <div>String23 Defect Breakdown(not done yet, fake data)</div>
     <div id="defectChar03" :style="{height:'150px'}"/>
+    <div>
+      <ul>
+        <li v-for="item in getAlertListStore.alertList" :key="item.id">{{ item }}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
