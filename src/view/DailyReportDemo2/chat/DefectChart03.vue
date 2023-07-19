@@ -146,11 +146,11 @@ onMounted(() => {
   <div>
     <div>String23 Defect Breakdown(not done yet, fake data)</div>
     <div id="defectChar03" :style="{height:'150px'}"/>
-    <div>
-      <ul>
-        <li v-for="item in getAlertListStore.alertList" :key="item.id">{{ item }}</li>
-      </ul>
-    </div>
+<!--    <div>-->
+<!--      <ul>-->
+<!--        <li v-for="item in getAlertListStore.alertList" :key="item.id">{{ item }}</li>-->
+<!--      </ul>-->
+<!--    </div>-->
   </div>
 </template>
 
