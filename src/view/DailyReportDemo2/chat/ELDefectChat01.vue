@@ -3,6 +3,7 @@
 import {log} from "@antv/g2plot/lib/utils/index.js";
 
 import getAlertList from '../../../store/getAlertList';
+
 const getAlertListStore = getAlertList();
 
 
@@ -24,7 +25,8 @@ function dailyTask() {
 
   currentDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
   tomorrowDay = nextDate.getFullYear() + "/" + (nextDate.getMonth() + 1) + "/" + nextDate.getDate()
-
+  console.log("EL  currentDay : " + currentDay)
+  console.log("EL tomorrowDay : " + tomorrowDay)
 }
 
 //1,set定时任务，2，跑一下开机任务
@@ -75,7 +77,7 @@ import {Column} from '@antv/g2plot';
 
 self.setInterval(() => {
   axiosCall();
-  console.log("EL-defect timer")
+  // console.log("EL-defect timer")
 }, 1000 * 60);
 
 
@@ -155,13 +157,18 @@ function axiosCall() {
       // console.log(shiftGroupedData);
 
       if (shiftGroupedData.hasOwnProperty("Day")) {
-        firstNGRate.value = ((1 - (groupedData["Day-A:正常"].count / shiftGroupedData["Day"].count) )* 100).toFixed(1) + '%';
+        firstNGRate.value = ((1 - (groupedData["Day-A:正常"].count / shiftGroupedData["Day"].count)) * 100).toFixed(1) + '%';
       }
       if (shiftGroupedData.hasOwnProperty("Night")) {
-        secondNGRate.value = ((1 - (groupedData["Night-A:正常"].count / shiftGroupedData["Night"].count) )* 100).toFixed(1) + '%';
+        secondNGRate.value = ((1 - (groupedData["Night-A:正常"].count / shiftGroupedData["Night"].count)) * 100).toFixed(1) + '%';
+      } else {
+        //第二天归0
+        secondNGRate.value = 0
       }
       if (shiftGroupedData.hasOwnProperty("NN")) {
-        thirdNGRate.value = ((1 - (groupedData["NN-A:正常"].count / shiftGroupedData["NN"].count) )* 100).toFixed(1) + '%';
+        thirdNGRate.value = ((1 - (groupedData["NN-A:正常"].count / shiftGroupedData["NN"].count)) * 100).toFixed(1) + '%';
+      } else {
+        secondNGRate.value = 0
       }
 
       //empty data and format, todo:安排顺序

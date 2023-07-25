@@ -2,114 +2,34 @@
 import {Column} from '@antv/g2plot';
 import {each, groupBy} from '@antv/util';
 
-const data = [
-  {
-    name: 'Miss-welding',
-    月份: 'First',
-    月均降雨量: 27,
-  },
-  {
-    name: 'Crack',
-    月份: 'First',
-    月均降雨量: 33,
-  },
-  {
-    name: 'others',
-    月份: 'First',
-    月均降雨量: 33,
-  },
-  {
-    name: 'Miss-welding',
-    月份: 'Second',
-    月均降雨量: 6,
-  },
-  {
-    name: 'Crack',
-    月份: 'Second',
-    月均降雨量: 6,
-  },
-  {
-    name: 'Excessive corrosion',
-    月份: 'Second',
-    月均降雨量: 1,
-  },
-  {
-    name: 'Miss-welding',
-    月份: 'Third',
-    月均降雨量: 47,
-  },
+let data = [];
+let stackedColumnPlot ;
 
-
-  {
-    name: 'Crack',
-    月份: 'Third',
-    月均降雨量: 48,
-  },
-  {
-    name: 'Short',
-    月份: 'Third',
-    月均降雨量: 2,
-  },
-
-];
-const data2 = [
-  {
-    name: 'Miss-welding',
-    月份: 'First',
-    月均降雨量: 27,
-  },
-  {
-    name: 'Crack',
-    月份: 'First',
-    月均降雨量: 33,
-  },
-  {
-    name: 'others',
-    月份: 'First',
-    月均降雨量: 33,
-  },
-  {
-    name: 'Miss-welding',
-    月份: 'Second',
-    月均降雨量: 6,
-  },
-  {
-    name: 'Crack',
-    月份: 'Second',
-    月均降雨量: 6,
-  },
-  {
-    name: 'Excessive corrosion',
-    月份: 'Second',
-    月均降雨量: 1,
-  },
-  {
-    name: 'Miss-welding',
-    月份: 'Third',
-    月均降雨量: 47,
-  },
-
-
-  {
-    name: 'Crack',
-    月份: 'Third',
-    月均降雨量: 48,
-  },
-  {
-    name: 'Short',
-    月份: 'Third',
-    月均降雨量: 4,
-  },
-
-];
+ function jsonCall() {
+  fetch('src/view/DailyReportDemo2/chat/data.json')
+      .then(response => response.json())
+      .then(data => {
+        // Access the JSON data
+        // console.log(data.data);
+        // Perform further operations with the data
+        stackedColumnPlot.changeData(data.data);
+      })
+}
+jsonCall();
+self.setInterval(() => {
+  jsonCall();
+  // console.log("stringer21-defect timer")
+}, 1000 * 60);
 
 onMounted(() => {
-  const stackedColumnPlot = new Column('defectChar01', {
+
+
+  stackedColumnPlot = new Column('defectChar01', {
     data,
     isGroup: true,
-    xField: '月份',
-    yField: '月均降雨量',
-    seriesField: 'name',
+    xField: 'shift',
+    yField: 'amount',
+    seriesField: 'reason',
     /** 设置颜色 */
     //color: ['#1ca9e6', '#f88c24'],
     /** 设置间距 */
@@ -135,11 +55,10 @@ onMounted(() => {
 })
 
 
-
 </script>
 
 <template>
-  <div >
+  <div>
     <div>String21 Defect Breakdown(not done yet, fake data)</div>
     <div id="defectChar01" :style="{height:'150px'}"/>
   </div>

@@ -8,9 +8,13 @@ import {each, groupBy} from '@antv/util';
 let dataToShow = [];
 let column;
 
+const FIRST_AMOUNT = 600;
+const SECOND_AMOUNT = 600;
+const THIRD_AMOUNT = 300;
+
 self.setInterval(() => {
   axiosCall()
-  console.log("output timer")
+  // console.log("output timer")
 }, 1000 * 60);
 
 let currentDay;
@@ -23,7 +27,8 @@ function dailyTask() {
 
   currentDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
   tomorrowDay = nextDate.getFullYear() + "/" + (nextDate.getMonth() + 1) + "/" + nextDate.getDate()
-
+  console.log("output currentDay : " + currentDay)
+  console.log("output tomorrowDay : " + tomorrowDay)
 }
 
 //1,set定时任务，2，跑一下开机任务
@@ -118,9 +123,7 @@ function axiosCall() {
         }
     )
 
-    const FIRST_AMOUNT = 600;
-    const SECOND_AMOUNT = 600;
-    const THIRD_AMOUNT = 300;
+
 
     const dict = {
       "Day : Layup, FirstEL, Framing, Sorting": FIRST_AMOUNT,
