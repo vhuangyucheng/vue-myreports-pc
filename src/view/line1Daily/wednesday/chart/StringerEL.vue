@@ -3,45 +3,46 @@ import {Column} from '@antv/g2plot';
 
 const data = [
   {
-    name: 'Input',
-    月份: 'first.',
-    月均降雨量: 18.9,
+    name: 'Miss-welding虚焊',
+    shift: 'Day',
+    amount: 6,
   },
   {
-    name: 'Input',
-    月份: 'second.',
-    月均降雨量: 28.8,
+    name: '露白',
+    shift: 'Day',
+    amount: 1,
   },
   {
-    name: 'Input',
-    月份: 'third.',
-    月均降雨量: 39.3,
+    name: 'Silver裂片',
+    shift: 'Day',
+    amount: 2,
+  },
+  {
+    name: 'Miss-welding虚焊',
+    shift: 'Night',
+    amount: 0,
+  },
+  {
+    name: '露白',
+    shift: 'Night',
+    amount: 0
+  },
+  {
+    name: 'Silver裂片',
+    shift: 'Night',
+    amount: 0,
   },
 
-  {
-    name: 'Finished goods',
-    月份: 'first.',
-    月均降雨量: 12.4,
-  },
-  {
-    name: 'Finished goods',
-    月份: 'second.',
-    月均降雨量: 23.2,
-  },
-  {
-    name: 'Finished goods',
-    月份: 'third.',
-    月均降雨量: 34.5,
-  },
 
 ];
+let stackedColumnPlot ;
 
 onMounted(() => {
-  const stackedColumnPlot = new Column('InputAndFinishedGoods', {
-    data,
+  stackedColumnPlot = new Column('line1DailyWednesdayStringerEL', {
+    data: data,
     isGroup: true,
-    xField: '月份',
-    yField: '月均降雨量',
+    xField: 'shift',
+    yField: 'amount',
     seriesField: 'name',
     /** 设置颜色 */
     //color: ['#1ca9e6', '#f88c24'],
@@ -49,7 +50,7 @@ onMounted(() => {
     // marginRatio: 0.1,
     label: {
       // 可手动配置 label 数据标签位置
-      position: 'middle', // 'top', 'middle', 'bottom'
+      position: 'bottom', // 'top', 'middle', 'bottom'
       // 可配置附加的布局方法
       layout: [
         // 柱形图数据标签位置自动调整
@@ -60,14 +61,21 @@ onMounted(() => {
         {type: 'adjust-color'},
       ],
     },
+
   });
+
   stackedColumnPlot.render();
+
 })
+
 
 </script>
 
 <template>
-  <div id="InputAndFinishedGoods"/>
+  <div>
+    <div>String Defect 焊机不良 : Day = 9, Night = </div>
+    <div id="line1DailyWednesdayStringerEL" :style="{height:'200px'}"/>
+  </div>
 </template>
 
 

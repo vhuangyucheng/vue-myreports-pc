@@ -7,44 +7,48 @@ import DefectChart02 from "./chat/DefectChart02.vue";
 import DefectChart03 from "./chat/DefectChart03.vue";
 import {values} from "@antv/util";
 
-let date = ref();
-let currentTime = new Date();
-const time1 = new Date(); // Replace with your desired time
-time1.setHours(0);       // Set the hours
-time1.setMinutes(0);    // Set the minutes
-const time2 = new Date(); // Replace with your desired time
-time2.setHours(6);      // Set the hours
-time2.setMinutes(45);     // Set the minutes
-if (currentTime <= time2 && currentTime >= time1) {
-  currentTime = new Date(currentTime.getTime() - 24 * 60 * 60 * 1000);
-}
- date.value = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
+// let date = ref();
+// let currentTime = new Date();
+// const time1 = new Date(); // Replace with your desired time
+// time1.setHours(0);       // Set the hours
+// time1.setMinutes(0);    // Set the minutes
+// const time2 = new Date(); // Replace with your desired time
+// time2.setHours(6);      // Set the hours
+// time2.setMinutes(45);     // Set the minutes
+// if (currentTime <= time2 && currentTime >= time1) {
+//   currentTime = new Date(currentTime.getTime() - 24 * 60 * 60 * 1000);
+// }
+// date.value = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
+
+import getDate from '../../store/getDate';
+const getDateStore = getDate();
+console.log(getDateStore.getCurrentDay)
 </script>
 
 
 <template>
-<!--  <a-row>-->
-<!--    <a-col :span="17" :offset="4">-->
-<!--      <div :style="{fontSize:'57px'}">06/07/2023 Wednesday Productivity</div>-->
-<!--    </a-col>-->
-<!--  </a-row>-->
+  <!--  <a-row>-->
+  <!--    <a-col :span="17" :offset="4">-->
+  <!--      <div :style="{fontSize:'57px'}">06/07/2023 Wednesday Productivity</div>-->
+  <!--    </a-col>-->
+  <!--  </a-row>-->
   <a-row>
-    <a-col :span="12"  >
-      <div>{{ date }} : floor productivity</div>
-      <div >
+    <a-col :span="12">
+      <div>{{ getDateStore.getCurrentDay }} : floor productivity</div>
+      <div>
         <OutputChat1 :style="{height:'300px'}"/>
       </div>
     </a-col>
     <a-col :span="12">
-      <ELDefectChat01 />
+      <ELDefectChat01/>
       <DefectChart01/>
     </a-col>
   </a-row>
 
   <a-row>
-    <a-col :span="12"  >
-      <div>{{ date }} : Stringer productivity</div>
-      <div >
+    <a-col :span="12">
+      <div>{{ getDateStore.getCurrentDay }} : Stringer productivity</div>
+      <div>
         <StringerOutput/>
       </div>
     </a-col>
@@ -53,8 +57,6 @@ if (currentTime <= time2 && currentTime >= time1) {
       <DefectChart03/>
     </a-col>
   </a-row>
-
-
 
 
 </template>

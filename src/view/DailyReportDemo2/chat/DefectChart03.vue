@@ -1,6 +1,5 @@
 <script setup>
 import {Column} from '@antv/g2plot';
-import {each, groupBy} from '@antv/util';
 
 import getAlertList from '../../../store/getAlertList';
 

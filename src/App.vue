@@ -36,101 +36,31 @@ const itemClick = ({item, key, keyPath}) => {
           <template #icon>
             <MailOutlined/>
           </template>
-          <template #title>Example</template>
-          <a-menu-item key="/DailyReportDemo1">
-            <user-outlined/>
-            <span class="nav-text">Demo01</span>
-          </a-menu-item>
+          <template #title>Line#2</template>
           <a-menu-item key="/DailyReportDemo02">
             <user-outlined/>
-            <span class="nav-text">Demo02</span>
+            <span class="nav-text">real-time dashboard</span>
           </a-menu-item>
-          <a-menu-item key="/webSocketDemo">
-            <user-outlined/>
-            <span class="nav-text">webSocketDemo</span>
-          </a-menu-item>
-          <a-menu-item key="/stringerDemo01">
-            <user-outlined/>
-            <span class="nav-text">stringerDemo01</span>
-          </a-menu-item>
-
         </a-sub-menu>
 
-
-        <a-sub-menu key="sub2">
+        <a-sub-menu key="sub02">
           <template #icon>
             <MailOutlined/>
           </template>
-          <template #title>line#2</template>
-          <a-menu-item key="/mondayReport2">
+          <template #title>Line#1</template>
+          <a-menu-item key="/Line1Daily">
             <user-outlined/>
-            <span class="nav-text">Monday report</span>
-          </a-menu-item>
-          <a-menu-item key="/mondayReport2">
-            <user-outlined/>
-            <span class="nav-text">Tuesday report</span>
-          </a-menu-item>
-          <a-menu-item key="/wednesdayReport2">
-            <user-outlined/>
-            <span class="nav-text">Wednesday report</span>
-          </a-menu-item>
-          <a-menu-item key="/thursdayReport02">
-            <user-outlined/>
-            <span class="nav-text">Thursday report</span>
-          </a-menu-item>
-          <a-menu-item key="/fridayReport02">
-            <user-outlined/>
-            <span class="nav-text">Friday report</span>
-          </a-menu-item>
-          <a-menu-item key="/mondayReport2">
-            <user-outlined/>
-            <span class="nav-text">Saturday report</span>
-          </a-menu-item>
-          <a-menu-item key="/mondayReport2">
-            <user-outlined/>
-            <span class="nav-text">Sunday report</span>
-          </a-menu-item>
-          <a-menu-item key="/weeklyReport2">
-            <video-camera-outlined/>
-            <span class="nav-text">weekly report</span>
-          </a-menu-item>
-          <a-menu-item key="/monthlyReport2">
-            <upload-outlined/>
-            <span class="nav-text">monthly report</span>
-          </a-menu-item>
-          <a-menu-item key="/selectedReport2">
-            <bar-chart-outlined/>
-            <span class="nav-text">selected report</span>
+            <span class="nav-text">Line1Daily</span>
           </a-menu-item>
         </a-sub-menu>
-        <a-sub-menu key="sub1">
-          <template #icon>
-            <MailOutlined/>
-          </template>
-          <template #title>line#1</template>
-          <a-menu-item key="/mondayReport1">
-            <user-outlined/>
-            <span class="nav-text">MOnday report</span>
-          </a-menu-item>
-          <a-menu-item key="/weeklyReport1">
-            <video-camera-outlined/>
-            <span class="nav-text">weekly report</span>
-          </a-menu-item>
-          <a-menu-item key="/monthlyReport1">
-            <upload-outlined/>
-            <span class="nav-text">monthly report</span>
-          </a-menu-item>
-          <a-menu-item key="/selectedReport1">
-            <bar-chart-outlined/>
-            <span class="nav-text">selected report</span>
-          </a-menu-item>
-        </a-sub-menu>
+
+
       </a-menu>
     </a-layout-sider>
     <a-layout>
-<!--      <a-layout-header style="background: #fff; padding: 0">-->
-<!--        header-->
-<!--      </a-layout-header>-->
+      <!--      <a-layout-header style="background: #fff; padding: 0">-->
+      <!--        header-->
+      <!--      </a-layout-header>-->
       <a-layout-content :style="{ margin: '24px 16px 0', overflow: 'initial' }">
         <div :style="{ padding: '24px', background: '#fff', textAlign: 'center' }">
           <router-view></router-view>

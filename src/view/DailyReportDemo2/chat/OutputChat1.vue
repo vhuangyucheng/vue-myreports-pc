@@ -20,6 +20,10 @@ self.setInterval(() => {
 let currentDay;
 let tomorrowDay;
 
+import getDate from '../../../store/getDate';
+const getDateStore = getDate();
+
+
 function dailyTask() {
   // Your task logic goes here
   var currentTime = new Date();
@@ -27,6 +31,7 @@ function dailyTask() {
 
   currentDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
   tomorrowDay = nextDate.getFullYear() + "/" + (nextDate.getMonth() + 1) + "/" + nextDate.getDate()
+  getDateStore.setDate(currentDay, tomorrowDay);
   console.log("output currentDay : " + currentDay)
   console.log("output tomorrowDay : " + tomorrowDay)
 }
@@ -46,6 +51,8 @@ function startDailyTask() {
   var nextDate = new Date(currentTime.getTime() + 24 * 60 * 60 * 1000);
   currentDay = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
   tomorrowDay = nextDate.getFullYear() + "/" + (nextDate.getMonth() + 1) + "/" + (nextDate.getDate())
+  getDateStore.setDate(currentDay, tomorrowDay);
+
   axiosCall();
 
   // Calculate the time until the next 6:46 am

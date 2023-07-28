@@ -3,7 +3,6 @@
 import {log} from "@antv/g2plot/lib/utils/index.js";
 
 import getAlertList from '../../../store/getAlertList';
-
 const getAlertListStore = getAlertList();
 
 
@@ -168,7 +167,7 @@ function axiosCall() {
       if (shiftGroupedData.hasOwnProperty("NN")) {
         thirdNGRate.value = ((1 - (groupedData["NN-A:正常"].count / shiftGroupedData["NN"].count)) * 100).toFixed(1) + '%';
       } else {
-        secondNGRate.value = 0
+        thirdNGRate.value = 0
       }
 
       //empty data and format, todo:安排顺序
