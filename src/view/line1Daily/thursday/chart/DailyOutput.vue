@@ -37,7 +37,7 @@ const data = [...data2, ...data1]
 console.log(data)
 
 onMounted(() => {
-  column = new Column('line1DailyWednesday', {
+  column = new Column('line1DailyThursday', {
     data: data,
     xField: 'shift',
     yField: 'amount',
@@ -69,7 +69,7 @@ onMounted(() => {
 
 <template>
   <div>今日产量</div>
-  <div id="line1DailyWednesday" :style="{height:'200px'}"/>
+  <div id="line1DailyThursday" :style="{height:'200px'}"/>
 </template>
 
 

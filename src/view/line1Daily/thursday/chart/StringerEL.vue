@@ -38,7 +38,7 @@ const data = [
 let stackedColumnPlot ;
 
 onMounted(() => {
-  stackedColumnPlot = new Column('line1DailyWednesdayStringerEL', {
+  stackedColumnPlot = new Column('line1DailyThursdayStringerEL', {
     data: data,
     isGroup: true,
     xField: 'shift',
@@ -74,7 +74,7 @@ onMounted(() => {
 <template>
   <div>
     <div>String Defect 焊机不良 : Day = 9, Night = </div>
-    <div id="line1DailyWednesdayStringerEL" :style="{height:'180px'}"/>
+    <div id="line1DailyThursdayStringerEL" :style="{height:'180px'}"/>
   </div>
 </template>
 

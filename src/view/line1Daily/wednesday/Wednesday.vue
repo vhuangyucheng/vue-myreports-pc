@@ -1,6 +1,6 @@
 <script setup>
-import DailyOutput from "./chart/DailyOutput.vue";
-import StringerEL from "./chart/StringerEL.vue";
+import DailyOutput1 from "./chart/DailyOutput.vue";
+import StringerEL from "./chart/StringerEL1.vue";
 import DailyScrap from "./chart/DailyScrap.vue";
 </script>
 
@@ -8,7 +8,7 @@ import DailyScrap from "./chart/DailyScrap.vue";
   <div>7/26 Wednesday</div>
   <a-row justify="space-between" align="bottom">
     <a-col :span="8">
-      <DailyOutput></DailyOutput>
+      <DailyOutput1></DailyOutput1>
     </a-col>
     <a-col :span="8">
       <StringerEL/>

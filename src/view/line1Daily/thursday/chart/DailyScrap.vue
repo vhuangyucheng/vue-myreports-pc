@@ -46,7 +46,7 @@ const data = [
 let stackedColumnPlot ;
 
 onMounted(() => {
-  stackedColumnPlot = new Column('line1DailyWednesdayScrap', {
+  stackedColumnPlot = new Column('line1DailyThursdayScrap', {
     data: data,
     isGroup: true,
     xField: 'shift',
@@ -82,7 +82,7 @@ onMounted(() => {
 <template>
   <div>
     <div>Cells Scrap 报废 : Day = 140 ,  Night = 217</div>
-    <div id="line1DailyWednesdayScrap" :style="{height:'180px'}" />
+    <div id="line1DailyThursdayScrap" :style="{height:'180px'}" />
   </div>
 </template>
 

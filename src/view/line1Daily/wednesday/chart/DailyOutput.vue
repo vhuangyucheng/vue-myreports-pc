@@ -1,5 +1,4 @@
 <script setup>
-import axios from "axios";
 
 import {Column} from '@antv/g2plot';
 
