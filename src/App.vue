@@ -54,6 +54,17 @@ const itemClick = ({item, key, keyPath}) => {
           </a-menu-item>
         </a-sub-menu>
 
+        <a-sub-menu key="sub03">
+          <template #icon>
+            <MailOutlined/>
+          </template>
+          <template #title>DailyInput</template>
+          <a-menu-item key="/DailyInput">
+            <user-outlined/>
+            <span class="nav-text">DailyInput</span>
+          </a-menu-item>
+        </a-sub-menu>
+
 
       </a-menu>
     </a-layout-sider>
