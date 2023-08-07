@@ -69,21 +69,6 @@ const onFinishFailed = errorInfo => {
 
 <template>
   <a-row>
-    <a-col :span="4">
-      <div :style="{ width: '300px', border: '1px solid #d9d9d9', borderRadius: '4px' }">
-        <a-calendar v-model:value="dateValue" :fullscreen="false" @panelChange="onPanelChange" @select="DateOnChange"/>
-      </div>
-      <div>
-        <a-cascader
-            size="large"
-            v-model:value="shiftValue"
-            :options="options"
-            expand-trigger="hover"
-            placeholder="选择你的班别/shift selection"
-            @change="ShiftOnChange"
-        />
-      </div>
-    </a-col>
     <a-col :span="20">
       <a-row>
         <a-col :span="8">
@@ -143,31 +128,23 @@ const onFinishFailed = errorInfo => {
             <a-form
                 :model="formState"
                 name="basic"
-                :label-col="{ span: 8 }"
-                :wrapper-col="{ span: 16 }"
+                :label-col="{ span: 10 }"
+                :wrapper-col="{ span: 14 }"
                 autocomplete="off"
                 @finish="labelOnFinish"
                 @finishFailed="onFinishFailed"
             >
               <a-form-item
-                  label="条码开始LabelStart"
-                  name="labelStart"
+                  label="层前EL产出FirstEL output "
+                  name="1stELOutput"
                   :rules="[{ required: true, message: '不能为空cannot empty' }]"
               >
                 <a-input v-model:value="formState.username"/>
               </a-form-item>
 
               <a-form-item
-                  label="条码结束LabelEnd"
-                  name="labelEnd"
-                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
-              >
-                <a-input v-model:value="formState.username"/>
-              </a-form-item>
-
-              <a-form-item
-                  label="条码数量 amount"
-                  name="labelAmount"
+                  label="不良defect"
+                  name="1stELDefect"
                   :rules="[{ required: true, message: '不能为空cannot empty' }]"
               >
                 <a-input v-model:value="formState.username"/>
@@ -217,6 +194,21 @@ const onFinishFailed = errorInfo => {
           </div>
         </a-col>
       </a-row>
+    </a-col>
+    <a-col :span="4">
+      <div :style="{ width: '300px', border: '1px solid #d9d9d9', borderRadius: '4px' }">
+        <a-calendar v-model:value="dateValue" :fullscreen="false" @panelChange="onPanelChange" @select="DateOnChange"/>
+      </div>
+      <div>
+        <a-cascader
+            size="large"
+            v-model:value="shiftValue"
+            :options="options"
+            expand-trigger="hover"
+            placeholder="选择你的班别/shift selection"
+            @change="ShiftOnChange"
+        />
+      </div>
     </a-col>
   </a-row>
 </template>
