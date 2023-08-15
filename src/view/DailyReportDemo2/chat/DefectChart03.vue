@@ -7,103 +7,103 @@ const getAlertListStore = getAlertList();
 
 
 const data = [
-  {
-    name: 'Miss-welding',
-    月份: 'First',
-    月均降雨量: 27,
-  },
-  {
-    name: 'Crack',
-    月份: 'First',
-    月均降雨量: 33,
-  },
-  {
-    name: 'others',
-    月份: 'First',
-    月均降雨量: 33,
-  },
-  {
-    name: 'Miss-welding',
-    月份: 'Second',
-    月均降雨量: 6,
-  },
-  {
-    name: 'Crack',
-    月份: 'Second',
-    月均降雨量: 6,
-  },
-  {
-    name: 'Excessive corrosion',
-    月份: 'Second',
-    月均降雨量: 1,
-  },
-  {
-    name: 'Miss-welding',
-    月份: 'Third',
-    月均降雨量: 47,
-  },
-
-
-  {
-    name: 'Crack',
-    月份: 'Third',
-    月均降雨量: 48,
-  },
-  {
-    name: 'Short',
-    月份: 'Third',
-    月均降雨量: 2,
-  },
+  // {
+  //   name: 'Miss-welding',
+  //   月份: 'First',
+  //   月均降雨量: 27,
+  // },
+  // {
+  //   name: 'Crack',
+  //   月份: 'First',
+  //   月均降雨量: 33,
+  // },
+  // {
+  //   name: 'others',
+  //   月份: 'First',
+  //   月均降雨量: 33,
+  // },
+  // {
+  //   name: 'Miss-welding',
+  //   月份: 'Second',
+  //   月均降雨量: 6,
+  // },
+  // {
+  //   name: 'Crack',
+  //   月份: 'Second',
+  //   月均降雨量: 6,
+  // },
+  // {
+  //   name: 'Excessive corrosion',
+  //   月份: 'Second',
+  //   月均降雨量: 1,
+  // },
+  // {
+  //   name: 'Miss-welding',
+  //   月份: 'Third',
+  //   月均降雨量: 47,
+  // },
+  //
+  //
+  // {
+  //   name: 'Crack',
+  //   月份: 'Third',
+  //   月均降雨量: 48,
+  // },
+  // {
+  //   name: 'Short',
+  //   月份: 'Third',
+  //   月均降雨量: 2,
+  // },
 
 ];
 const data2 = [
-  {
-    name: 'Miss-welding',
-    月份: 'First',
-    月均降雨量: 27,
-  },
-  {
-    name: 'Crack',
-    月份: 'First',
-    月均降雨量: 33,
-  },
-  {
-    name: 'others',
-    月份: 'First',
-    月均降雨量: 33,
-  },
-  {
-    name: 'Miss-welding',
-    月份: 'Second',
-    月均降雨量: 6,
-  },
-  {
-    name: 'Crack',
-    月份: 'Second',
-    月均降雨量: 6,
-  },
-  {
-    name: 'Excessive corrosion',
-    月份: 'Second',
-    月均降雨量: 1,
-  },
-  {
-    name: 'Miss-welding',
-    月份: 'Third',
-    月均降雨量: 47,
-  },
-
-
-  {
-    name: 'Crack',
-    月份: 'Third',
-    月均降雨量: 48,
-  },
-  {
-    name: 'Short',
-    月份: 'Third',
-    月均降雨量: 4,
-  },
+  // {
+  //   name: 'Miss-welding',
+  //   月份: 'First',
+  //   月均降雨量: 27,
+  // },
+  // {
+  //   name: 'Crack',
+  //   月份: 'First',
+  //   月均降雨量: 33,
+  // },
+  // {
+  //   name: 'others',
+  //   月份: 'First',
+  //   月均降雨量: 33,
+  // },
+  // {
+  //   name: 'Miss-welding',
+  //   月份: 'Second',
+  //   月均降雨量: 6,
+  // },
+  // {
+  //   name: 'Crack',
+  //   月份: 'Second',
+  //   月均降雨量: 6,
+  // },
+  // {
+  //   name: 'Excessive corrosion',
+  //   月份: 'Second',
+  //   月均降雨量: 1,
+  // },
+  // {
+  //   name: 'Miss-welding',
+  //   月份: 'Third',
+  //   月均降雨量: 47,
+  // },
+  //
+  //
+  // {
+  //   name: 'Crack',
+  //   月份: 'Third',
+  //   月均降雨量: 48,
+  // },
+  // {
+  //   name: 'Short',
+  //   月份: 'Third',
+  //   月均降雨量: 4,
+  // },
 
 ];
 

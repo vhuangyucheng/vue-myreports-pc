@@ -5,21 +5,21 @@ import {each, groupBy} from '@antv/util';
 let data = [];
 let stackedColumnPlot ;
 
- function jsonCall() {
-  fetch('src/view/DailyReportDemo2/chat/data.json')
-      .then(response => response.json())
-      .then(data => {
-        // Access the JSON data
-        // console.log(data.data);
-        // Perform further operations with the data
-        stackedColumnPlot.changeData(data.data);
-      })
-}
-jsonCall();
-self.setInterval(() => {
-  jsonCall();
-  // console.log("stringer21-defect timer")
-}, 1000 * 60);
+//  function jsonCall() {
+//   fetch('src/view/DailyReportDemo2/chat/data.json')
+//       .then(response => response.json())
+//       .then(data => {
+//         // Access the JSON data
+//         // console.log(data.data);
+//         // Perform further operations with the data
+//         stackedColumnPlot.changeData(data.data);
+//       })
+// }
+// jsonCall();
+// self.setInterval(() => {
+//   jsonCall();
+//   // console.log("stringer21-defect timer")
+// }, 1000 * 60);
 
 onMounted(() => {
 
