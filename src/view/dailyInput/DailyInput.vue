@@ -51,7 +51,8 @@ const DateOnChange = (day) => {
   console.log(dateValue.value);
 }
 
-
+let isLock = reactive(0);
+let shiftId ;
 const QRCodeFormState = reactive({
   QRCodeStart: '',
   QRCodeEnd: '',
@@ -100,7 +101,27 @@ const othersFormState = reactive({
 });
 
 const labelOnFinish = values => {
-  console.log('Success:', values);
+  if(undefined === shiftValue.value[1]){
+    message.error("提交前先选择班别 finish shift selection before submit", 3)
+    return;
+  }
+  axios({
+    url: "/apiStringer/report/saveAndUpdate",
+    method: "POST",
+    data: {
+      shiftId:  getShiftId(),
+      qrcodeStart: QRCodeFormState.QRCodeStart,
+      qrcodeEnd: QRCodeFormState.QRCodeEnd,
+      qrcodeAmount: QRCodeFormState.QRCodeAmount,
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if(response.data.code === '1'){
+      message.success("提交成功 submit succeed", 4)
+    }
+  })
 };
 
 const firstELOnFinish = values => {
@@ -132,10 +153,18 @@ const onFinishFailed = errorInfo => {
   console.log('Failed:', errorInfo);
 };
 
+const lockOnClick = () => {
+  console.log("lock")
+};
+const getShiftId = ()=> {
+  const month = (dateValue.value.$M + 1) <= 10 ? ("0" + (dateValue.value.$M + 1).toString()) : ((dateValue.value.$M + 1).toString())
+  return Number((dateValue.value.$y).toString() + month + (dateValue.value.$D).toString() + (shiftValue.value[1].toString()));
+}
+
 const ShiftOnChange = (value) => {
 
-  const month = (dateValue.value.$M + 1) <= 10 ? ("0" + (dateValue.value.$M + 1).toString()) : ((dateValue.value.$M + 1).toString())
-  const shiftID = Number((dateValue.value.$y).toString() + month + (dateValue.value.$D).toString() + (value[1].toString()))
+  // let shiftIdParam = getShiftId();
+
   // console.log((dateValue.value.$y).toString())
   // console.log(month)
   // console.log((dateValue.value.$D).toString())
@@ -145,7 +174,7 @@ const ShiftOnChange = (value) => {
     url: "/apiStringer/report/getRecord",
     method: "POST",
     data: {
-      shiftId: shiftID,
+      shiftId: getShiftId(),
     },
     contentType: "json",
     processData: false,
@@ -153,11 +182,18 @@ const ShiftOnChange = (value) => {
   }).then(function (response) {
     console.log(response.data)
     console.log(QRCodeFormState)
+    if(null === response.data.data){
+      message.info("这个班别暂时没有记录 This shift have no record yet")
+      return ;
+    }
+    shiftId = response.data.data.shiftId;
     QRCodeFormState.QRCodeStart = response.data.data.qrcodeStart;
     QRCodeFormState.QRCodeEnd = response.data.data.qrcodeEnd;
     QRCodeFormState.QRCodeAmount = response.data.data.qrcodeAmount;
     firstELFormState.firstELOutput = response.data.data.firstELOutput;
     firstELFormState.firstELDefect = response.data.data.firstELDefect;
+    isLock = response.data.data.isLock;
+    console.log(isLock===1)
   })
 }
 </script>
@@ -205,7 +241,7 @@ const ShiftOnChange = (value) => {
               </a-form-item>
 
               <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-                <a-button type="primary" html-type="submit">提交Submit</a-button>
+                <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>
               </a-form-item>
             </a-form>
           </div>
@@ -556,6 +592,7 @@ const ShiftOnChange = (value) => {
             placeholder="选择你的班别/shift selection"
             @change="ShiftOnChange"
         />
+        <a-button type="primary" danger @click="lockOnClick" :disabled="isLock===1">锁定表格lock form</a-button>
       </div>
     </a-col>
   </a-row>
