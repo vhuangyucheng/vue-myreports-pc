@@ -51,7 +51,7 @@ const DateOnChange = (day) => {
   console.log(dateValue.value);
 }
 
-let isLock = reactive(0);
+let isLock = ref(0);
 let shiftId ;
 const QRCodeFormState = reactive({
   QRCodeStart: '',
@@ -62,7 +62,6 @@ const QRCodeFormState = reactive({
 const firstELFormState = reactive({
   firstELOutput: '',
   firstELDefect: '',
-  QRCodeAmount: '',
 });
 const reworkFormState = reactive({
   moduleRepair: '',
@@ -92,7 +91,7 @@ const stringerFormState = reactive({
   stringer3: '',
   stringer3Defect: '',
   openBoxBroken: '',
-  StringerBrokenCells: '',
+  stringerBrokenCells: '',
   cellsInput: '',
 });
 
@@ -125,28 +124,135 @@ const labelOnFinish = values => {
 };
 
 const firstELOnFinish = values => {
-  console.log('Success:', values);
+  if(undefined === shiftValue.value[1]){
+    message.error("提交前先选择班别 finish shift selection before submit", 3)
+    return;
+  }
+  axios({
+    url: "/apiStringer/report/saveAndUpdate",
+    method: "POST",
+    data: {
+      shiftId:  getShiftId(),
+      firstELOutput: firstELFormState.firstELOutput,
+      firstELDefect: firstELFormState.firstELDefect,
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if(response.data.code === '1'){
+      message.success("提交成功 submit succeed", 4)
+    }
+  })
 };
 
 const reworkOnFinish = values => {
-  console.log('Success:', values);
+  if(undefined === shiftValue.value[1]){
+    message.error("提交前先选择班别 finish shift selection before submit", 3)
+    return;
+  }
+  axios({
+    url: "/apiStringer/report/saveAndUpdate",
+    method: "POST",
+    data: {
+      shiftId:  getShiftId(),
+      moduleRepair: reworkFormState.moduleRepair,
+      moduleScrap: reworkFormState.moduleScrap,
+      stringRepair: reworkFormState.stringRepair,
+      stringScrap: reworkFormState.stringScrap,
+      repairCellsReceive:reworkFormState.repairCellsReceive,
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if(response.data.code === '1'){
+      message.success("提交成功 submit succeed", 4)
+    }
+  })
 };
 
 const secondHalfOnFinish = values => {
-  console.log('Success:', values);
+  if(undefined === shiftValue.value[1]){
+    message.error("提交前先选择班别 finish shift selection before submit", 3)
+    return;
+  }
+  axios({
+    url: "/apiStringer/report/saveAndUpdate",
+    method: "POST",
+    data: {
+      shiftId:  getShiftId(),
+      visualInspection: secondHalfFormState.visualInspection,
+      visualInspectionDefect: secondHalfFormState.visualInspectionDefect,
+      framing: secondHalfFormState.framing,
+      framingDefect: secondHalfFormState.framingDefect,
+      jboxWelding:secondHalfFormState.jboxWelding,
+      jboxWeldingDefect: secondHalfFormState.jboxWeldingDefect,
+      cleaning: secondHalfFormState.cleaning,
+      cleaningDefect: secondHalfFormState.cleaningDefect,
+      secondEL: secondHalfFormState.secondEL,
+      secondELDefect:secondHalfFormState.secondELDefect,
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if(response.data.code === '1'){
+      message.success("提交成功 submit succeed", 4)
+    }
+  })
 };
 
 const stringerOnFinish = values => {
-  console.log('Success:', values);
+  if(undefined === shiftValue.value[1]){
+    message.error("提交前先选择班别 finish shift selection before submit", 3)
+    return;
+  }
+  axios({
+    url: "/apiStringer/report/saveAndUpdate",
+    method: "POST",
+    data: {
+      shiftId:  getShiftId(),
+      stringer1: stringerFormState.stringer1,
+      stringer1Defect: stringerFormState.stringer1Defect,
+      stringer2: stringerFormState.stringer2,
+      stringer2Defect: stringerFormState.stringer2Defect,
+      stringer3:stringerFormState.stringer3,
+      stringer3Defect: stringerFormState.stringer3Defect,
+      openboxBroken: stringerFormState.openboxBroken,
+      stringerBrokenCells: stringerFormState.stringerBrokenCells,
+      cellsInput: stringerFormState.cellsInput,
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if(response.data.code === '1'){
+      message.success("提交成功 submit succeed", 4)
+    }
+  })
 };
 
 const othersOnFinish = values => {
-  console.log(shiftValue.value[0]);
-  if (shiftValue.value[0] === undefined)
-      // console.log(shiftValue.value[1]);
-      // console.log(dateValue.value.$D)
-    message.success('This is an error message');
-  console.log('Success:', values);
+  if(undefined === shiftValue.value[1]){
+    message.error("提交前先选择班别 finish shift selection before submit", 3)
+    return;
+  }
+  axios({
+    url: "/apiStringer/report/saveAndUpdate",
+    method: "POST",
+    data: {
+      shiftId:  getShiftId(),
+      panelScrap: othersFormState.panelScrap,
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if(response.data.code === '1'){
+      message.success("提交成功 submit succeed", 4)
+    }
+  })
 
 };
 const onFinishFailed = errorInfo => {
@@ -154,7 +260,26 @@ const onFinishFailed = errorInfo => {
 };
 
 const lockOnClick = () => {
-  console.log("lock")
+  if(undefined === shiftValue.value[1]){
+    message.error("提交前先选择班别 finish shift selection before submit", 3)
+    return;
+  }
+  axios({
+    url: "/apiStringer/report/saveAndUpdate",
+    method: "POST",
+    data: {
+      shiftId:  getShiftId(),
+      isLock: 1
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if(response.data.code === '1'){
+      message.success("锁定成功 Lock succeed", 4)
+      isLock.value = 1;
+    }
+  })
 };
 const getShiftId = ()=> {
   const month = (dateValue.value.$M + 1) <= 10 ? ("0" + (dateValue.value.$M + 1).toString()) : ((dateValue.value.$M + 1).toString())
@@ -184,16 +309,73 @@ const ShiftOnChange = (value) => {
     console.log(QRCodeFormState)
     if(null === response.data.data){
       message.info("这个班别暂时没有记录 This shift have no record yet")
+      isLock.value = 0
+      QRCodeFormState.QRCodeStart = '';
+      QRCodeFormState.QRCodeEnd = '';
+      QRCodeFormState.QRCodeAmount = '';
+      firstELFormState.firstELOutput = ''
+      firstELFormState.firstELDefect = ''
+      reworkFormState.moduleRepair = ''
+      reworkFormState.moduleScrap = ''
+      reworkFormState.stringRepair = ''
+      reworkFormState.stringScrap = ''
+      reworkFormState.repairCellsReceive = ''
+      secondHalfFormState.visualInspection = ''
+      secondHalfFormState.visualInspectionDefect = ''
+      secondHalfFormState.framing = ''
+      secondHalfFormState.framingDefect = ''
+      secondHalfFormState.jboxWelding = ''
+      secondHalfFormState.jboxWeldingDefect = ''
+      secondHalfFormState.cleaning = ''
+      secondHalfFormState.cleaningDefect = ''
+      secondHalfFormState.secondEL = ''
+      secondHalfFormState.secondELDefect = ''
+      stringerFormState.stringer1 = ''
+      stringerFormState.stringer1Defect = ''
+      stringerFormState.stringer2 = ''
+      stringerFormState.stringer2Defect = ''
+      stringerFormState.stringer3 = ''
+      stringerFormState.stringer3Defect = ''
+      stringerFormState.openboxBroken = ''
+      stringerFormState.stringerBrokenCells = ''
+      stringerFormState.cellsInput = ''
+      othersFormState.panelScrap = ''
       return ;
     }
     shiftId = response.data.data.shiftId;
+    isLock.value = response.data.data.isLock;
     QRCodeFormState.QRCodeStart = response.data.data.qrcodeStart;
     QRCodeFormState.QRCodeEnd = response.data.data.qrcodeEnd;
     QRCodeFormState.QRCodeAmount = response.data.data.qrcodeAmount;
     firstELFormState.firstELOutput = response.data.data.firstELOutput;
     firstELFormState.firstELDefect = response.data.data.firstELDefect;
-    isLock = response.data.data.isLock;
-    console.log(isLock===1)
+    reworkFormState.moduleRepair = response.data.data.moduleRepair;
+    reworkFormState.moduleScrap = response.data.data.moduleScrap;
+    reworkFormState.stringRepair = response.data.data.stringRepair;
+    reworkFormState.stringScrap = response.data.data.stringScrap;
+    reworkFormState.repairCellsReceive = response.data.data.repairCellsReceive;
+    secondHalfFormState.visualInspection = response.data.data.visualInspection;
+    secondHalfFormState.visualInspectionDefect = response.data.data.visualInspectionDefect;
+    secondHalfFormState.framing = response.data.data.framing;
+    secondHalfFormState.framingDefect = response.data.data.framingDefect;
+    secondHalfFormState.jboxWelding = response.data.data.jboxWelding;
+    secondHalfFormState.jboxWeldingDefect = response.data.data.jboxWeldingDefect;
+    secondHalfFormState.cleaning = response.data.data.cleaning;
+    secondHalfFormState.cleaningDefect = response.data.data.cleaningDefect;
+    secondHalfFormState.secondEL = response.data.data.secondEL;
+    secondHalfFormState.secondELDefect = response.data.data.secondELDefect;
+    stringerFormState.stringer1 = response.data.data.stringer1;
+    stringerFormState.stringer1Defect = response.data.data.stringer1Defect;
+    stringerFormState.stringer2 = response.data.data.stringer2;
+    stringerFormState.stringer2Defect = response.data.data.stringer2Defect;
+    stringerFormState.stringer3 = response.data.data.stringer3;
+    stringerFormState.stringer3Defect = response.data.data.stringer3Defect;
+    stringerFormState.openboxBroken = response.data.data.openboxBroken;
+    stringerFormState.stringerBrokenCells = response.data.data.stringerBrokenCells;
+    stringerFormState.cellsInput = response.data.data.cellsInput;
+    othersFormState.panelScrap = response.data.data.panelScrap;
+
+    // console.log(isLock===1)
   })
 }
 </script>
@@ -278,7 +460,7 @@ const ShiftOnChange = (value) => {
               </a-form-item>
 
               <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-                <a-button type="primary" html-type="submit">提交Submit</a-button>
+                <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>
               </a-form-item>
             </a-form>
           </div>
@@ -339,7 +521,7 @@ const ShiftOnChange = (value) => {
                 </a-form-item>
 
                 <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-                  <a-button type="primary" html-type="submit">提交Submit</a-button>
+                  <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>
                 </a-form-item>
               </a-form>
             </div>
@@ -445,7 +627,7 @@ const ShiftOnChange = (value) => {
                 </a-form-item>
 
                 <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-                  <a-button type="primary" html-type="submit">提交Submit</a-button>
+                  <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>
                 </a-form-item>
               </a-form>
             </div>
@@ -525,22 +707,22 @@ const ShiftOnChange = (value) => {
 
                 <a-form-item
                     label="开箱破片Open box broken"
-                    name="openBoxBroken"
+                    name="openboxBroken"
                     :rules="[{ required: true, message: '不能为空cannot empty' }]"
                 >
-                  <a-input v-model:value="stringerFormState.openBoxBroken"/>
+                  <a-input v-model:value="stringerFormState.openboxBroken"/>
                 </a-form-item>
 
                 <a-form-item
                     label="焊机破片Cells broken by Stringer"
-                    name="StringerBrokenCells"
+                    name="stringerBrokenCells"
                     :rules="[{ required: true, message: '不能为空cannot empty' }]"
                 >
-                  <a-input v-model:value="stringerFormState.StringerBrokenCells"/>
+                  <a-input v-model:value="stringerFormState.stringerBrokenCells"/>
                 </a-form-item>
 
                 <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-                  <a-button type="primary" html-type="submit">提交Submit</a-button>
+                  <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>
                 </a-form-item>
               </a-form>
             </div>
@@ -571,7 +753,7 @@ const ShiftOnChange = (value) => {
                 </a-form-item>
 
                 <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-                  <a-button type="primary" html-type="submit">提交Submit</a-button>
+                  <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>
                 </a-form-item>
               </a-form>
             </div>
@@ -592,7 +774,7 @@ const ShiftOnChange = (value) => {
             placeholder="选择你的班别/shift selection"
             @change="ShiftOnChange"
         />
-        <a-button type="primary" danger @click="lockOnClick" :disabled="isLock===1">锁定表格lock form</a-button>
+        <a-button type="primary" danger @click="lockOnClick"  :disabled="isLock===1">锁定表格lock form</a-button>
       </div>
     </a-col>
   </a-row>

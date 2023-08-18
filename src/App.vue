@@ -65,6 +65,25 @@ const itemClick = ({item, key, keyPath}) => {
           </a-menu-item>
         </a-sub-menu>
 
+        <a-sub-menu key="sub04">
+          <template #icon>
+            <MailOutlined/>
+          </template>
+          <template #title>OutputReport</template>
+          <a-menu-item key="/DailyReport">
+            <user-outlined/>
+            <span class="nav-text">DailyReport</span>
+          </a-menu-item>
+          <a-menu-item key="/WeeklyReport">
+            <user-outlined/>
+            <span class="nav-text">WeeklyReport</span>
+          </a-menu-item>
+          <a-menu-item key="/MonthlyReport">
+            <user-outlined/>
+            <span class="nav-text">MonthlyReport</span>
+          </a-menu-item>
+        </a-sub-menu>
+
 
       </a-menu>
     </a-layout-sider>
