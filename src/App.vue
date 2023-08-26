@@ -10,6 +10,7 @@ import {
   MailOutlined,
   ShopOutlined
 } from '@ant-design/icons-vue';
+import DefectInput from "./view/dailyInput/defectInput/DefectInput.vue";
 
 const router = useRouter();
 const itemClick = ({item, key, keyPath}) => {
@@ -43,16 +44,16 @@ const itemClick = ({item, key, keyPath}) => {
           </a-menu-item>
         </a-sub-menu>
 
-        <a-sub-menu key="sub02">
-          <template #icon>
-            <MailOutlined/>
-          </template>
-          <template #title>Line#1</template>
-          <a-menu-item key="/Line1Daily">
-            <user-outlined/>
-            <span class="nav-text">Line1Daily</span>
-          </a-menu-item>
-        </a-sub-menu>
+<!--        <a-sub-menu key="sub02">-->
+<!--          <template #icon>-->
+<!--            <MailOutlined/>-->
+<!--          </template>-->
+<!--          <template #title>Line#1</template>-->
+<!--          <a-menu-item key="/Line1Daily">-->
+<!--            <user-outlined/>-->
+<!--            <span class="nav-text">Line1Daily</span>-->
+<!--          </a-menu-item>-->
+<!--        </a-sub-menu>-->
 
         <a-sub-menu key="sub03">
           <template #icon>
@@ -62,6 +63,18 @@ const itemClick = ({item, key, keyPath}) => {
           <a-menu-item key="/DailyInput">
             <user-outlined/>
             <span class="nav-text">DailyInput</span>
+          </a-menu-item>
+          <a-menu-item key="/DailyInput2">
+            <user-outlined/>
+            <span class="nav-text">DailyInput2.0.0</span>
+          </a-menu-item>
+          <a-menu-item key="/DefectInput">
+            <user-outlined/>
+            <span class="nav-text">DefectInput</span>
+          </a-menu-item>
+          <a-menu-item key="/IPQCReview">
+            <user-outlined/>
+            <span class="nav-text">IPQCReview</span>
           </a-menu-item>
         </a-sub-menu>
 

@@ -119,6 +119,8 @@ const labelOnFinish = values => {
   }).then(function (response) {
     if(response.data.code === '1'){
       message.success("提交成功 submit succeed", 4)
+    } else {
+      message.error("提交失败 submit failed")
     }
   })
 };
@@ -142,6 +144,8 @@ const firstELOnFinish = values => {
   }).then(function (response) {
     if(response.data.code === '1'){
       message.success("提交成功 submit succeed", 4)
+    }else {
+      message.error("提交失败 submit failed")
     }
   })
 };
@@ -168,6 +172,8 @@ const reworkOnFinish = values => {
   }).then(function (response) {
     if(response.data.code === '1'){
       message.success("提交成功 submit succeed", 4)
+    }else {
+      message.error("提交失败 submit failed")
     }
   })
 };
@@ -199,6 +205,8 @@ const secondHalfOnFinish = values => {
   }).then(function (response) {
     if(response.data.code === '1'){
       message.success("提交成功 submit succeed", 4)
+    }else {
+      message.error("提交失败 submit failed")
     }
   })
 };
@@ -229,6 +237,8 @@ const stringerOnFinish = values => {
   }).then(function (response) {
     if(response.data.code === '1'){
       message.success("提交成功 submit succeed", 4)
+    }else {
+      message.error("提交失败 submit failed")
     }
   })
 };
@@ -251,6 +261,8 @@ const othersOnFinish = values => {
   }).then(function (response) {
     if(response.data.code === '1'){
       message.success("提交成功 submit succeed", 4)
+    }else {
+      message.error("提交失败 submit failed")
     }
   })
 
