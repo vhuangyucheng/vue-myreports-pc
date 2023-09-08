@@ -494,7 +494,8 @@ const lockOnClick = () => {
 };
 const getShiftId = () => {
   const month = (dateValue.value.$M + 1) <= 10 ? ("0" + (dateValue.value.$M + 1).toString()) : ((dateValue.value.$M + 1).toString())
-  return Number((dateValue.value.$y).toString() + month + (dateValue.value.$D).toString() + (shiftValue.value[1].toString()));
+  const day = (dateValue.value.$D ) <= 10 ? ("0" + (dateValue.value.$D).toString()) : ((dateValue.value.$D).toString())
+  return Number((dateValue.value.$y).toString() + month + day + (shiftValue.value[1].toString()));
 }
 
 const ShiftOnChange = (value) => {
@@ -729,14 +730,14 @@ const ShiftOnChange = (value) => {
               <a-form
                   :model="materialFeedingFormState"
                   name="materialFeedingFormState"
-                  :label-col="{ span: 10 }"
-                  :wrapper-col="{ span: 14 }"
+                  :label-col="{ span: 16 }"
+                  :wrapper-col="{ span: 8 }"
                   autocomplete="off"
                   @finish="materialFeedingOnFinish"
                   @finishFailed="onFinishFailed"
               >
                 <a-form-item
-                    label="玻璃产量glassOutput"
+                    label="玻璃产量GlassOutput"
                     name="glassOutput"
                     :rules="[{ required: true, message: '不能为空cannot empty' }]"
                 >
@@ -744,7 +745,7 @@ const ShiftOnChange = (value) => {
                 </a-form-item>
 
                 <a-form-item
-                    label="玻璃不良数glassDefect"
+                    label="玻璃不良数GlassDefect"
                     name="glassDefect"
                     :rules="[{ required: true, message: '不能为空cannot empty' }]"
                 >
@@ -760,7 +761,7 @@ const ShiftOnChange = (value) => {
                 </a-form-item>
 
                 <a-form-item
-                    label="EVA报废数（玻璃面）EVAGLassDefect(glass side)"
+                    label="EVA报废数（玻璃面）EVAGLassScrap(glass side)"
                     name="evaglassDefect"
                     :rules="[{ required: true, message: '不能为空cannot empty' }]"
                 >
@@ -776,7 +777,7 @@ const ShiftOnChange = (value) => {
                 </a-form-item>
 
                 <a-form-item
-                    label="背板报废数backsheetDefect"
+                    label="背板报废数backsheetScrap"
                     name="backsheetDefect"
                     :rules="[{ required: true, message: '不能为空cannot empty' }]"
                 >
@@ -792,7 +793,7 @@ const ShiftOnChange = (value) => {
                 </a-form-item>
 
                 <a-form-item
-                    label="EVA报废数（背板面）EVABacksheetDefect"
+                    label="EVA报废数（背板面）EVABacksheetScrap"
                     name="evabacksheetDefect"
                     :rules="[{ required: true, message: '不能为空cannot empty' }]"
                 >
@@ -824,8 +825,8 @@ const ShiftOnChange = (value) => {
           <a-form
               :model="stringerFormState"
               name="stringerFormState"
-              :label-col="{ span: 10 }"
-              :wrapper-col="{ span: 14 }"
+              :label-col="{ span: 16 }"
+              :wrapper-col="{ span: 8 }"
               autocomplete="off"
               @finish="stringerOnFinish"
               @finishFailed="onFinishFailed"
@@ -887,7 +888,7 @@ const ShiftOnChange = (value) => {
             </a-form-item>
 
             <a-form-item
-                label="2号焊机产出Stringer#1 output"
+                label="2号焊机产出Stringer#2 output"
                 name="stringer2Output"
                 :rules="[{ required: true, message: '不能为空cannot empty' }]"
             >
@@ -942,7 +943,7 @@ const ShiftOnChange = (value) => {
               <a-input v-model:value="stringerFormState.stringer2Others"/>
             </a-form-item>
             <a-form-item
-                label="3号焊机产出Stringer#1 output"
+                label="3号焊机产出Stringer#3 output"
                 name="stringer3Output"
                 :rules="[{ required: true, message: '不能为空cannot empty' }]"
             >
@@ -1014,8 +1015,8 @@ const ShiftOnChange = (value) => {
               <a-form
                   :model="bussingFormState"
                   name="bussingFormState"
-                  :label-col="{ span: 10 }"
-                  :wrapper-col="{ span: 14 }"
+                  :label-col="{ span: 16 }"
+                  :wrapper-col="{ span: 8 }"
                   autocomplete="off"
                   @finish="bussingOnFinish"
                   @finishFailed="onFinishFailed"
@@ -1077,8 +1078,8 @@ const ShiftOnChange = (value) => {
             <a-form
                 :model="firstELFormState"
                 name="secondHalfFormState"
-                :label-col="{ span: 10 }"
-                :wrapper-col="{ span: 14 }"
+                :label-col="{ span: 16 }"
+                :wrapper-col="{ span: 8 }"
                 autocomplete="off"
                 @finish="firstELOnFinish"
                 @finishFailed="onFinishFailed"
@@ -1119,7 +1120,7 @@ const ShiftOnChange = (value) => {
         <a-col :span="24">
           <div>
             <h1 style="color: cornflowerblue">
-              前道组长表格 A0
+              前道组长表格 Duty on first-half leader A0
             </h1>
             <div>
               <a-form
@@ -1344,7 +1345,7 @@ const ShiftOnChange = (value) => {
       <a-row>
         <a-col :span="24">
           <h1 style="color: cornflowerblue">
-            后道组长 B0
+            后道组长 Duty on second-half leader B0
           </h1>
           <div>
             <a-form

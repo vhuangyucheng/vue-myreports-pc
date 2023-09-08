@@ -4,65 +4,129 @@ import axios from "axios";
 import {Column} from '@antv/g2plot';
 import {toRefs, defineProps} from 'vue'
 
-const props = defineProps(['data1','chartName'])
+const props = defineProps(['dataFromPa', 'chartName'])
 
-watch(()=>props.data1, (newVal, oldVal) => {
-  console.log('2监听引用类型数据dataList')
-  console.log('new', newVal)
-  console.log('old', oldVal)
-})
+
 
 let column;
 
-const data1 = [
-  {
-    shift: "Day",
-    amount: 0,
-    type: "productivity",
-    col_name: "Layup",
-  },
-  {
-    shift: "Day",
-    amount: 0,
-    type: "productivity",
-    col_name: "FirstEL",
-  },
-  {
-    shift: "Day",
-    amount: 0,
-    type: "productivity",
-    col_name: "Framing",
-  },
-  {
-    shift: "Day",
-    amount: 0,
-    type: "productivity",
-    col_name: "Sorting",
-  },
-  {
-    shift: "Night",
-    amount: 0,
-    type: "productivity",
-    col_name: "layup",
-  },
-  {
-    shift: "NN",
-    amount: 0,
-    type: "productivity",
-    col_name: "layup",
-  },
-]
+let data1 = ref([
+  // {
+  //   shift: "Day",
+  //   amount: 0,
+  //   type: "productivity",
+  //   col_name: "Layup",
+  // },
+  // {
+  //   shift: "Day",
+  //   amount: 0,
+  //   type: "productivity",
+  //   col_name: "FirstEL",
+  // },
+  // {
+  //   shift: "Day",
+  //   amount: 0,
+  //   type: "productivity",
+  //   col_name: "Framing",
+  // },
+  // {
+  //   shift: "Day",
+  //   amount: 0,
+  //   type: "productivity",
+  //   col_name: "Sorting",
+  // },
+  // {
+  //   shift: "Night",
+  //   amount: 0,
+  //   type: "productivity",
+  //   col_name: "layup",
+  // },
+  // {
+  //   shift: "Night",
+  //   amount: 0,
+  //   type: "productivity",
+  //   col_name: "FirstEL",
+  // },
+  // {
+  //   shift: "Night",
+  //   amount: 0,
+  //   type: "productivity",
+  //   col_name: "Framing",
+  // },
+  // {
+  //   shift: "Night",
+  //   amount: 0,
+  //   type: "productivity",
+  //   col_name: "Sorting",
+  // },
+  //
+  // {
+  //   shift: "NN",
+  //   amount: 0,
+  //   type: "productivity",
+  //   col_name: "Sorting",
+  // },
+])
+
+watch(() => props.dataFromPa, (newVal, oldVal) => {
+  console.log('2监听引用类型数据dataList')
+  console.log('new', newVal)
+  console.log('old', oldVal)
+  data1.value = [];
+  let shiftValue = "";
+  let col_name = "";
+  newVal.forEach(item => {
+    switch (item.shiftId % 10) {
+      case 1:
+        shiftValue = "Day"
+        break;
+      case 2:
+        shiftValue = "Night"
+        break;
+      case 3:
+        shiftValue = "NN"
+        break;
+    }
+    let layup = {
+      shift: shiftValue,
+      amount: item.glassOutput,
+      type: "productivity",
+      col_name: "layup",
+    }
+    let FirstEL = {
+      shift: shiftValue,
+      amount: item.firstel1Output,
+      type: "productivity",
+      col_name: "FirstEL",
+    }
+    let Framing = {
+      shift: shiftValue,
+      amount: item.framingOutput,
+      type: "productivity",
+      col_name: "Framing",
+    }
+    let Sorting = {
+      shift: shiftValue,
+      amount: item.secondelOutput,
+      type: "productivity",
+      col_name: "Sorting",
+    }
+    data1.value.push(layup,FirstEL,Framing,Sorting)
+  })
+
+  column.changeData(dataWithData2(data1))
+})
 
 let FIRST_AMOUNT = 0;
 let SECOND_AMOUNT = 0;
 let THIRD_AMOUNT = 0;
 
-if("line2" === props.chartName){
+if ("line2" === props.chartName) {
   FIRST_AMOUNT = 600;
   SECOND_AMOUNT = 600;
   THIRD_AMOUNT = 300;
 }
-if("line1" === props.chartName){
+if ("line1" === props.chartName) {
   FIRST_AMOUNT = 400;
   SECOND_AMOUNT = 400;
   THIRD_AMOUNT = 300;
@@ -75,18 +139,29 @@ const dict = {
   "NN": THIRD_AMOUNT,
 };
 
-const data2 = data1.filter(item => (item.amount <= dict[item.shift])).map(item => ({
+const data2 = data1.value.filter(item => (item.amount <= dict[item.shift])).map(item => ({
   ...item,
   amount: dict[item.shift] - item.amount,
   type: 'to target',
 }));
 
-const data = [...data2, ...data1]
+const data = [...data2, ...data1.value]
+
+let dataWithData2 = (data1) =>{
+  const data2 = data1.value.filter(item => (item.amount <= dict[item.shift])).map(item => ({
+    ...item,
+    amount: dict[item.shift] - item.amount,
+    type: 'to target',
+  }));
+
+  const data = [...data2, ...data1.value]
+  return data;
+}
 
 // console.log(data)
 
 onMounted(() => {
-  column = new Column("line1DailyThursday"+props.chartName, {
+  column = new Column("line1DailyThursday" + props.chartName, {
     data: data,
     xField: 'shift',
     yField: 'amount',
@@ -118,7 +193,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>今日产量</div>
+  <a-typography-text code>今日产量</a-typography-text>
   <div :id="'line1DailyThursday'+ props.chartName " :style="{height:'200px'}"/>
 </template>
 

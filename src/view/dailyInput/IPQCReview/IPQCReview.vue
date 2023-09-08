@@ -3,27 +3,27 @@ import dayjs from 'dayjs';
 import {message} from 'ant-design-vue'
 import 'ant-design-vue/es/message/style/css'
 import axios from "axios";
-import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
+import {SmileOutlined, DownOutlined} from '@ant-design/icons-vue';
 
 let searchReturnValue = ref("");
 let reviewReturnValue = ref("");
 const QRCodeFormState = reactive({
-  defectId:0,
+  defectId: 0,
   stationValue: '',
-  shiftValue:'',
+  shiftValue: '',
   qrcode: '',
   submitee: ''
 })
 
 const reviewFormState = reactive({
-  dateValue : dayjs(),
+  dateValue: dayjs(),
   moduleModel: '',
   MO: '',
-  location:'',
-  description:'',
-  judgementGrade:'',
-  judger:'',
-  remark:'',
+  location: '',
+  description: '',
+  judgementGrade: '',
+  judger: '',
+  remark: '',
 })
 
 
@@ -41,40 +41,44 @@ const reviewOnFinish = values => {
     url: "/apiStringer/Defect/saveAndUpdate",
     method: "POST",
     data: {
-      defectId:QRCodeFormState.defectId,
-      reviewDate:Number((reviewFormState.dateValue.$y).toString() + month + (reviewFormState.dateValue.$D).toString() ),
-      mo:reviewFormState.MO,
-      model:reviewFormState.moduleModel,
-      defectLocation:reviewFormState.location,
-      description:reviewFormState.description,
-      grade:reviewFormState.judgementGrade,
-      judger:reviewFormState.judger,
-      remark:reviewFormState.remark,
-      status:0,
+      defectId: QRCodeFormState.defectId,
+      reviewDate: Number((reviewFormState.dateValue.$y).toString() + month + (reviewFormState.dateValue.$D).toString()),
+      mo: reviewFormState.MO,
+      model: reviewFormState.moduleModel,
+      defectLocation: reviewFormState.location,
+      description: reviewFormState.description,
+      grade: reviewFormState.judgementGrade,
+      judger: reviewFormState.judger,
+      remark: reviewFormState.remark,
+      status: 0,
     },
     contentType: "json",
     processData: false,
     dataType: "json",
   }).then(function (response) {
     if (response.data.code === '1') {
-      QRCodeFormState.qrcode=''
+      reviewReturnValue.value = QRCodeFormState.qrcode + '评审成功 review succeed';
+      QRCodeFormState.qrcode = ''
+      QRCodeFormState.defectId = 0
+      callNeedsReviewList();
       message.success("评审成功 review succeed", 4)
+
     } else {
       message.error("没有这个不良记录 no record with this qr code")
-      reviewReturnValue.value= ''
+      reviewReturnValue.value = ''
     }
   })
 };
 
 const shiftLocationConvertion = {
-  1:"旧线old line",
-  2:"新线new line"
+  1: "旧线old line",
+  2: "新线new line"
 }
 
 const shiftTimeConvertion = {
-  1:"早班day",
-  2:"晚班night",
-  3:"深夜班NN"
+  1: "早班day",
+  2: "晚班night",
+  3: "深夜班NN"
 }
 const submitOnFinish = values => {
   searchReturnValue.value = QRCodeFormState.qrcode
@@ -93,17 +97,28 @@ const submitOnFinish = values => {
     if (response.data.code === '1') {
       searchReturnValue.value = QRCodeFormState.qrcode
       QRCodeFormState.stationValue = response.data.data.station
-      QRCodeFormState.shiftValue =  shiftLocationConvertion[response.data.data.shiftLocation] + "/" +shiftTimeConvertion[response.data.data.shiftTime]
-      QRCodeFormState.qrcode= response.data.data.qrcode
-      QRCodeFormState.submitee= response.data.data.submitee
+      QRCodeFormState.shiftValue = shiftLocationConvertion[response.data.data.shiftLocation] + "/" + shiftTimeConvertion[response.data.data.shiftTime]
+      QRCodeFormState.qrcode = response.data.data.qrcode
+      QRCodeFormState.submitee = response.data.data.submitee
       QRCodeFormState.defectId = response.data.data.defectId
       message.success("查找成功 search code succeed", 4)
     } else {
       message.error("没有这个不良记录 no record with this qr code")
-      searchReturnValue.value= ''
+      searchReturnValue.value = ''
     }
   })
 };
+
+const reviewButtonToSearch = item =>{
+  console.log(item)
+  QRCodeFormState.defectId= item.defectId;
+
+  searchReturnValue.value = item.qrcode
+  QRCodeFormState.stationValue = item.station.split("-----")[1]
+  QRCodeFormState.shiftValue = item.station.split("-----")[0]
+  QRCodeFormState.qrcode = item.qrcode
+  QRCodeFormState.submitee = item.submitee
+}
 
 const onFinishFailed = errorInfo => {
   console.log('Failed:', errorInfo);
@@ -112,14 +127,9 @@ const onFinishFailed = errorInfo => {
 
 const columns = [
   {
-    name: 'submitee',
+    title: 'submitee',
     dataIndex: 'submitee',
     key: 'submitee',
-  },
-  {
-    title: 'shift',
-    dataIndex: 'shift',
-    key: 'shift',
   },
   {
     title: 'station',
@@ -131,40 +141,60 @@ const columns = [
     key: 'qrcode',
     dataIndex: 'qrcode',
   },
-  // {
-  //   title: 'qrcode',
-  //   key: 'qrcode',
-  //   dataIndex: 'qrcode',
-  // },
+
   {
     title: 'Action',
     key: 'action',
   },
 ];
 
-const data = [
-  {
-    key: '1',
-    submitee: 'John Brown',
-    shift: 32,
-    station: 'New York No. 1 Lake Park',
-    qrcode: 'ddd',
-  },
-  {
-    key: '2',
-    submitee: 'Jim Green',
-    shift: 42,
-    station: 'London No. 1 Lake Park',
-    qrcode: "dd",
-  },
-  {
-    key: '3',
-    submitee: 'Joe Black',
-    shift: 32,
-    station: 'Sidney No. 1 Lake Park',
-    qrcode: 'dd',
-  },
-];
+let dataToReviewList = reactive([
+  // {
+  //   key: '1',
+  //   submitee: 'John Brown',
+  //   station: 'New York No. 1 Lake Park',
+  //   qrcode: 'ddd',
+  // },
+  // {
+  //   key: '2',
+  //   submitee: 'Jim Green',
+  //   station: 'London No. 1 Lake Park',
+  //   qrcode: "dd",
+  // },
+  // {
+  //   key: '3',
+  //   submitee: 'Joe Black',
+  //   station: 'Sidney No. 1 Lake Park',
+  //   qrcode: 'dd',
+  // },
+]);
+
+const callNeedsReviewList = () => {
+  axios({
+    url: "/apiStringer/Defect/ListOpenDefect",
+    method: "POST",
+    data: {},
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    console.log(response.data)
+    let keyCounter = 1;
+    const returnList = response.data.data;
+    dataToReviewList.length = 0;
+    returnList.forEach(item => {
+      dataToReviewList.push({
+        key: keyCounter++,
+        defectId:item.defectId,
+        submitee: item.submitee,
+        station: shiftLocationConvertion[item.shiftLocation] + "/" + shiftTimeConvertion[item.shiftTime]+ "-----" + item.station+"/"+item.reason,
+        qrcode:item.qrcode,
+      })
+    })
+  })
+}
+
+callNeedsReviewList();
 </script>
 
 <template>
@@ -246,7 +276,7 @@ const data = [
               name="dateValue"
               :rules="[{ required: true, message: '不能为空cannot empty' }]"
           >
-            <a-date-picker v-model:value="reviewFormState.dateValue" />
+            <a-date-picker v-model:value="reviewFormState.dateValue"/>
           </a-form-item>
 
           <a-form-item
@@ -254,7 +284,7 @@ const data = [
               name="moduleModel"
               :rules="[{ required: true, message: '不能为空cannot empty' }]"
           >
-            <a-input v-model:value="reviewFormState.moduleModel" />
+            <a-input v-model:value="reviewFormState.moduleModel"/>
           </a-form-item>
 
           <a-form-item
@@ -262,7 +292,7 @@ const data = [
               name="MO"
               :rules="[{ required: true, message: '不能为空cannot empty' }]"
           >
-            <a-input v-model:value="reviewFormState.MO" />
+            <a-input v-model:value="reviewFormState.MO"/>
           </a-form-item>
 
           <a-form-item
@@ -270,7 +300,7 @@ const data = [
               name="location"
               :rules="[{ required: true, message: '不能为空cannot empty' }]"
           >
-            <a-input v-model:value="reviewFormState.location" />
+            <a-input v-model:value="reviewFormState.location"/>
           </a-form-item>
 
           <a-form-item
@@ -278,7 +308,7 @@ const data = [
               name="description"
               :rules="[{ required: true, message: '不能为空cannot empty' }]"
           >
-            <a-input v-model:value="reviewFormState.description" />
+            <a-input v-model:value="reviewFormState.description"/>
           </a-form-item>
 
           <a-form-item
@@ -286,7 +316,7 @@ const data = [
               name="judgementGrade"
               :rules="[{ required: true, message: '不能为空cannot empty' }]"
           >
-<!--            <a-input v-model:value="reviewFormState.judgementGrade" />-->
+            <!--            <a-input v-model:value="reviewFormState.judgementGrade" />-->
             <a-radio-group v-model:value="reviewFormState.judgementGrade">
               <a-radio value="a">A</a-radio>
               <a-radio value="b">B</a-radio>
@@ -300,7 +330,7 @@ const data = [
               name="judger"
               :rules="[{ required: true, message: '不能为空cannot empty' }]"
           >
-            <a-input v-model:value="reviewFormState.judger" />
+            <a-input v-model:value="reviewFormState.judger"/>
           </a-form-item>
 
           <a-form-item
@@ -308,7 +338,7 @@ const data = [
               name="remark"
               :rules="[{ required: true, message: '不能为空cannot empty' }]"
           >
-            <a-input v-model:value="reviewFormState.remark" />
+            <a-input v-model:value="reviewFormState.remark"/>
           </a-form-item>
 
           <a-form-item :wrapper-col="{ offset: 2, span: 16 }">
@@ -323,41 +353,41 @@ const data = [
   </a-row>
   <a-divider style="height: 2px; background-color: #7cb305"/>
   <div>
-      <a-table :columns="columns" :data-source="data">
-        <template #headerCell="{ column }">
-          <template v-if="column.key === 'submitee'">
+    <a-table :columns="columns" :data-source="dataToReviewList">
+      <template #headerCell="{ column }">
+        <template v-if="column.key === 'submitee'">
         <span>
-          <smile-outlined />
+          <smile-outlined/>
           Name
         </span>
-          </template>
         </template>
+      </template>
 
-        <template #bodyCell="{ column, record }">
-          <template v-if="column.key === 'submitee'">
-            <a>
-              {{ record.submitee }}
-            </a>
-          </template>
-          <template v-else-if="column.key === 'qrcode'">
-            <a>
-              {{ record.qrcode }}
-            </a>
-          </template>
-          <template v-else-if="column.key === 'action'">
-        <span>
-          <a>Invite 一 {{ record.submitee }}</a>
-          <a-divider type="vertical" />
-          <a>Delete</a>
-          <a-divider type="vertical" />
-          <a class="ant-dropdown-link">
-            More actions
-            <down-outlined />
+      <template #bodyCell="{ column, record }">
+        <template v-if="column.key === 'submitee'">
+          <a>
+            {{ record.submitee }}
           </a>
-        </span>
-          </template>
         </template>
-      </a-table>
+        <template v-if="column.key === 'qrcode'">
+          <a>
+            {{ record.qrcode }}
+          </a>
+        </template>
+        <template v-else-if="column.key === 'action'">
+        <span>
+          <a @click="reviewButtonToSearch(record)">Review</a>
+          <!--          <a-divider type="vertical" />-->
+          <!--          <a>Delete</a>-->
+          <!--          <a-divider type="vertical" />-->
+          <!--          <a class="ant-dropdown-link">-->
+          <!--            More actions-->
+          <!--            <down-outlined />-->
+          <!--          </a>-->
+        </span>
+        </template>
+      </template>
+    </a-table>
   </div>
 </template>
 
