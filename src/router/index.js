@@ -8,6 +8,7 @@ import WeeklyReport from "../view/outputReport/weeklyReport/WeeklyReport.vue";
 import DailyInput2 from "../view/dailyInput/dailyInput2/dailyInput2.vue";
 import DefectInput from "../view/dailyInput/DefectInput/DefectInput.vue";
 import IPQCReview from "../view/dailyInput/IPQCReview/IPQCReview.vue";
+import DailyReportDataTable from "../view/daliyReportDataTable/DailyReportDataTable.vue";
 
 const myRouter = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,6 +57,11 @@ const myRouter = createRouter({
       path: '/IPQCReview',
       name: 'IPQCReview',
       component: IPQCReview
+    },
+    {
+      path: '/DailyReportDataTable',
+      name: 'DailyReportDataTable',
+      component: DailyReportDataTable
     },
 
 

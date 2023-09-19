@@ -29,6 +29,10 @@ const DateOnChange = (day) => {
     if (response.data.code === '0') {
       emptyIcon.value = true;
       message.error("当天没有任何记录 no records for the day", 4)
+      line2Value.value = [];
+      line1Value.value = [];
+      // console.log(line2Value.value)
+      // console.log(line1Value.value)
       return;
     }
     if (response.data.code === '1') {
@@ -49,20 +53,20 @@ const DateOnChange = (day) => {
     }, {});
     line2Value.value = groupByLine.line2 !== undefined ? groupByLine.line2 : [];
     line1Value.value = groupByLine.line1 !== undefined ? groupByLine.line1 : [];
-    // console.log(line2Value.value)
-    // console.log(line1Value.value)
+    console.log(line2Value.value)
+    console.log(line1Value.value)
   })
 }
 
 
-
 const getShiftId = () => {
-  const month = (dateValue.value.$M + 1) <= 10 ? ("0" + (dateValue.value.$M + 1).toString()) : ((dateValue.value.$M + 1).toString())
-  const day = (dateValue.value.$D) <= 10 ? ("0" + (dateValue.value.$D).toString()) : ((dateValue.value.$D).toString())
+  const month = (dateValue.value.$M + 1) < 10 ? ("0" + (dateValue.value.$M + 1).toString()) : ((dateValue.value.$M + 1).toString())
+  const day = (dateValue.value.$D) < 10 ? ("0" + (dateValue.value.$D).toString()) : ((dateValue.value.$D).toString())
   return Number((dateValue.value.$y).toString() + month + day + "00");
 }
 
 DateOnChange(dateValue.value)
+
 </script>
 
 <template>
@@ -70,50 +74,60 @@ DateOnChange(dateValue.value)
 
   <a-row>
     <a-col :span="18">
-      <div style="background-color: #ececec; padding: 10px">
-        <a-row :gutter="18">
-          <a-col :span="12">
-            <a-card title="New line" :bordered="false">
-              <div>1 Shift : <span v-if="line2Value.find(item=>item.shiftId ===getShiftId()+21)"><CheckOutlined/></span>
-              </div>
-              <div>2 Shift : <span v-if="line2Value.find(item=>item.shiftId ===getShiftId()+22)"><CheckOutlined/></span>
-              </div>
-              <div>3 Shift : <span v-if="line2Value.find(item=>item.shiftId ===getShiftId()+23)"><CheckOutlined/></span>
-              </div>
-            </a-card>
-          </a-col>
-          <a-col :span="12">
-            <a-card title="Old line" :bordered="false">
-              <div>1 Shift : <span v-if="line1Value.find(item=>item.shiftId ===getShiftId()+11)"><CheckOutlined/></span>
-              </div>
-              <div>2 Shift : <span v-if="line1Value.find(item=>item.shiftId ===getShiftId()+12)"><CheckOutlined/></span>
-              </div>
-              <div>3 Shift : <span v-if="line1Value.find(item=>item.shiftId ===getShiftId()+13)"><CheckOutlined/></span>
-              </div>
-            </a-card>
-          </a-col>
 
-        </a-row>
-      </div>
-      <a-empty v-if="emptyIcon"/>
-      <div v-else>
-        <a-row>
-          <a-col :span="24">
-            <DayChart :value1="line2Value" :value2="line2"/>
-          </a-col>
-        </a-row>
-        <a-row>
-          <a-col :span="24">
-            <DayChart :value1="line1Value" :value2="line1"/>
-          </a-col>
-        </a-row>
-      </div>
+      <!--      <a-empty v-if="emptyIcon"/>-->
+      <!--      <div v-else>-->
+      <!--        <div v-if="line2Value.length!==0">-->
+
+      <a-row>
+        <a-col :span="24">
+          <DayChart :value1="line2Value" :value2="line2"/>
+        </a-col>
+      </a-row>
+      <a-divider style="height: 2px; background-color: #7cb305"/>
+
+      <!--        </div>-->
+      <!--        <div v-if="line1Value.length!==0">-->
+      <a-row>
+        <a-col :span="24">
+          <DayChart :value1="line1Value" :value2="line1"/>
+        </a-col>
+      </a-row>
+      <!--        </div>-->
+      <!--      </div>-->
 
     </a-col>
-    <a-col :span="4">
-      <div :style="{ width: '300px', border: '1px solid #d9d9d9', borderRadius: '4px' }">
-        <a-calendar v-model:value="dateValue" :fullscreen="false" @select="DateOnChange"/>
-      </div>
+    <a-col :span="6">
+      <a-row>
+        <div :style="{ width: '300px', border: '1px solid #d9d9d9', borderRadius: '4px' }">
+          <a-calendar v-model:value="dateValue" :fullscreen="false" @select="DateOnChange"/>
+        </div>
+      </a-row>
+        <div style="background-color: #ececec; padding: 10px">
+          <a-row :gutter="18">
+            <a-col :span="12">
+              <a-card title="New line" :bordered="false" style="padding: 0px">
+                <div>1 Shift : <span v-if="line2Value.find(item=>item.shiftId ===getShiftId()+21)"><CheckOutlined/></span>
+                </div>
+                <div>2 Shift : <span v-if="line2Value.find(item=>item.shiftId ===getShiftId()+22)"><CheckOutlined/></span>
+                </div>
+                <div>3 Shift : <span v-if="line2Value.find(item=>item.shiftId ===getShiftId()+23)"><CheckOutlined/></span>
+                </div>
+              </a-card>
+            </a-col>
+            <a-col :span="12">
+              <a-card title="Old line" :bordered="false">
+                <div>1 Shift : <span v-if="line1Value.find(item=>item.shiftId ===getShiftId()+11)"><CheckOutlined/></span>
+                </div>
+                <div>2 Shift : <span v-if="line1Value.find(item=>item.shiftId ===getShiftId()+12)"><CheckOutlined/></span>
+                </div>
+                <div>3 Shift : <span v-if="line1Value.find(item=>item.shiftId ===getShiftId()+13)"><CheckOutlined/></span>
+                </div>
+              </a-card>
+            </a-col>
+          </a-row>
+        </div>
+
     </a-col>
   </a-row>
 </template>

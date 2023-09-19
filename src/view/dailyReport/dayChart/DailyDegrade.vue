@@ -66,28 +66,18 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
         shiftValue = "NN"
         break;
     }
-    let incomingScrap = {
-      shift: shiftValue,
-      amount: Number(item.incomingScrap),
-      name: "incomingScrap"
-    }
-    let stringerScrap = {
-      shift: shiftValue,
-      amount: Number(item.stringerScrap),
-      name: 'stringerScrap'
-    }
-    let repairScrap = {
-      shift: shiftValue,
-      amount: Number(item.repairScrap),
-      name: 'repairScrap'
-    }
-    let incidentScrap = {
-      shift: shiftValue,
-      amount: Number(item.incidentScrap),
-      name: 'incidentScrap'
-    }
 
-    data1.push(incomingScrap, stringerScrap, repairScrap, incidentScrap)
+    let finishedgoodDegrade = {
+      shift: shiftValue,
+      amount: Number(item.finishedgoodDegrade),
+      name: 'finishedgoodDegrade'
+    }
+    let finishedgoodScrap = {
+      shift: shiftValue,
+      amount: Number(item.finishedgoodScrap),
+      name: 'finishedgoodScrap'
+    }
+    data1.push(finishedgoodDegrade,finishedgoodScrap)
   })
   console.log(data1)
   stackedColumnPlot.changeData(data1)
@@ -96,7 +86,7 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
 let stackedColumnPlot ;
 
 onMounted(() => {
-  stackedColumnPlot = new Column('line1DailyThursdayScrap'+props.chartName, {
+  stackedColumnPlot = new Column('dailyOutputDailyDegrade'+props.chartName, {
     data: data,
     isGroup: true,
     xField: 'shift',
@@ -132,7 +122,7 @@ onMounted(() => {
 <template>
   <div>
     <a-typography-text code>Cells Scrap 报废 : Day = 140 ,  Night = 217</a-typography-text>
-    <div :id="'line1DailyThursdayScrap'+props.chartName " :style="{height:'180px'}" />
+    <div :id="'dailyOutputDailyDegrade'+props.chartName " :style="{height:'180px'}" />
   </div>
 </template>
 

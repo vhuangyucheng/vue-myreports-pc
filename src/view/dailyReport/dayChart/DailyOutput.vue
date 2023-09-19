@@ -7,10 +7,9 @@ import {toRefs, defineProps} from 'vue'
 const props = defineProps(['dataFromPa', 'chartName'])
 
 
-
 let column;
 
-let data1 = ref([
+let data1 = [
   // {
   //   shift: "Day",
   //   amount: 0,
@@ -66,13 +65,14 @@ let data1 = ref([
   //   type: "productivity",
   //   col_name: "Sorting",
   // },
-])
+]
+
 
 watch(() => props.dataFromPa, (newVal, oldVal) => {
-  console.log('2监听引用类型数据dataList')
-  console.log('new', newVal)
-  console.log('old', oldVal)
-  data1.value = [];
+  // console.log('2监听引用类型数据dataList')
+  // console.log('new', newVal)
+  // console.log('old', oldVal)
+  data1 = [];
   let shiftValue = "";
   let col_name = "";
   newVal.forEach(item => {
@@ -89,31 +89,32 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
     }
     let layup = {
       shift: shiftValue,
-      amount: item.glassOutput,
+      amount: Number(item.glassOutput),
       type: "productivity",
       col_name: "layup",
     }
     let FirstEL = {
       shift: shiftValue,
-      amount: item.firstel1Output,
+      amount: Number(item.firstel1Output),
       type: "productivity",
       col_name: "FirstEL",
     }
     let Framing = {
       shift: shiftValue,
-      amount: item.framingOutput,
+      amount: Number(item.framingOutput),
       type: "productivity",
       col_name: "Framing",
     }
     let Sorting = {
       shift: shiftValue,
-      amount: item.secondelOutput,
+      amount: Number(item.secondelOutput),
       type: "productivity",
       col_name: "Sorting",
     }
-    data1.value.push(layup,FirstEL,Framing,Sorting)
+    data1.push(layup, FirstEL, Framing, Sorting)
   })
-
+  // console.log(data1)
+  // console.log(dataWithData2(data1))
   column.changeData(dataWithData2(data1))
 })
 
@@ -139,22 +140,22 @@ const dict = {
   "NN": THIRD_AMOUNT,
 };
 
-const data2 = data1.value.filter(item => (item.amount <= dict[item.shift])).map(item => ({
+const data2 = data1.filter(item => (item.amount <= dict[item.shift])).map(item => ({
   ...item,
   amount: dict[item.shift] - item.amount,
   type: 'to target',
 }));
 
-const data = [...data2, ...data1.value]
+const data = [...data2, ...data1]
 
-let dataWithData2 = (data1) =>{
-  const data2 = data1.value.filter(item => (item.amount <= dict[item.shift])).map(item => ({
+let dataWithData2 = (data1) => {
+  const data2 = data1.filter(item => (item.amount <= dict[item.shift])).map(item => ({
     ...item,
     amount: dict[item.shift] - item.amount,
     type: 'to target',
   }));
 
-  const data = [...data2, ...data1.value]
+  const data = [...data2, ...data1]
   return data;
 }
 
@@ -193,7 +194,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <a-typography-text code>今日产量</a-typography-text>
+  <a-typography-text code>今日产量 Today Output</a-typography-text>
   <div :id="'line1DailyThursday'+ props.chartName " :style="{height:'200px'}"/>
 </template>
 

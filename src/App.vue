@@ -83,6 +83,10 @@ const itemClick = ({item, key, keyPath}) => {
             <MailOutlined/>
           </template>
           <template #title>OutputReport</template>
+          <a-menu-item key="/DailyReportDataTable">
+            <user-outlined/>
+            <span class="nav-text">DailyReportDataTable</span>
+          </a-menu-item>
           <a-menu-item key="/DailyReport">
             <user-outlined/>
             <span class="nav-text">DailyReport</span>
