@@ -3,6 +3,7 @@
 import {log} from "@antv/g2plot/lib/utils/index.js";
 
 import getAlertList from '../../../store/getAlertList';
+
 const getAlertListStore = getAlertList();
 
 
@@ -15,7 +16,10 @@ let secondNGRate = ref(0);
 let thirdNGRate = ref(0);
 
 let dataToShow = []
-
+let firstelYieldRate;
+let firstDefectAmount = 0
+let secondDefectAmount = 0
+let thirdDefectAmount = 0
 
 function dailyTask() {
   // Your task logic goes here
@@ -73,6 +77,7 @@ startDailyTask();
 
 import axios from "axios";
 import {Column} from '@antv/g2plot';
+import {message} from "ant-design-vue";
 
 self.setInterval(() => {
   axiosCall();
@@ -157,15 +162,18 @@ function axiosCall() {
 
       if (shiftGroupedData.hasOwnProperty("Day")) {
         firstNGRate.value = ((1 - (groupedData["Day-A:正常"].count / shiftGroupedData["Day"].count)) * 100).toFixed(1) + '%';
+        firstDefectAmount = (shiftGroupedData["Day"].count - groupedData["Day-A:正常"].count);
       }
       if (shiftGroupedData.hasOwnProperty("Night")) {
         secondNGRate.value = ((1 - (groupedData["Night-A:正常"].count / shiftGroupedData["Night"].count)) * 100).toFixed(1) + '%';
+        secondDefectAmount = (shiftGroupedData["Night"].count - groupedData["Night-A:正常"].count);
       } else {
         //第二天归0
         secondNGRate.value = 0
       }
       if (shiftGroupedData.hasOwnProperty("NN")) {
         thirdNGRate.value = ((1 - (groupedData["NN-A:正常"].count / shiftGroupedData["NN"].count)) * 100).toFixed(1) + '%';
+        thirdDefectAmount = (shiftGroupedData["NN"].count - groupedData["NN-A:正常"].count);
       } else {
         thirdNGRate.value = 0
       }
@@ -206,6 +214,108 @@ function axiosCall() {
   })
 };
 
+function parseDate(today) {
+  const parts = today.split('/');
+  const year = parts[0];
+  const month = parts[1].padStart(2, '0'); // Ensure two-digit month
+  const day = parts[2].padStart(2, '0'); // Ensure two-digit day
+  const formattedDate = year + month + day;
+  return formattedDate;
+}
+
+function setDailyTimers(callback1, callback2, callback3) {
+  // Calculate the target times for 6:44 AM, 3:14 PM, and 11:29 PM
+  const targetTimes = [
+    {hours: 15, minutes: 14},
+    {hours: 23, minutes: 29},
+    {hours: 6, minutes: 44},
+  ];
+
+  // Function to calculate the time until the next target time
+  function timeUntilNextTarget(target) {
+    const now = new Date();
+    const targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), target.hours, target.minutes);
+    if (now > targetDate) {
+      targetDate.setDate(targetDate.getDate() + 1); // Move to tomorrow
+    }
+    return targetDate - now;
+  }
+
+  // Function to execute the callback and reschedule the timer
+  function scheduleCallback(callback, target) {
+    callback();
+    const delay = timeUntilNextTarget(target);
+    setTimeout(() => scheduleCallback(callback, target), delay);
+  }
+
+  // Schedule the timers for each target time
+  targetTimes.forEach((target, index) => {
+    const callback = [callback1, callback2, callback3][index];
+    const delay = timeUntilNextTarget(target);
+    setTimeout(() => scheduleCallback(callback, target), delay);
+  });
+}
+
+// Define the callback functions to be executed at 6:44 AM, 3:14 PM, and 11:29 PM
+function timerCallback1() {
+  console.log("Timer 1 triggered at 3:14 AM");
+  axios({
+    url: "/apiStringer/shiftRecord/saveAndUpdate",
+    method: "POST",
+    data: {
+      shiftId: Number(parseDate(currentDay + "21")),
+      firstel2Defect: firstDefectAmount,
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if (response.data.code === '1') {
+    } else {
+    }
+  })
+}
+
+function timerCallback2() {
+  console.log("Timer 2 triggered at 11:29 PM");
+  axios({
+    url: "/apiStringer/shiftRecord/saveAndUpdate",
+    method: "POST",
+    data: {
+      shiftId: Number(parseDate(currentDay + "22")),
+      firstel2Defect: secondDefectAmount,
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if (response.data.code === '1') {
+    } else {
+    }
+  })
+}
+
+function timerCallback3() {
+  console.log("Timer 3 triggered at 6:44 AM");
+  axios({
+    url: "/apiStringer/shiftRecord/saveAndUpdate",
+    method: "POST",
+    data: {
+      shiftId: Number(parseDate(currentDay + "23")),
+      firstel2Defect: thirdDefectAmount,
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if (response.data.code === '1') {
+    } else {
+    }
+  })
+}
+
+// Call setDailyTimers with the callback functions
+setDailyTimers(timerCallback1, timerCallback2, timerCallback3);
 
 const data = {
   id: "Stringer21", //String21, , Stringer22, Stringer23,

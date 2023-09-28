@@ -8,6 +8,7 @@ let stringerNGRateColumn;
 let NGList = ref([]);
 let listFromBack;
 
+
 function axiosCall() {
   axios({
     url: "/apiStringer/stringer/getString",

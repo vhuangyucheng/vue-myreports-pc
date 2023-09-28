@@ -114,7 +114,7 @@ const itemClick = ({item, key, keyPath}) => {
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        KPI dashboard 2.0.0 powered by IT department, email: helpdesk@solarjuiceamerica.com
+        KPI dashboard 3.0.0 powered by IT department, published on 09/22, email: helpdesk@solarjuiceamerica.com
       </a-layout-footer>
     </a-layout>
   </a-layout>

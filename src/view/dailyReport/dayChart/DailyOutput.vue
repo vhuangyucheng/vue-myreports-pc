@@ -67,11 +67,20 @@ let data1 = [
   // },
 ]
 
+let divider
+if ("line2" === props.chartName) {
+  divider = 12;
+
+}
+if ("line1" === props.chartName) {
+  divider = 6;
+}
+
 
 watch(() => props.dataFromPa, (newVal, oldVal) => {
-  // console.log('2监听引用类型数据dataList')
-  // console.log('new', newVal)
-  // console.log('old', oldVal)
+  console.log('2监听引用类型数据dataList')
+  console.log('new', newVal)
+  console.log('old', oldVal)
   data1 = [];
   let shiftValue = "";
   let col_name = "";
@@ -89,13 +98,13 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
     }
     let layup = {
       shift: shiftValue,
-      amount: Number(item.glassOutput),
+      amount:Math.ceil((item.stringer3Output + item.stringer1Output + item.stringer2Output)/divider),
       type: "productivity",
       col_name: "layup",
     }
     let FirstEL = {
       shift: shiftValue,
-      amount: Number(item.firstel1Output),
+      amount: item.laminator1Output,
       type: "productivity",
       col_name: "FirstEL",
     }
@@ -111,9 +120,16 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
       type: "productivity",
       col_name: "Sorting",
     }
-    data1.push(layup, FirstEL, Framing, Sorting)
+    let packing = {
+      shift: shiftValue,
+      // amount: Number(item.packing),
+      amount: 700,
+      type: "productivity",
+      col_name: "packing",
+    }
+    data1.push(layup, FirstEL, Framing, Sorting,packing)
   })
-  // console.log(data1)
+  console.log(data1)
   // console.log(dataWithData2(data1))
   column.changeData(dataWithData2(data1))
 })
@@ -194,7 +210,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <a-typography-text code>今日产量 Today Output</a-typography-text>
+  <a-typography-text code>产量(焊机,层压,装框,排版,送到仓库) Daily Output(Stringer,Lamination,Framing,Sorting,ToWarehouse</a-typography-text>
   <div :id="'line1DailyThursday'+ props.chartName " :style="{height:'200px'}"/>
 </template>
 

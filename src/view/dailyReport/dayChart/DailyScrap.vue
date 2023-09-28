@@ -47,49 +47,40 @@ const data = [
 ];
 
 let data1;
+let dayAmount = ref(0);
+let nightAmount = ref(0);
+let nnAmount = ref(0);
 
 watch(() => props.dataFromPa, (newVal, oldVal) => {
-  console.log('2监听引用类型数据dataList')
-  console.log('new', newVal)
-  console.log('old', oldVal)
+  // console.log('2监听引用类型数据dataList')
+  // console.log('new', newVal)
+  // console.log('old', oldVal)
   data1 = [];
   let shiftValue = "";
   newVal.forEach(item => {
     switch (item.shiftId % 10) {
       case 1:
         shiftValue = "Day"
+        dayAmount.value = (item.incomingScrap) + (item.stringerScrap) +(item.repairScrap)+ (item.incidentScrap)
         break;
       case 2:
         shiftValue = "Night"
+        nightAmount.value = (item.incomingScrap) + (item.stringerScrap) +(item.repairScrap)+ (item.incidentScrap)
         break;
       case 3:
         shiftValue = "NN"
+        nnAmount.value = (item.incomingScrap) + (item.stringerScrap) +(item.repairScrap)+ (item.incidentScrap)
         break;
     }
     let incomingScrap = {
       shift: shiftValue,
-      amount: Number(item.incomingScrap),
-      name: "incomingScrap"
-    }
-    let stringerScrap = {
-      shift: shiftValue,
-      amount: Number(item.stringerScrap),
-      name: 'stringerScrap'
-    }
-    let repairScrap = {
-      shift: shiftValue,
-      amount: Number(item.repairScrap),
-      name: 'repairScrap'
-    }
-    let incidentScrap = {
-      shift: shiftValue,
-      amount: Number(item.incidentScrap),
-      name: 'incidentScrap'
+      amount: (item.incomingScrap) + (item.stringerScrap) +(item.repairScrap)+ (item.incidentScrap),
+      name: "报废数量ScrapAmount"
     }
 
-    data1.push(incomingScrap, stringerScrap, repairScrap, incidentScrap)
+    data1.push(incomingScrap)
   })
-  console.log(data1)
+  // console.log(data1)
   stackedColumnPlot.changeData(data1)
 })
 
@@ -131,7 +122,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <a-typography-text code>Cells Scrap 报废 : Day = 140 ,  Night = 217</a-typography-text>
+    <a-typography-text code>电池片报废Cells Scrap : Day = {{ dayAmount }} ,  Night = {{ nightAmount }} , NN = {{nnAmount}}</a-typography-text>
     <div :id="'line1DailyThursdayScrap'+props.chartName " :style="{height:'180px'}" />
   </div>
 </template>
