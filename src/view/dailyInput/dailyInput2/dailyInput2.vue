@@ -885,7 +885,7 @@ const ShiftOnChange = (value) => {
             </a-form-item>
 
             <a-form-item
-                label="隐裂Crack(strings)"
+                label="隐裂MicroCrack(strings)"
                 name="stringer1Crack"
                 :rules="[{ required: true, message: '不能为空cannot empty' }]"
             >
@@ -941,7 +941,7 @@ const ShiftOnChange = (value) => {
             </a-form-item>
 
             <a-form-item
-                label="隐裂Crack(strings)"
+                label="隐裂MicroCrack(strings)"
                 name="stringer2Crack"
                 :rules="[{ required: true, message: '不能为空cannot empty' }]"
             >
@@ -998,7 +998,7 @@ const ShiftOnChange = (value) => {
             </a-form-item>
 
             <a-form-item
-                label="隐裂Crack(strings)"
+                label="隐裂MicroCrack(strings)"
                 name="stringer3Crack"
                 :rules="[{ required: true, message: '不能为空cannot empty' }]"
             >

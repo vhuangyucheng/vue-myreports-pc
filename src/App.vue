@@ -33,6 +33,22 @@ const itemClick = ({item, key, keyPath}) => {
           <span class="nav-text">announcement</span>
         </a-menu-item>
 
+        <a-menu-item key="/Calendar">
+          <appstore-outlined/>
+          <span class="nav-text">Calendar</span>
+        </a-menu-item>
+
+        <a-sub-menu key="sub05">
+          <template #icon>
+            <MailOutlined/>
+          </template>
+          <template #title>Tool</template>
+          <a-menu-item key="/ELCounter">
+            <user-outlined/>
+            <span class="nav-text">ELCounter</span>
+          </a-menu-item>
+        </a-sub-menu>
+
         <a-sub-menu key="sub01">
           <template #icon>
             <MailOutlined/>
@@ -60,10 +76,7 @@ const itemClick = ({item, key, keyPath}) => {
             <MailOutlined/>
           </template>
           <template #title>DailyInput</template>
-          <a-menu-item key="/DailyInput">
-            <user-outlined/>
-            <span class="nav-text">DailyInput</span>
-          </a-menu-item>
+
           <a-menu-item key="/DailyInput2">
             <user-outlined/>
             <span class="nav-text">DailyInput2.0.0</span>
@@ -114,7 +127,7 @@ const itemClick = ({item, key, keyPath}) => {
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        KPI dashboard 3.0.0 powered by IT department, published on 09/22, email: helpdesk@solarjuiceamerica.com
+        KPI dashboard 3.0.3 powered by IT department, published on 09/22, email: helpdesk@solarjuiceamerica.com
       </a-layout-footer>
     </a-layout>
   </a-layout>

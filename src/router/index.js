@@ -9,6 +9,10 @@ import DailyInput2 from "../view/dailyInput/dailyInput2/dailyInput2.vue";
 import DefectInput from "../view/dailyInput/DefectInput/DefectInput.vue";
 import IPQCReview from "../view/dailyInput/IPQCReview/IPQCReview.vue";
 import DailyReportDataTable from "../view/daliyReportDataTable/DailyReportDataTable.vue";
+import DataCatch from "../view/dataCatch/DataCatch.vue";
+import Calendar from "../view/calendar/Calendar.vue";
+import ELCounter from "../view/tool/ELCounter/ELCounter.vue";
+
 
 const myRouter = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -63,8 +67,21 @@ const myRouter = createRouter({
       name: 'DailyReportDataTable',
       component: DailyReportDataTable
     },
-
-
+    {
+      path: '/DataCatch',
+      name: 'DataCatch',
+      component: DataCatch
+    },
+    {
+      path: '/calendar',
+      name: 'calendar',
+      component: Calendar,
+    },
+    {
+      path: '/ELCounter',
+      name: 'ELCounter',
+      component: ELCounter,
+    },
   ]
 })
 

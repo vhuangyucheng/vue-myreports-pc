@@ -189,7 +189,128 @@ function axiosCall() {
 }
 
 
+//render
+// console.log(data)
+function setDailyTimers(callback1, callback2, callback3) {
+  // Calculate the target times for 6:44 AM, 3:14 PM, and 11:29 PM
+  const targetTimes = [
+    {hours: 15, minutes: 14},
+    {hours: 23, minutes: 29},
+    {hours: 6, minutes: 44},
+    // {hours: 16, minutes: 51},
+    // {hours: 16, minutes: 52},
+    // {hours: 16, minutes: 53},
+  ];
 
+  // Function to calculate the time until the next target time
+  function timeUntilNextTarget(target) {
+    const now = new Date();
+    const targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), target.hours, target.minutes);
+    if (now > targetDate) {
+      targetDate.setDate(targetDate.getDate() + 1); // Move to tomorrow
+    }
+    return targetDate - now;
+  }
+
+  // Function to execute the callback and reschedule the timer
+  function scheduleCallback(callback, target) {
+    callback();
+    const delay = timeUntilNextTarget(target);
+    setTimeout(() => scheduleCallback(callback, target), delay);
+  }
+
+  // Schedule the timers for each target time
+  targetTimes.forEach((target, index) => {
+    const callback = [callback1, callback2, callback3][index];
+    const delay = timeUntilNextTarget(target);
+    setTimeout(() => scheduleCallback(callback, target), delay);
+  });
+}
+
+function parseDate(today) {
+  const parts = today.split('/');
+  const year = parts[0];
+  const month = parts[1].padStart(2, '0'); // Ensure two-digit month
+  const day = parts[2].padStart(2, '0'); // Ensure two-digit day
+  const formattedDate = year + month + day;
+  return formattedDate;
+}
+
+// Define the callback functions to be executed at 6:44 AM, 3:14 PM, and 11:29 PM
+function timerCallback1() {
+
+  axios({
+    url: "/apiStringer/shiftRecord/saveAndUpdate",
+    method: "POST",
+    data: {
+      shiftId: Number(parseDate(currentDay )+ "21"),
+      firstel2Output: dayFirstel,
+      secondelOutput: daySorting,
+      framingOutput: dayFraming,
+      laminator1Output: dayLamination,
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if (response.data.code === '1') {
+      console.log("output Timer 1 triggered at 3:14 PM yes");
+    } else {
+      console.log("output Timer 1 triggered at 3:14 PM fail");
+    }
+  })
+}
+
+function timerCallback2() {
+
+  axios({
+    url: "/apiStringer/shiftRecord/saveAndUpdate",
+    method: "POST",
+    data: {
+      shiftId: Number(parseDate(currentDay) + "22"),
+      firstel2Output: nightFirstel,
+      framingOutput: nightFraming,
+      laminator1Output: nightLamination,
+      secondelOutput:nightSorting,
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if (response.data.code === '1') {
+      console.log("output Timer 2 triggered at 23:29 PM yes");
+    } else {
+      console.log("output Timer 2 triggered at 23:29 PM failed");
+    }
+  })
+}
+
+function timerCallback3() {
+
+  axios({
+    url: "/apiStringer/shiftRecord/saveAndUpdate",
+    method: "POST",
+    data: {
+      shiftId: Number(parseDate(currentDay )+ "23"),
+      firstel2Output: nnFirstel,
+      framingOutput: nnFraming,
+      laminator1Output: nnLamination,
+      secondelOutput:nnSorting,
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if (response.data.code === '1') {
+      console.log("output Timer 3 triggered at 6:44 AM yes");
+    } else {
+      console.log("output Timer 3 triggered at 6:44 AM failed");
+    }
+  })
+}
+
+// Call setDailyTimers with the callback functions
+setDailyTimers(timerCallback1, timerCallback2, timerCallback3);
 
 onMounted(() => {
   column = new Column('container12', {

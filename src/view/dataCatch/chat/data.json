@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "reason": "Miss-welding",
+      "shift": "First",
+      "amount": 15
+    },
+    {
+      "reason": "Crack",
+      "shift": "First",
+      "amount": 33
+    },
+    {
+      "reason": "others",
+      "shift": "First",
+      "amount": 33
+    },
+    {
+      "reason": "Miss-welding",
+      "shift": "Second",
+      "amount": 6
+    },
+    {
+      "reason": "Crack",
+      "shift": "Second",
+      "amount": 6
+    },
+    {
+      "reason": "Excessive corrosion",
+      "shift": "Second",
+      "amount": 1
+    },
+    {
+      "reason": "Miss-welding",
+      "shift": "Third",
+      "amount": 47
+    },
+
+
+    {
+      "reason": "Crack",
+      "shift": "Third",
+      "amount": 48
+    },
+    {
+      "reason": "Short",
+      "shift": "Third",
+      "amount": 2
+    }
+
+  ]
+}

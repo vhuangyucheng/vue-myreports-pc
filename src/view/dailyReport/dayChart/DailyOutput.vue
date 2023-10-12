@@ -122,8 +122,8 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
     }
     let packing = {
       shift: shiftValue,
-      // amount: Number(item.packing),
-      amount: 700,
+      amount: Number(item.packing),
+      // amount: 700,
       type: "productivity",
       col_name: "packing",
     }

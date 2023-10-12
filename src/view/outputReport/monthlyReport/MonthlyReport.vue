@@ -1,11 +1,26 @@
-<script setup>
-
-</script>
-
 <template>
-  <div> monthly</div>
+  <div>
+    <p>Value of a1: {{ a1 }}</p>
+    <button @click="handleButtonClick(a1)">Change a1</button>
+  </div>
 </template>
 
-<style scoped>
+<script>
+import { ref } from 'vue';
 
-</style>
+export default {
+  setup() {
+    const a1 = ref(0);
+
+    const handleButtonClick = (a1Ref) => {
+      // Change the value of a1 using the .value property of the passed ref
+      a1Ref.value = a1Ref.value + 1;
+    };
+
+    return {
+      a1,
+      handleButtonClick
+    };
+  }
+}
+</script>
