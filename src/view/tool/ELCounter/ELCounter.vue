@@ -75,8 +75,8 @@ const minusOne = (variableName)=>{
 
 </script>
 
-<template>
-
+<template >
+<div id="back">
   <table class="tg">
     <thead>
     <tr>
@@ -99,98 +99,98 @@ const minusOne = (variableName)=>{
     <tbody>
     <tr>
       <td class="tg-6o9b">A</td>
-      <td class="tg-rnpj"><a-button @click="minusOne('a1')" type="primary">-</a-button>&nbsp; {{ variables['a1'] }} &nbsp;<a-button type="primary" @click="plusOne('a1')"  >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('a2')" type="primary">-</a-button>&nbsp; {{ variables['a2']}} &nbsp;<a-button type="primary"  @click="plusOne('a2')"  >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('a3')" type="primary">-</a-button>&nbsp; {{ variables['a3']}} &nbsp;<a-button type="primary"  @click="plusOne('a3')"  >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('a4')" type="primary">-</a-button>&nbsp; {{ variables['a4']}} &nbsp;<a-button type="primary"  @click="plusOne('a4')"  >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('a5')" type="primary">-</a-button>&nbsp; {{ variables['a5']}} &nbsp;<a-button type="primary"  @click="plusOne('a5')"  >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('a6')" type="primary">-</a-button>&nbsp; {{ variables['a6']}} &nbsp;<a-button type="primary"  @click="plusOne('a6')"  >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('a7')" type="primary">-</a-button>&nbsp; {{ variables['a7']}} &nbsp;<a-button type="primary"  @click="plusOne('a7')"  >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('a8')" type="primary">-</a-button>&nbsp; {{ variables['a8']}} &nbsp;<a-button type="primary"  @click="plusOne('a8')"  >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('a9')" type="primary">-</a-button>&nbsp; {{ variables['a9']}} &nbsp;<a-button type="primary"  @click="plusOne('a9')"  >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('a10')" type="primary">-</a-button>&nbsp;{{ variables['a10'] }}&nbsp;<a-button type="primary" @click="plusOne('a10')">+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('a11')" type="primary">-</a-button>&nbsp;{{ variables['a11'] }}&nbsp;<a-button type="primary" @click="plusOne('a11')">+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('a12')" type="primary">-</a-button>&nbsp;{{ variables['a12'] }}&nbsp;<a-button type="primary" @click="plusOne('a12')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('a1')" type="primary">-</a-button>&nbsp; {{ variables['a1'] }} &nbsp;<a-button class="custom-button" type="primary" @click="plusOne('a1')"  >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('a2')" type="primary">-</a-button>&nbsp; {{ variables['a2']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('a2')"  >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('a3')" type="primary">-</a-button>&nbsp; {{ variables['a3']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('a3')"  >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('a4')" type="primary">-</a-button>&nbsp; {{ variables['a4']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('a4')"  >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('a5')" type="primary">-</a-button>&nbsp; {{ variables['a5']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('a5')"  >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('a6')" type="primary">-</a-button>&nbsp; {{ variables['a6']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('a6')"  >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('a7')" type="primary">-</a-button>&nbsp; {{ variables['a7']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('a7')"  >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('a8')" type="primary">-</a-button>&nbsp; {{ variables['a8']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('a8')"  >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('a9')" type="primary">-</a-button>&nbsp; {{ variables['a9']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('a9')"  >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('a10')" type="primary">-</a-button>&nbsp;{{ variables['a10'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('a10')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('a11')" type="primary">-</a-button>&nbsp;{{ variables['a11'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('a11')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('a12')" type="primary">-</a-button>&nbsp;{{ variables['a12'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('a12')">+</a-button></td>
       <td class="tg-cly1"></td>
     </tr>
     <tr>
       <td class="tg-6o9b">B</td>
-      <td class="tg-rnpj"><a-button @click="minusOne('b1')"  type="primary" >-</a-button>&nbsp;{{ variables['b1']}} &nbsp;<a-button type="primary" @click="plusOne('b1')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('b2')"  type="primary" >-</a-button>&nbsp;{{ variables['b2']}} &nbsp;<a-button type="primary" @click="plusOne('b2')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('b3')"  type="primary" >-</a-button>&nbsp;{{ variables['b3']}} &nbsp;<a-button type="primary" @click="plusOne('b3')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('b4')"  type="primary" >-</a-button>&nbsp;{{ variables['b4']}} &nbsp;<a-button type="primary" @click="plusOne('b4')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('b5')"  type="primary" >-</a-button>&nbsp;{{ variables['b5']}} &nbsp;<a-button type="primary" @click="plusOne('b5')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('b6')"  type="primary" >-</a-button>&nbsp;{{ variables['b6']}} &nbsp;<a-button type="primary" @click="plusOne('b6')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('b7')"  type="primary" >-</a-button>&nbsp;{{ variables['b7']}} &nbsp;<a-button type="primary" @click="plusOne('b7')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('b8')"  type="primary" >-</a-button>&nbsp;{{ variables['b8']}} &nbsp;<a-button type="primary" @click="plusOne('b8')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('b9')"  type="primary" >-</a-button>&nbsp;{{ variables['b9']}} &nbsp;<a-button type="primary" @click="plusOne('b9')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('b10')" type="primary">-</a-button>&nbsp;{{ variables['b10'] }}&nbsp;<a-button type="primary" @click="plusOne('b10')">+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('b11')" type="primary">-</a-button>&nbsp;{{ variables['b11'] }}&nbsp;<a-button type="primary" @click="plusOne('b11')">+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('b12')" type="primary">-</a-button>&nbsp;{{ variables['b12'] }}&nbsp;<a-button type="primary" @click="plusOne('b12')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('b1')"  type="primary" >-</a-button>&nbsp;{{ variables['b1']}} &nbsp;<a-button class="custom-button" type="primary" @click="plusOne('b1')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('b2')"  type="primary" >-</a-button>&nbsp;{{ variables['b2']}} &nbsp;<a-button class="custom-button" type="primary" @click="plusOne('b2')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('b3')"  type="primary" >-</a-button>&nbsp;{{ variables['b3']}} &nbsp;<a-button class="custom-button" type="primary" @click="plusOne('b3')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('b4')"  type="primary" >-</a-button>&nbsp;{{ variables['b4']}} &nbsp;<a-button class="custom-button" type="primary" @click="plusOne('b4')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('b5')"  type="primary" >-</a-button>&nbsp;{{ variables['b5']}} &nbsp;<a-button class="custom-button" type="primary" @click="plusOne('b5')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('b6')"  type="primary" >-</a-button>&nbsp;{{ variables['b6']}} &nbsp;<a-button class="custom-button" type="primary" @click="plusOne('b6')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('b7')"  type="primary" >-</a-button>&nbsp;{{ variables['b7']}} &nbsp;<a-button class="custom-button" type="primary" @click="plusOne('b7')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('b8')"  type="primary" >-</a-button>&nbsp;{{ variables['b8']}} &nbsp;<a-button class="custom-button" type="primary" @click="plusOne('b8')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('b9')"  type="primary" >-</a-button>&nbsp;{{ variables['b9']}} &nbsp;<a-button class="custom-button" type="primary" @click="plusOne('b9')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('b10')" type="primary">-</a-button>&nbsp;{{ variables['b10'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('b10')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('b11')" type="primary">-</a-button>&nbsp;{{ variables['b11'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('b11')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('b12')" type="primary">-</a-button>&nbsp;{{ variables['b12'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('b12')">+</a-button></td>
       <td class="tg-cly1"></td>
     </tr>
     <tr>
       <td class="tg-6o9b">C</td>
-      <td class="tg-rnpj"><a-button @click="minusOne('c1')"  type="primary">-</a-button>&nbsp;{{ variables['c1']}} &nbsp;<a-button type="primary"  @click="plusOne('c1')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('c2')"  type="primary">-</a-button>&nbsp;{{ variables['c2']}} &nbsp;<a-button type="primary"  @click="plusOne('c2')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('c3')"  type="primary">-</a-button>&nbsp;{{ variables['c3']}} &nbsp;<a-button type="primary"  @click="plusOne('c3')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('c4')"  type="primary">-</a-button>&nbsp;{{ variables['c4']}} &nbsp;<a-button type="primary"  @click="plusOne('c4')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('c5')"  type="primary">-</a-button>&nbsp;{{ variables['c5']}} &nbsp;<a-button type="primary"  @click="plusOne('c5')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('c6')"  type="primary">-</a-button>&nbsp;{{ variables['c6']}} &nbsp;<a-button type="primary"  @click="plusOne('c6')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('c7')"  type="primary">-</a-button>&nbsp;{{ variables['c7']}} &nbsp;<a-button type="primary"  @click="plusOne('c7')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('c8')"  type="primary">-</a-button>&nbsp;{{ variables['c8']}} &nbsp;<a-button type="primary"  @click="plusOne('c8')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('c9')"  type="primary">-</a-button>&nbsp;{{ variables['c9']}} &nbsp;<a-button type="primary"  @click="plusOne('c9')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('c10')" type="primary">-</a-button>&nbsp;{{ variables['c10'] }}&nbsp;<a-button type="primary" @click="plusOne('c10')">+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('c11')" type="primary">-</a-button>&nbsp;{{ variables['c11'] }}&nbsp;<a-button type="primary" @click="plusOne('c11')">+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('c12')" type="primary">-</a-button>&nbsp;{{ variables['c12'] }}&nbsp;<a-button type="primary" @click="plusOne('c12')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('c1')"  type="primary">-</a-button>&nbsp;{{ variables['c1']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('c1')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('c2')"  type="primary">-</a-button>&nbsp;{{ variables['c2']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('c2')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('c3')"  type="primary">-</a-button>&nbsp;{{ variables['c3']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('c3')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('c4')"  type="primary">-</a-button>&nbsp;{{ variables['c4']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('c4')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('c5')"  type="primary">-</a-button>&nbsp;{{ variables['c5']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('c5')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('c6')"  type="primary">-</a-button>&nbsp;{{ variables['c6']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('c6')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('c7')"  type="primary">-</a-button>&nbsp;{{ variables['c7']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('c7')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('c8')"  type="primary">-</a-button>&nbsp;{{ variables['c8']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('c8')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('c9')"  type="primary">-</a-button>&nbsp;{{ variables['c9']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('c9')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('c10')" type="primary">-</a-button>&nbsp;{{ variables['c10'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('c10')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('c11')" type="primary">-</a-button>&nbsp;{{ variables['c11'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('c11')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('c12')" type="primary">-</a-button>&nbsp;{{ variables['c12'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('c12')">+</a-button></td>
       <td class="tg-cly1"></td>
     </tr>
     <tr>
       <td class="tg-6o9b">D</td>
-      <td class="tg-rnpj"><a-button @click="minusOne('d1')"  type="primary">-</a-button>&nbsp;{{ variables['d1']}} &nbsp;<a-button type="primary"  @click="plusOne('d1')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('d2')"  type="primary">-</a-button>&nbsp;{{ variables['d2']}} &nbsp;<a-button type="primary"  @click="plusOne('d2')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('d3')"  type="primary">-</a-button>&nbsp;{{ variables['d3']}} &nbsp;<a-button type="primary"  @click="plusOne('d3')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('d4')"  type="primary">-</a-button>&nbsp;{{ variables['d4']}} &nbsp;<a-button type="primary"  @click="plusOne('d4')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('d5')"  type="primary">-</a-button>&nbsp;{{ variables['d5']}} &nbsp;<a-button type="primary"  @click="plusOne('d5')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('d6')"  type="primary">-</a-button>&nbsp;{{ variables['d6']}} &nbsp;<a-button type="primary"  @click="plusOne('d6')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('d7')"  type="primary">-</a-button>&nbsp;{{ variables['d7']}} &nbsp;<a-button type="primary"  @click="plusOne('d7')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('d8')"  type="primary">-</a-button>&nbsp;{{ variables['d8']}} &nbsp;<a-button type="primary"  @click="plusOne('d8')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('d9')"  type="primary">-</a-button>&nbsp;{{ variables['d9']}} &nbsp;<a-button type="primary"  @click="plusOne('d9')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('d10')" type="primary">-</a-button>&nbsp;{{ variables['d10'] }}&nbsp;<a-button type="primary" @click="plusOne('d10')">+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('d11')" type="primary">-</a-button>&nbsp;{{ variables['d11'] }}&nbsp;<a-button type="primary" @click="plusOne('d11')">+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('d12')" type="primary">-</a-button>&nbsp;{{ variables['d12'] }}&nbsp;<a-button type="primary" @click="plusOne('d12')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('d1')"  type="primary">-</a-button>&nbsp;{{ variables['d1']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('d1')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('d2')"  type="primary">-</a-button>&nbsp;{{ variables['d2']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('d2')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('d3')"  type="primary">-</a-button>&nbsp;{{ variables['d3']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('d3')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('d4')"  type="primary">-</a-button>&nbsp;{{ variables['d4']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('d4')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('d5')"  type="primary">-</a-button>&nbsp;{{ variables['d5']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('d5')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('d6')"  type="primary">-</a-button>&nbsp;{{ variables['d6']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('d6')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('d7')"  type="primary">-</a-button>&nbsp;{{ variables['d7']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('d7')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('d8')"  type="primary">-</a-button>&nbsp;{{ variables['d8']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('d8')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('d9')"  type="primary">-</a-button>&nbsp;{{ variables['d9']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('d9')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('d10')" type="primary">-</a-button>&nbsp;{{ variables['d10'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('d10')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('d11')" type="primary">-</a-button>&nbsp;{{ variables['d11'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('d11')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('d12')" type="primary">-</a-button>&nbsp;{{ variables['d12'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('d12')">+</a-button></td>
       <td class="tg-cly1"></td>
     </tr>
     <tr>
       <td class="tg-6o9b">E</td>
-      <td class="tg-rnpj"><a-button @click="minusOne('e1')"  type="primary">-</a-button>&nbsp;{{ variables['e1']}} &nbsp;<a-button type="primary"  @click="plusOne('e1')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('e2')"  type="primary">-</a-button>&nbsp;{{ variables['e2']}} &nbsp;<a-button type="primary"  @click="plusOne('e2')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('e3')"  type="primary">-</a-button>&nbsp;{{ variables['e3']}} &nbsp;<a-button type="primary"  @click="plusOne('e3')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('e4')"  type="primary">-</a-button>&nbsp;{{ variables['e4']}} &nbsp;<a-button type="primary"  @click="plusOne('e4')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('e5')"  type="primary">-</a-button>&nbsp;{{ variables['e5']}} &nbsp;<a-button type="primary"  @click="plusOne('e5')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('e6')"  type="primary">-</a-button>&nbsp;{{ variables['e6']}} &nbsp;<a-button type="primary"  @click="plusOne('e6')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('e7')"  type="primary">-</a-button>&nbsp;{{ variables['e7']}} &nbsp;<a-button type="primary"  @click="plusOne('e7')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('e8')"  type="primary">-</a-button>&nbsp;{{ variables['e8']}} &nbsp;<a-button type="primary"  @click="plusOne('e8')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('e9')"  type="primary">-</a-button>&nbsp;{{ variables['e9']}} &nbsp;<a-button type="primary"  @click="plusOne('e9')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('e10')" type="primary">-</a-button>&nbsp;{{ variables['e10'] }}&nbsp;<a-button type="primary" @click="plusOne('e10')">+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('e11')" type="primary">-</a-button>&nbsp;{{ variables['e11'] }}&nbsp;<a-button type="primary" @click="plusOne('e11')">+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('e12')" type="primary">-</a-button>&nbsp;{{ variables['e12'] }}&nbsp;<a-button type="primary" @click="plusOne('e12')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('e1')"  type="primary">-</a-button>&nbsp;{{ variables['e1']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('e1')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('e2')"  type="primary">-</a-button>&nbsp;{{ variables['e2']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('e2')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('e3')"  type="primary">-</a-button>&nbsp;{{ variables['e3']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('e3')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('e4')"  type="primary">-</a-button>&nbsp;{{ variables['e4']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('e4')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('e5')"  type="primary">-</a-button>&nbsp;{{ variables['e5']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('e5')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('e6')"  type="primary">-</a-button>&nbsp;{{ variables['e6']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('e6')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('e7')"  type="primary">-</a-button>&nbsp;{{ variables['e7']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('e7')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('e8')"  type="primary">-</a-button>&nbsp;{{ variables['e8']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('e8')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('e9')"  type="primary">-</a-button>&nbsp;{{ variables['e9']}} &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('e9')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('e10')" type="primary">-</a-button>&nbsp;{{ variables['e10'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('e10')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('e11')" type="primary">-</a-button>&nbsp;{{ variables['e11'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('e11')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('e12')" type="primary">-</a-button>&nbsp;{{ variables['e12'] }}&nbsp;<a-button class="custom-button" type="primary" @click="plusOne('e12')">+</a-button></td>
       <td class="tg-cly1"></td>
     </tr>
     <tr>
       <td class="tg-6o9b">F</td>
-      <td class="tg-rnpj"><a-button @click="minusOne('f1')"  type="primary">-</a-button>&nbsp;{{ variables['f1']}}  &nbsp;<a-button type="primary"  @click="plusOne('f1')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('f2')"  type="primary">-</a-button>&nbsp;{{ variables['f2']}}  &nbsp;<a-button type="primary"  @click="plusOne('f2')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('f3')"  type="primary">-</a-button>&nbsp;{{ variables['f3']}}  &nbsp;<a-button type="primary"  @click="plusOne('f3')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('f4')"  type="primary">-</a-button>&nbsp;{{ variables['f4']}}  &nbsp;<a-button type="primary"  @click="plusOne('f4')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('f5')"  type="primary">-</a-button>&nbsp;{{ variables['f5']}}  &nbsp;<a-button type="primary"  @click="plusOne('f5')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('f6')"  type="primary">-</a-button>&nbsp;{{ variables['f6']}}  &nbsp;<a-button type="primary"  @click="plusOne('f6')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('f7')"  type="primary">-</a-button>&nbsp;{{ variables['f7']}}  &nbsp;<a-button type="primary"  @click="plusOne('f7')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('f8')"  type="primary">-</a-button>&nbsp;{{ variables['f8']}}  &nbsp;<a-button type="primary"  @click="plusOne('f8')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('f9')"  type="primary">-</a-button>&nbsp;{{ variables['f9']}}  &nbsp;<a-button type="primary"  @click="plusOne('f9')" >+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('f10')" type="primary">-</a-button>&nbsp;{{ variables['f10'] }} &nbsp;<a-button type="primary" @click="plusOne('f10')">+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('f11')" type="primary">-</a-button>&nbsp;{{ variables['f11'] }} &nbsp;<a-button type="primary" @click="plusOne('f11')">+</a-button></td>
-      <td class="tg-rnpj"><a-button @click="minusOne('f12')" type="primary">-</a-button>&nbsp;{{ variables['f12'] }} &nbsp;<a-button type="primary" @click="plusOne('f12')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('f1')"  type="primary">-</a-button>&nbsp;{{ variables['f1']}}  &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('f1')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('f2')"  type="primary">-</a-button>&nbsp;{{ variables['f2']}}  &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('f2')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('f3')"  type="primary">-</a-button>&nbsp;{{ variables['f3']}}  &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('f3')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('f4')"  type="primary">-</a-button>&nbsp;{{ variables['f4']}}  &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('f4')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('f5')"  type="primary">-</a-button>&nbsp;{{ variables['f5']}}  &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('f5')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('f6')"  type="primary">-</a-button>&nbsp;{{ variables['f6']}}  &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('f6')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('f7')"  type="primary">-</a-button>&nbsp;{{ variables['f7']}}  &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('f7')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('f8')"  type="primary">-</a-button>&nbsp;{{ variables['f8']}}  &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('f8')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('f9')"  type="primary">-</a-button>&nbsp;{{ variables['f9']}}  &nbsp;<a-button class="custom-button" type="primary"  @click="plusOne('f9')" >+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('f10')" type="primary">-</a-button>&nbsp;{{ variables['f10'] }} &nbsp;<a-button class="custom-button" type="primary" @click="plusOne('f10')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('f11')" type="primary">-</a-button>&nbsp;{{ variables['f11'] }} &nbsp;<a-button class="custom-button" type="primary" @click="plusOne('f11')">+</a-button></td>
+      <td class="tg-rnpj"><a-button class="custom-button" @click="minusOne('f12')" type="primary">-</a-button>&nbsp;{{ variables['f12'] }} &nbsp;<a-button class="custom-button" type="primary" @click="plusOne('f12')">+</a-button></td>
       <td class="tg-jd6m">合计</td>
     </tr>
     <tr>
@@ -227,6 +227,7 @@ const minusOne = (variableName)=>{
     </tr>
     </tbody>
   </table>
+</div>
 </template>
 
 <style scoped>
@@ -236,8 +237,17 @@ const minusOne = (variableName)=>{
 .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
   font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
 .tg .tg-cly1{text-align:left;vertical-align:middle}
-.tg .tg-rnpj{background-color:#F2BA02;text-align:center;vertical-align:middle}
+.tg .tg-rnpj{background-color: #b2be60;text-align:center;vertical-align:middle}
 .tg .tg-ejev{color:#F00;text-align:center;vertical-align:middle}
-.tg .tg-6o9b{background-color:#FF0;font-weight:bold;text-align:center;vertical-align:middle}
-.tg .tg-jd6m{background-color:#FF0;text-align:center;vertical-align:middle}
+.tg .tg-6o9b{background-color: #ed6484;font-weight:bold;text-align:center;vertical-align:middle}
+.tg .tg-jd6m{background-color: #ed6484;text-align:center;vertical-align:middle}
+
+.custom-button {
+  background-color: #b2be60; /* Change the background color on hover */
+}
+
+#back {
+  /*background-color: #b2be60; !* Change the background color to your desired color *!*/
+  /*color: #fff; !* Change the text color to white (optional) *!*/
+}
 </style>

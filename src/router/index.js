@@ -12,6 +12,7 @@ import DailyReportDataTable from "../view/daliyReportDataTable/DailyReportDataTa
 import DataCatch from "../view/dataCatch/DataCatch.vue";
 import Calendar from "../view/calendar/Calendar.vue";
 import ELCounter from "../view/tool/ELCounter/ELCounter.vue";
+import ELCounterV2 from "../view/tool/ELCounterV2/ELCounterV2.vue";
 
 
 const myRouter = createRouter({
@@ -81,6 +82,11 @@ const myRouter = createRouter({
       path: '/ELCounter',
       name: 'ELCounter',
       component: ELCounter,
+    },
+    {
+      path: '/ELCounterV2',
+      name: 'ELCounterV2',
+      component: ELCounterV2,
     },
   ]
 })

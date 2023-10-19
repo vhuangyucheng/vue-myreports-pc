@@ -53,8 +53,8 @@ const DateOnChange = (day) => {
     }, {});
     line2Value.value = groupByLine.line2 !== undefined ? groupByLine.line2 : [];
     line1Value.value = groupByLine.line1 !== undefined ? groupByLine.line1 : [];
-    console.log(line2Value.value)
-    console.log(line1Value.value)
+    // console.log(line2Value.value)
+    // console.log(line1Value.value)
   })
 }
 

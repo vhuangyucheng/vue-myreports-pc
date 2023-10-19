@@ -78,9 +78,9 @@ if ("line1" === props.chartName) {
 
 
 watch(() => props.dataFromPa, (newVal, oldVal) => {
-  console.log('2监听引用类型数据dataList')
-  console.log('new', newVal)
-  console.log('old', oldVal)
+  // console.log('2监听引用类型数据dataList')
+  // console.log('new', newVal)
+  // console.log('old', oldVal)
   data1 = [];
   let shiftValue = "";
   let col_name = "";
@@ -130,7 +130,7 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
     data1.push(layup, FirstEL, Framing, Sorting,packing)
   })
   console.log(data1)
-  // console.log(dataWithData2(data1))
+  console.log(dataWithData2(data1))
   column.changeData(dataWithData2(data1))
 })
 

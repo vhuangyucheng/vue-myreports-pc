@@ -47,6 +47,10 @@ const itemClick = ({item, key, keyPath}) => {
             <user-outlined/>
             <span class="nav-text">ELCounter</span>
           </a-menu-item>
+          <a-menu-item key="/ELCounterV2">
+            <user-outlined/>
+            <span class="nav-text">ELCounterV2</span>
+          </a-menu-item>
         </a-sub-menu>
 
         <a-sub-menu key="sub01">
@@ -127,7 +131,7 @@ const itemClick = ({item, key, keyPath}) => {
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        KPI dashboard 3.0.3 powered by IT department, published on 09/22, email: helpdesk@solarjuiceamerica.com
+        KPI dashboard 3.0.4 powered by IT department, published on 10/12, email: helpdesk@solarjuiceamerica.com
       </a-layout-footer>
     </a-layout>
   </a-layout>

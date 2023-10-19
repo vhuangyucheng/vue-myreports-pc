@@ -19,7 +19,7 @@ function axiosCall() {
     dataType: "json",
   }).then(function (response) {
     listFromBack = response.data
-    // console.log(listFromBack);
+    console.log(listFromBack);
 
     const groupedList = Object.values(listFromBack).flatMap(stringer =>
         Object.values(stringer).filter(obj => obj.hasOwnProperty("shiftName"))

@@ -70,7 +70,7 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
     }
 
     let stringerDefectAmount = Number((((item.stringer1Output + item.stringer2Output + item.stringer3Output) / (item.stringer1Output + item.stringer2Output + item.stringer3Output + item.stringer1Miswelding + item.stringer1Overwelding + item.stringer1Split + item.stringer1Crack + item.stringer1Others + item.stringer2Miswelding + item.stringer2Overwelding + item.stringer2Split + item.stringer2Crack + item.stringer2Others + item.stringer3Miswelding + item.stringer3Overwelding + item.stringer3Split + item.stringer3Crack + item.stringer3Others)) * 100).toFixed(2))
-    let firstelDefectAmount = Number((item.firstel2Defect / item.firstel2Output * 100).toFixed(2))
+    let firstelDefectAmount = Number(((1-(item.firstel2Defect / item.firstel2Output)) * 100).toFixed(2))
     let finishedgoodDefectAmount = Number((((item.secondelOutput - item.finishedgoodScrap - item.finishedgoodDegrade) / item.secondelOutput) * 100).toFixed(2))
 
     let firstelDefect = {
