@@ -21,6 +21,7 @@ import {values} from "@antv/util";
 // date.value = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
 
 import getDate from '../../store/getDate';
+import StringerStatistics from "./chat/StringerStatistics.vue";
 const getDateStore = getDate();
 console.log(getDateStore.getCurrentDay)
 </script>
@@ -41,7 +42,6 @@ console.log(getDateStore.getCurrentDay)
     </a-col>
     <a-col :span="12">
       <ELDefectChat01/>
-      <DefectChart01/>
     </a-col>
   </a-row>
 
@@ -53,8 +53,7 @@ console.log(getDateStore.getCurrentDay)
       </div>
     </a-col>
     <a-col :span="12">
-      <DefectChart02/>
-      <DefectChart03/>
+      <StringerStatistics/>
     </a-col>
   </a-row>
 
