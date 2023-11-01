@@ -100,10 +100,7 @@ const itemClick = ({item, key, keyPath}) => {
             <MailOutlined/>
           </template>
           <template #title>OutputReport</template>
-          <a-menu-item key="/DailyReportDataTable">
-            <user-outlined/>
-            <span class="nav-text">DailyReportDataTable</span>
-          </a-menu-item>
+
           <a-menu-item key="/DailyReport">
             <user-outlined/>
             <span class="nav-text">DailyReport</span>
@@ -131,7 +128,7 @@ const itemClick = ({item, key, keyPath}) => {
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        KPI dashboard 3.2.4, powered by IT department, Updated Stringers'Stat, published on 10/20, email: helpdesk@solarjuiceamerica.com
+        KPI dashboard 3.2.7, powered by IT department, Updated hot-reflesh, published on 10/31, email: helpdesk@solarjuiceamerica.com
       </a-layout-footer>
     </a-layout>
   </a-layout>
