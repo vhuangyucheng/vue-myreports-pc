@@ -120,14 +120,14 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
       type: "productivity",
       col_name: "Sorting",
     }
-    let packing = {
-      shift: shiftValue,
-      amount: Number(item.packing),
-      // amount: 700,
-      type: "productivity",
-      col_name: "packing",
-    }
-    data1.push(layup, FirstEL, Framing, Sorting,packing)
+    // let packing = {
+    //   shift: shiftValue,
+    //   amount: Number(item.packing),
+    //   // amount: 700,
+    //   type: "productivity",
+    //   col_name: "packing",
+    // }
+    data1.push(layup, FirstEL, Framing, Sorting)
   })
   console.log(data1)
   console.log(dataWithData2(data1))
@@ -139,8 +139,8 @@ let SECOND_AMOUNT = 0;
 let THIRD_AMOUNT = 0;
 
 if ("line2" === props.chartName) {
-  FIRST_AMOUNT = 600;
-  SECOND_AMOUNT = 600;
+  FIRST_AMOUNT = 800;
+  SECOND_AMOUNT = 800;
   THIRD_AMOUNT = 300;
 }
 if ("line1" === props.chartName) {
@@ -210,7 +210,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <a-typography-text code>产量(焊机,层压,装框,排版,送到仓库) Daily Output(Stringer,Lamination,Framing,Sorting,ToWarehouse</a-typography-text>
+  <a-typography-text code>产量(焊机,层压,装框,排版) Daily Output(Stringer,Lamination,Framing,Sorting)</a-typography-text>
   <div :id="'line1DailyThursday'+ props.chartName " :style="{height:'200px'}"/>
 </template>
 

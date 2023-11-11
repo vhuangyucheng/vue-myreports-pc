@@ -55,6 +55,9 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
   // console.log('2监听引用类型数据dataList')
   // console.log('new', newVal)
   // console.log('old', oldVal)
+  dayAmount.value = 0;
+  nightAmount.value = 0;
+  nnAmount.value = 0;
   data1 = [];
   let shiftValue = "";
   newVal.forEach(item => {
@@ -72,13 +75,33 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
         nnAmount.value = (item.incomingScrap) + (item.stringerScrap) +(item.repairScrap)+ (item.incidentScrap)
         break;
     }
+    // let incomingScrap = {
+    //   shift: shiftValue,
+    //   amount: (item.incomingScrap) + (item.stringerScrap) +(item.repairScrap)+ (item.incidentScrap),
+    //   name: "报废数量ScrapAmount"
+    // }
     let incomingScrap = {
       shift: shiftValue,
-      amount: (item.incomingScrap) + (item.stringerScrap) +(item.repairScrap)+ (item.incidentScrap),
-      name: "报废数量ScrapAmount"
+      amount: (item.incomingScrap) ,
+      name: "来料报废incomingScrap"
+    }
+    let stringerScrap = {
+      shift: shiftValue,
+      amount: (item.stringerScrap) ,
+      name: "焊机报废stringerScrap"
+    }
+    let repairScrap = {
+      shift: shiftValue,
+      amount: (item.repairScrap),
+      name: "返修报废repairScrap"
+    }
+    let incidentScrap = {
+      shift: shiftValue,
+      amount: (item.incidentScrap),
+      name: "事故报废incidentScrap"
     }
 
-    data1.push(incomingScrap)
+    data1.push(incomingScrap, stringerScrap,repairScrap,incidentScrap )
   })
   // console.log(data1)
   stackedColumnPlot.changeData(data1)

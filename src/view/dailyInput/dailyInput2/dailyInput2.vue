@@ -765,13 +765,7 @@ const ShiftOnChange = (value) => {
                   @finish="materialFeedingOnFinish"
                   @finishFailed="onFinishFailed"
               >
-                <a-form-item
-                    label="玻璃产量GlassOutput"
-                    name="glassOutput"
-                    :rules="[{ required: true, message: '不能为空cannot empty' }]"
-                >
-                  <a-input v-model:value="materialFeedingFormState.glassOutput"/>
-                </a-form-item>
+
 
                 <a-form-item
                     label="玻璃不良数GlassDefect"
@@ -781,13 +775,7 @@ const ShiftOnChange = (value) => {
                   <a-input v-model:value="materialFeedingFormState.glassDefect"/>
                 </a-form-item>
 
-                <a-form-item
-                    label="EVA产量（玻璃面）EVAOutput(glass side)(m2)"
-                    name="evaglassOutput"
-                    :rules="[{ required: true, message: '不能为空cannot empty' }]"
-                >
-                  <a-input v-model:value="materialFeedingFormState.evaglassOutput"/>
-                </a-form-item>
+
 
                 <a-form-item
                     label="EVA报废数（玻璃面）EVAScrap(glass side)(m2)"
@@ -797,13 +785,7 @@ const ShiftOnChange = (value) => {
                   <a-input v-model:value="materialFeedingFormState.evaglassDefect"/>
                 </a-form-item>
 
-                <a-form-item
-                    label="背板产量backsheetOutput(m2)"
-                    name="backsheetOutput"
-                    :rules="[{ required: true, message: '不能为空cannot empty' }]"
-                >
-                  <a-input v-model:value="materialFeedingFormState.backsheetOutput"/>
-                </a-form-item>
+
 
                 <a-form-item
                     label="背板报废数backsheetScrap(m2)"
@@ -813,13 +795,6 @@ const ShiftOnChange = (value) => {
                   <a-input v-model:value="materialFeedingFormState.backsheetDefect"/>
                 </a-form-item>
 
-                <a-form-item
-                    label="EVA产量（背板面）EVABacksheetOutput(m2)"
-                    name="evabacksheetOutput"
-                    :rules="[{ required: true, message: '不能为空cannot empty' }]"
-                >
-                  <a-input v-model:value="materialFeedingFormState.evabacksheetOutput"/>
-                </a-form-item>
 
                 <a-form-item
                     label="EVA报废数（背板面）EVABacksheetScrap(m2)"
@@ -1255,36 +1230,6 @@ const ShiftOnChange = (value) => {
       <a-row>
         <a-col :span="24">
           <h1 style="color: cornflowerblue">
-            削边 Trimming B2
-          </h1>
-          <div>
-            <a-form
-                :model="trimmingFormState"
-                name="trimmingFormState"
-                :label-col="{ span: 10 }"
-                :wrapper-col="{ span: 14 }"
-                autocomplete="off"
-                @finish="trimmingOnFinish"
-                @finishFailed="onFinishFailed"
-            >
-              <a-form-item
-                  label="削边产量TrimmingOutput"
-                  name="trimmingOutput"
-                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
-              >
-                <a-input v-model:value="trimmingFormState.trimmingOutput"/>
-              </a-form-item>
-              <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-                <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>
-              </a-form-item>
-            </a-form>
-          </div>
-        </a-col>
-      </a-row>
-      <a-divider style="height: 2px; background-color: #7cb305"/>
-      <a-row>
-        <a-col :span="24">
-          <h1 style="color: cornflowerblue">
             组框，线盒焊接 Framing B4 B5
           </h1>
           <div>
@@ -1341,13 +1286,7 @@ const ShiftOnChange = (value) => {
               >
                 <a-input v-model:value="secondELFormState.ivDefect"/>
               </a-form-item>
-              <a-form-item
-                  label="绝缘耐压不良 Hipot Defect"
-                  name="hipotDefect"
-                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
-              >
-                <a-input v-model:value="secondELFormState.hipotDefect"/>
-              </a-form-item>
+
               <a-form-item
                   label="后道EL不良 Second EL Defect"
                   name="secondelDefect"
@@ -1355,13 +1294,7 @@ const ShiftOnChange = (value) => {
               >
                 <a-input v-model:value="secondELFormState.secondelDefect"/>
               </a-form-item>
-              <a-form-item
-                  label="打包/仓库入库packing output"
-                  name="packing"
-                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
-              >
-                <a-input v-model:value="secondELFormState.packing"/>
-              </a-form-item>
+
               <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
                 <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>
               </a-form-item>
@@ -1432,30 +1365,6 @@ const ShiftOnChange = (value) => {
                   :rules="[{ required: true, message: '不能为空cannot empty' }]"
               >
                 <a-input v-model:value="secondHalfFormState.cornerProtectionScrap"/>
-              </a-form-item>
-
-              <a-form-item
-                  label="托盘报废PalletScrap:"
-                  name="palletScrap"
-                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
-              >
-                <a-input v-model:value="secondHalfFormState.palletScrap"/>
-              </a-form-item>
-
-              <a-form-item
-                  label="包装箱报废PackingCartonScrap:"
-                  name="packingCartonScrap"
-                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
-              >
-                <a-input v-model:value="secondHalfFormState.packingCartonScrap"/>
-              </a-form-item>
-
-              <a-form-item
-                  label="打包轧带报废PackingStrap:"
-                  name="packingStrapScrap"
-                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
-              >
-                <a-input v-model:value="secondHalfFormState.packingStrapScrap"/>
               </a-form-item>
 
               <a-form-item

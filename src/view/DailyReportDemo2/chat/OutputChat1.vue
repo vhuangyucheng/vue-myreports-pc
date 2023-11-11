@@ -8,8 +8,8 @@ import {each, groupBy} from '@antv/util';
 let dataToShow = [];
 let column;
 
-const FIRST_AMOUNT = 600;
-const SECOND_AMOUNT = 600;
+const FIRST_AMOUNT = 800;
+const SECOND_AMOUNT = 800;
 const THIRD_AMOUNT = 300;
 
 let dayFirstel = 0;
