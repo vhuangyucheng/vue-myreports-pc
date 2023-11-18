@@ -13,6 +13,8 @@ import DataCatch from "../view/dataCatch/DataCatch.vue";
 import Calendar from "../view/calendar/Calendar.vue";
 import ELCounter from "../view/tool/ELCounter/ELCounter.vue";
 import ELCounterV2 from "../view/tool/ELCounterV2/ELCounterV2.vue";
+import GetMO from "../view/material/getMO/GetMO.vue";
+import ListMO from "../view/material/ListMO/ListMO.vue";
 
 
 const myRouter = createRouter({
@@ -87,6 +89,14 @@ const myRouter = createRouter({
       path: '/ELCounterV2',
       name: 'ELCounterV2',
       component: ELCounterV2,
+    },
+    {
+      path: '/GetMO',
+      component: GetMO,
+    },
+    {
+      path: '/ListMO',
+      component: ListMO,
     },
   ]
 })

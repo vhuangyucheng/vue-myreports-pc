@@ -64,16 +64,16 @@ const itemClick = ({item, key, keyPath}) => {
           </a-menu-item>
         </a-sub-menu>
 
-<!--        <a-sub-menu key="sub02">-->
-<!--          <template #icon>-->
-<!--            <MailOutlined/>-->
-<!--          </template>-->
-<!--          <template #title>Line#1</template>-->
-<!--          <a-menu-item key="/Line1Daily">-->
-<!--            <user-outlined/>-->
-<!--            <span class="nav-text">Line1Daily</span>-->
-<!--          </a-menu-item>-->
-<!--        </a-sub-menu>-->
+        <!--        <a-sub-menu key="sub02">-->
+        <!--          <template #icon>-->
+        <!--            <MailOutlined/>-->
+        <!--          </template>-->
+        <!--          <template #title>Line#1</template>-->
+        <!--          <a-menu-item key="/Line1Daily">-->
+        <!--            <user-outlined/>-->
+        <!--            <span class="nav-text">Line1Daily</span>-->
+        <!--          </a-menu-item>-->
+        <!--        </a-sub-menu>-->
 
         <a-sub-menu key="sub03">
           <template #icon>
@@ -115,6 +115,21 @@ const itemClick = ({item, key, keyPath}) => {
           </a-menu-item>
         </a-sub-menu>
 
+        <a-sub-menu key="MaterialManagement">
+          <template #icon>
+            <MailOutlined/>
+          </template>
+          <template #title>MaterialManagement</template>
+
+          <a-menu-item key="/GetMO">
+            <user-outlined/>
+            <span class="nav-text">GetMO</span>
+          </a-menu-item>
+          <a-menu-item key="/ListMO">
+            <user-outlined/>
+            <span class="nav-text">ListMO</span>
+          </a-menu-item>
+        </a-sub-menu>
 
       </a-menu>
     </a-layout-sider>
@@ -128,7 +143,8 @@ const itemClick = ({item, key, keyPath}) => {
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        KPI dashboard 3.2.8, powered by IT department, Updated hot-reflesh, published on 10/31, email: helpdesk@solarjuiceamerica.com
+        KPI dashboard 3.2.8, powered by IT department, Updated hot-reflesh, published on 10/31, email:
+        helpdesk@solarjuiceamerica.com
       </a-layout-footer>
     </a-layout>
   </a-layout>
