@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import DailyReportDemo02 from "../view/DailyReportDemo2/DailyReportDemo02.vue";
 import Line1Daily from "../view/line1Daily/Line1Daily.vue";
-import DailyInput from "../view/dailyInput/DailyInput.vue";
 import DailyReport from "../view/dailyReport/DailyReport.vue";
 import MonthlyReport from "../view/outputReport/monthlyReport/MonthlyReport.vue";
 import WeeklyReport from "../view/outputReport/weeklyReport/WeeklyReport.vue";
@@ -29,11 +28,6 @@ const myRouter = createRouter({
       path: '/Line1Daily',
       name: 'Line1Daily',
       component: Line1Daily
-    },
-    {
-      path: '/DailyInput',
-      name: 'DailyInput',
-      component: DailyInput
     },
     {
       path: '/DailyReport',

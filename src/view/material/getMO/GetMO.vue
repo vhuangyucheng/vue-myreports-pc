@@ -1,7 +1,7 @@
 <script setup>
 
 
-import AddMO from "./AddMO.vue";
+import AddMO from "./AddBOM.vue";
 import GetOrder from "./GetOrder.vue";
 import GetMOTemplate from "./GetMOTemplate.vue";
 import DailyConsumption from "./DailyConsumption.vue";

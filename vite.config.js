@@ -67,7 +67,8 @@ export default defineConfig({
             include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
             resolvers: [
               AntDesignVueResolver({
-                    sideEffect: true
+                    sideEffect: true,
+                  importStyle:false
                 })
             ],
             VueUseComponentsResolver,
@@ -75,20 +76,7 @@ export default defineConfig({
         })
     ],
 
-    css: {
-        preprocessorOptions: {
-            less: {
-                modifyVars: {
-                    white: '#333',
-                    'component-background': '#777',
-                    'primary-color': '#1DA57A',
-                    'link-color': '#1DA57A',
-                    'border-radius-base': '2px',
-                },
-                javascriptEnabled: true,
-            },
-        }
-    }
+
     // ...
 })
 
