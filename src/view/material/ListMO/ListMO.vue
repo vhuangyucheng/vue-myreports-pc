@@ -5,56 +5,342 @@ const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
-    width: 150,
+    width: '10%',
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    width: 150,
+    title: 'WIP/ FG/ Total',
+    dataIndex: 'quantity',
+    width: '20%',
   },
   {
-    title: 'Address',
-    dataIndex: 'address',
+    title: 'Type',
+    dataIndex: 'type',
+    width: '10%',
+  },
+  {
+    title: 'Info',
+    dataIndex: 'info',
+    width: '30%',
+  },
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    width: '10%',
+  },
+  {
+    title: 'Operation',
+    dataIndex: 'Operation',
+    width: '10%',
   },
 ];
-const data = [...Array(100)].map((_, i) => ({
-  key: i,
-  name: `Edward King ${i}`,
-  age: 32,
-  address: `London, Park Lane no. ${i}`,
-}));
+const data = [
+  {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  },
+  {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  }, {
+    name: "mo001",
+    quantity: "2/5/100",
+    type:"550w",
+    status:"关闭",
+    info:"common"
+  },
+]
 
-const value1=ref("a")
+const value1 = ref("a")
 </script>
 
 <template>
   <a-row>
-    <a-col :span="6">
+    <a-col :span="3">
       <a-flex gap="middle" align="center" :vertical="false">
-        <div>
-          ddd
-        </div>
         <AddMO/>
       </a-flex>
     </a-col>
-    <a-col :span="18">
-
-      <div>订单状态</div>
-      <div>
-        <a-radio-group v-model:value="value1" button-style="solid">
-          <a-radio-button value="a">Hangzhou</a-radio-button>
-          <a-radio-button value="b">Shanghai</a-radio-button>
-          <a-radio-button value="c">Beijing</a-radio-button>
-          <a-radio-button value="d">Chengdu</a-radio-button>
-        </a-radio-group>
-      </div>
-
+    <a-col :span="21">
+      <a-flex gap="middle" align="center" :vertical="false">
+        <div>
+          <div>订单状态</div>
+          <div>
+            <a-radio-group v-model:value="value1" button-style="solid">
+              <a-radio-button value="a">全部</a-radio-button>
+              <a-radio-button value="b">未关闭</a-radio-button>
+              <a-radio-button value="c">关闭</a-radio-button>
+              <a-radio-button value="d">其他</a-radio-button>
+            </a-radio-group>
+          </div>
+        </div>
+        <div>
+          <div>组件类型</div>
+          <div>
+            <a-radio-group v-model:value="value1" button-style="solid">
+              <a-radio-button value="a1">全部</a-radio-button>
+              <a-radio-button value="b1">550W</a-radio-button>
+              <a-radio-button value="c1">535W</a-radio-button>
+              <a-radio-button value="d1">410W</a-radio-button>
+              <a-radio-button value="e1">其他</a-radio-button>
+            </a-radio-group>
+          </div>
+        </div>
+        <div>
+          <div>流水线</div>
+          <div>
+            <a-radio-group v-model:value="value1" button-style="solid">
+              <a-radio-button value="a3">全部</a-radio-button>
+              <a-radio-button value="b3">#1</a-radio-button>
+              <a-radio-button value="c3">#2</a-radio-button>
+            </a-radio-group>
+          </div>
+        </div>
+        <div>
+          <a-input-search
+              v-model:value="value"
+              placeholder="input MO/WO"
+              enter-button="Search"
+              size="large"
+              :maxlength="20"
+              bordered
+              @search="onSearch"
+          />
+        </div>
+      </a-flex>
     </a-col>
   </a-row>
   <a-table
       :columns="columns"
       :data-source="data"
-      :pagination="{ pageSize: 50 }"
+      :pagination="{ pageSize: 10 }"
       :scroll="{ y: 500 }"
   />
 </template>
