@@ -14,6 +14,7 @@ import ELCounter from "../view/tool/ELCounter/ELCounter.vue";
 import ELCounterV2 from "../view/tool/ELCounterV2/ELCounterV2.vue";
 import GetMO from "../view/material/getMO/GetMO.vue";
 import ListMO from "../view/material/ListMO/ListMO.vue";
+import Inventory from "../view/inventory/inventory/Inventory.vue";
 
 
 const myRouter = createRouter({
@@ -91,6 +92,10 @@ const myRouter = createRouter({
     {
       path: '/ListMO',
       component: ListMO,
+    },
+    {
+      path: '/Inventory',
+      component: Inventory,
     },
   ]
 })

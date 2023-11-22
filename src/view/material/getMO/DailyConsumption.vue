@@ -3,97 +3,195 @@ import {ref} from "vue";
 
 const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: '日期',
+    dataIndex: 'date',
+    key: 'date',
     width: 100,
     fixed: 'left',
-    filters: [
-      {
-        text: 'Joe',
-        value: 'Joe',
-      },
-      {
-        text: 'John',
-        value: 'John',
-      },
-    ],
-    onFilter: (value, record) => record.name.indexOf(value) === 0,
   },
   {
-    title: 'Other',
+    title: '电池',
     children: [
       {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-        width: 200,
-        sorter: (a, b) => a.age - b.age,
+        title: '领用',
+        dataIndex: 'receive',
+        key: 'receive',
+        width: 100,
       },
       {
-        title: 'Address',
-        children: [
-          {
-            title: 'Street',
-            dataIndex: 'street',
-            key: 'street',
-            width: 200,
-          },
-          {
-            title: 'Block',
-            children: [
-              {
-                title: 'Building',
-                dataIndex: 'building',
-                key: 'building',
-                width: 100,
-              },
-              {
-                title: 'Door No.',
-                dataIndex: 'number',
-                key: 'number',
-                width: 100,
-              },
-            ],
-          },
-        ],
+        title: '生产',
+        dataIndex: 'production',
+        key: 'production',
+        width: 100,
+      },
+      {
+        title: '报废',
+        dataIndex: 'scrapped',
+        key: 'scrapped',
+        width: 100,
+      },
+      {
+        title: '剩余',
+        dataIndex: 'remaining',
+        key: 'remaining',
+        width: 100,
       },
     ],
   },
   {
-    title: 'Company',
+    title: '玻璃',
     children: [
       {
-        title: 'Company Address',
-        dataIndex: 'companyAddress',
-        key: 'companyAddress',
-        width: 200,
+        title: '领用',
+        dataIndex: 'receive',
+        key: 'receive',
+        width: 100,
       },
       {
-        title: 'Company Name',
-        dataIndex: 'companyName',
-        key: 'companyName',
+        title: '生产',
+        dataIndex: 'production',
+        key: 'production',
+        width: 100,
+      },
+      {
+        title: '报废',
+        dataIndex: 'scrapped',
+        key: 'scrapped',
+        width: 100,
+      },
+      {
+        title: '剩余',
+        dataIndex: 'remaining',
+        key: 'remaining',
+        width: 100,
       },
     ],
   },
   {
-    title: 'Gender',
-    dataIndex: 'gender',
-    key: 'gender',
-    width: 80,
-    fixed: 'right',
+    title: '边框',
+    children: [
+      {
+        title: '领用',
+        dataIndex: 'receive',
+        key: 'receive',
+        width: 100,
+      },
+      {
+        title: '生产',
+        dataIndex: 'production',
+        key: 'production',
+        width: 100,
+      },
+      {
+        title: '报废',
+        dataIndex: 'scrapped',
+        key: 'scrapped',
+        width: 100,
+      },
+      {
+        title: '剩余',
+        dataIndex: 'remaining',
+        key: 'remaining',
+        width: 100,
+      },
+    ],
   },
+  {
+    title: '硅胶',
+    children: [
+      {
+        title: '领用',
+        dataIndex: 'receive',
+        key: 'receive',
+        width: 100,
+      },
+      {
+        title: '生产',
+        dataIndex: 'production',
+        key: 'production',
+        width: 100,
+      },
+      {
+        title: '报废',
+        dataIndex: 'scrapped',
+        key: 'scrapped',
+        width: 100,
+      },
+      {
+        title: '剩余',
+        dataIndex: 'remaining',
+        key: 'remaining',
+        width: 100,
+      },
+    ],
+  },
+  {
+    title: '背板',
+    children: [
+      {
+        title: '领用',
+        dataIndex: 'receive',
+        key: 'receive',
+        width: 100,
+      },
+      {
+        title: '生产',
+        dataIndex: 'production',
+        key: 'production',
+        width: 100,
+      },
+      {
+        title: '报废',
+        dataIndex: 'scrapped',
+        key: 'scrapped',
+        width: 100,
+      },
+      {
+        title: '剩余',
+        dataIndex: 'remaining',
+        key: 'remaining',
+        width: 100,
+      },
+    ],
+  },
+  {
+    title: 'EVA',
+    children: [
+      {
+        title: '领用',
+        dataIndex: 'receive',
+        key: 'receive',
+        width: 100,
+      },
+      {
+        title: '生产',
+        dataIndex: 'production',
+        key: 'production',
+        width: 100,
+      },
+      {
+        title: '报废',
+        dataIndex: 'scrapped',
+        key: 'scrapped',
+        width: 100,
+      },
+      {
+        title: '剩余',
+        dataIndex: 'remaining',
+        key: 'remaining',
+        width: 100,
+      },
+    ],
+  },
+
 ];
-const data = [...Array(100)].map((_, i) => ({
-  key: i,
-  name: 'John Brown',
-  age: i + 1,
-  street: 'Lake Park',
-  building: 'C',
-  number: 2035,
-  companyAddress: 'Lake Street 42',
-  companyName: 'SoftLake Co',
-  gender: 'M',
+const data = [...Array(50)].map((_, i) => ({
+  date: "11/21/2023",
+  receive: 232,
+  production: 231,
+  scrapped: 321,
+  remaining: 21,
+
 }));
 </script>
 

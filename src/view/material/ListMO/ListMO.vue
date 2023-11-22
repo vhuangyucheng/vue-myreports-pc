@@ -329,7 +329,7 @@ const value1 = ref("a")
               placeholder="input MO/WO"
               enter-button="Search"
               size="large"
-              :maxlength="20"
+              :maxLength="4"
               bordered
               @search="onSearch"
           />

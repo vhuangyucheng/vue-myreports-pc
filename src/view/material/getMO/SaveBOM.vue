@@ -4,6 +4,11 @@ import {reactive, ref} from 'vue';
 
 const columns = [
   {
+    title: '序号No',
+    dataIndex: 'index',
+    width: '10%',
+  },
+  {
     title: '材料名称Item',
     dataIndex: 'item',
     width: '10%',
@@ -24,6 +29,11 @@ const columns = [
     width: '10%',
   },
   {
+    title: 'Usage(Consumption+Loss)/Pcs',
+    dataIndex: 'usage',
+    width: '10%',
+  },
+  {
     title: '材料需求量Material demand Amount',
     dataIndex: 'demand',
     width: '10%',
@@ -37,27 +47,53 @@ let i = 0;
 const data = [
   {
     key: (++i).toString(),
-    item: 111,
-    spec: 32,
-    eachConsumption: `111`,
-    eachLoss: `1111`,
-    demand: `21111`,
+    index:1,
+    item: "电池片",
+    spec: "23.5, unit:pcs",
+    eachConsumption: 72,
+    eachLoss: '0.50%',
+    usage:72.3600,
+    demand: 27390,
   },
   {
     key: (++i).toString(),
-    item: 22,
-    spec: 22,
-    eachConsumption: `2`,
-    eachLoss: `22`,
-    demand: `2222`,
+    index:2,
+    item: "玻璃",
+    spec: "part number: 1002CS227211001, 2272mm*1128mm*3.2mm, unit:pcs",
+    eachConsumption: 1,
+    eachLoss: '0.02%',
+    usage:1.0002,
+    demand: 3011,
   },
   {
     key: (++i).toString(),
-    item: 33,
-    spec: 333,
-    eachConsumption: `3`,
-    eachLoss: `333`,
-    demand: `333`,
+    index:3,
+    item: "边框",
+    spec: "part number: 1007YY227835001, 2278mm*35mm*35mm, unit:pcs",
+    eachConsumption: 2,
+    eachLoss: '0.1%',
+    usage:2.0020,
+    demand: 6026,
+  },
+  {
+    key: (++i).toString(),
+    index:4,
+    item: "硅胶",
+    spec: "part number: 1013HT906275001, HT906Z 270KG / barrel, unit:pcs",
+    eachConsumption: 0.298,
+    eachLoss: '2.00%',
+    usage:0.3040,
+    demand: 915,
+  },
+  {
+    key: (++i).toString(),
+    index:5,
+    item: "接线盒",
+    spec: "part number: 1008su140012001, 1400mm,pv-JB12x, mc4, unit:pcs",
+    eachConsumption: 1,
+    eachLoss: '0.01%',
+    usage:1.0001,
+    demand: 3010,
   },
 ];
 
@@ -98,7 +134,7 @@ const metaDelete = key => {
     <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="handleAdd">Add</a-button>
     <a-table :columns="columns" :data-source="dataSource" bordered>
       <template #bodyCell="{ column, text, record }">
-        <template v-if="['item', 'spec', 'eachConsumption','eachLoss','demand'].includes(column.dataIndex)">
+        <template v-if="['index', 'usage', 'item', 'spec', 'eachConsumption','eachLoss','demand'].includes(column.dataIndex)">
           <div>
             <a-input
                 v-if="editableData[record.key]"
