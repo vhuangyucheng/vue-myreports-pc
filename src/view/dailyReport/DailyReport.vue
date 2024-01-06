@@ -136,7 +136,11 @@ DateOnChange(dateValue.value)
         <a-row :gutter="18">
           <a-col :span="12">
             <a-card title="New line need to improve" :bordered="false" style="padding: 0px">
-              <div>{{ getImprovementListStore.getLine2ImprovementList }}</div>
+              <div v-if="getImprovementListStore.getLine2ImprovementList.length > 0">
+                <div v-for="(item, index) in getImprovementListStore.getLine2ImprovementList" :key="index">
+                  <span> {{ item}}</span>
+                </div>
+              </div>
             </a-card>
           </a-col>
           <a-col :span="12">

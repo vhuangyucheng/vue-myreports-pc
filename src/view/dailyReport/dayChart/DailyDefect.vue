@@ -82,6 +82,9 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
     if(stringerDefectAmount < 90){
       getImprovementListStore.line1ImprovementListPush(stringerDefectAmount + " not up to " + "90%");
     }
+    getImprovementListStore.line2ImprovementListPush("ddd");
+    getImprovementListStore.line2ImprovementListPush("ss");
+    getImprovementListStore.line2ImprovementListPush("aa");
 
     let firstelDefect = {
       shift: shiftValue,
