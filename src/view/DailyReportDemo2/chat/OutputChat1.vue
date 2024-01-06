@@ -16,17 +16,20 @@ let dayFirstel = 0;
 let daySecondel = 0;
 let dayFraming = 0;
 let dayLamination = 0;
-let daySorting=0;
+let daySorting = 0;
+let dayPack = 0;
 let nightFirstel = 0;
 let nightSecondel = 0;
 let nightFraming = 0;
 let nightLamination = 0;
-let nightSorting=0;
+let nightSorting = 0;
+let nightPack = 0;
 let nnFirstel = 0;
 let nnSecondel = 0;
 let nnFraming = 0;
 let nnLamination = 0;
-let nnSorting=0;
+let nnSorting = 0;
+let nnPack = 0;
 
 self.setInterval(() => {
   axiosCall()
@@ -109,7 +112,8 @@ function axiosCall() {
       StartTime: currentDay + " 6:45:00",
       EndTime: tomorrowDay + " 6:45:00",
       TimesFlag: 7,
-      MaxResultCount: 1000
+      MaxResultCount: 1000,
+      LineCodes: "SJC01-01"
 
     },
     contentType: "json",
@@ -117,7 +121,7 @@ function axiosCall() {
     dataType: "json",
   }).then(function (response) {
     dataFromBack = response.data.result.items;
-    // console.log(dataFromBack)
+    console.log(dataFromBack)
 
     dataFromBack.forEach(item => {
           if (item.ShiftValue === 'Day') {
@@ -126,42 +130,51 @@ function axiosCall() {
             dayFraming = parseInt(item["Framing&JB"]);
             dayLamination = parseInt(item.Lamination)
             daySorting = parseInt(item.Sorting)
+            dayPack = parseInt(item.Pack);
           } else if (item.ShiftValue === 'Night') {
             nightFirstel = parseInt(item["EL-1"]);
             nightSecondel = parseInt(item["EL-F"]);
             nightFraming = parseInt(item["Framing&JB"]);
             nightLamination = parseInt(item.Lamination)
             nightSorting = parseInt(item.Sorting)
+            nightPack = parseInt(item.Pack);
           } else if (item.ShiftValue === 'NN') {
             nnFirstel = parseInt(item["EL-1"]);
             nnSecondel = parseInt(item["EL-F"]);
             nnFraming = parseInt(item["Framing&JB"]);
             nnLamination = parseInt(item.Lamination)
             nnSorting = parseInt(item.Sorting)
+            nnPack= parseInt(item.Pack);
           }
           dataOutput = [...dataOutput,
             {
-              shift: item.ShiftValue + (" : Layup, FirstEL, Framing, Sorting"),
+              shift: item.ShiftValue + (" : Layup, FirstEL, Framing, Sorting, Pack"),
               col_name: "layup",
               amount: parseInt(item.Layup),
               type: "productivity"
             },
             {
-              shift: item.ShiftValue + (" : Layup, FirstEL, Framing, Sorting"),
+              shift: item.ShiftValue + (" : Layup, FirstEL, Framing, Sorting, Pack"),
               col_name: "EL-1",
               amount: parseInt(item["EL-1"]),
               type: "productivity"
             },
             {
-              shift: item.ShiftValue + (" : Layup, FirstEL, Framing, Sorting"),
+              shift: item.ShiftValue + (" : Layup, FirstEL, Framing, Sorting, Pack"),
               col_name: "Framing&JB",
               amount: parseInt(item["Framing&JB"]),
               type: "productivity"
             },
             {
-              shift: item.ShiftValue + (" : Layup, FirstEL, Framing, Sorting"),
+              shift: item.ShiftValue + (" : Layup, FirstEL, Framing, Sorting, Pack"),
               col_name: "Sorting",
               amount: parseInt(item.Sorting),
+              type: "productivity"
+            },
+            {
+              shift: item.ShiftValue + (" : Layup, FirstEL, Framing, Sorting, Pack"),
+              col_name: "Pack",
+              amount: parseInt(item.Pack),
               type: "productivity"
             }
           ]
@@ -170,9 +183,9 @@ function axiosCall() {
 
 
     const dict = {
-      "Day : Layup, FirstEL, Framing, Sorting": FIRST_AMOUNT,
-      "Night : Layup, FirstEL, Framing, Sorting": SECOND_AMOUNT,
-      "NN : Layup, FirstEL, Framing, Sorting": THIRD_AMOUNT,
+      "Day : Layup, FirstEL, Framing, Sorting, Pack": FIRST_AMOUNT,
+      "Night : Layup, FirstEL, Framing, Sorting, Pack": SECOND_AMOUNT,
+      "NN : Layup, FirstEL, Framing, Sorting, Pack": THIRD_AMOUNT,
     };
     const data2 = dataOutput.filter(item => (item.amount <= dict[item.shift])).map(item => ({
       ...item,
@@ -187,8 +200,6 @@ function axiosCall() {
 
   });
 }
-
-
 
 
 onMounted(() => {

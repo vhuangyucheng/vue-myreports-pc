@@ -3,6 +3,11 @@ import {Column} from '@antv/g2plot';
 import {toRefs, defineProps} from 'vue'
 const props = defineProps(['dataFromPa', 'chartName'])
 
+import getImprovementList from '../../../store/getImprovementList';
+
+const getImprovementListStore = getImprovementList();
+
+
 const data = [
   {
     name: '来料破片',

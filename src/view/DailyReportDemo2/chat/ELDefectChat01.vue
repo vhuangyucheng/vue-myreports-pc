@@ -99,6 +99,7 @@ function axiosCall() {
       TimesFlag: 7,
       MaxResultCount: 1000,
       RouteOperations: "EL-1",
+      LineCodes: "SJC01-01",
       SkipCount: 0
     },
     contentType: "json",

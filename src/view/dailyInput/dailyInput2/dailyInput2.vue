@@ -130,7 +130,8 @@ const trimmingFormState = reactive({
 });
 
 const framingFormState = reactive({
-  framingOutput: ''
+  framingOutput: '',
+  framingScrap: ''
 });
 
 const secondELFormState = reactive({
@@ -402,6 +403,7 @@ const framingOnFinish = values => {
     data: {
       shiftId: getShiftId(),
       framingOutput: framingFormState.framingOutput,
+      framingScrap: framingFormState.framingScrap,
     },
     contentType: "json",
     processData: false,
@@ -675,6 +677,7 @@ const ShiftOnChange = (value) => {
     trimmingFormState.trimmingOutput = response.data.data.trimmingOutput
 
     framingFormState.framingOutput = response.data.data.framingOutput
+    framingFormState.framingScrap = response.data.data.framingScrap
 
     secondELFormState.secondELOutput = response.data.data.secondelOutput
     secondELFormState.ivDefect = response.data.data.ivDefect
@@ -1249,6 +1252,15 @@ const ShiftOnChange = (value) => {
               >
                 <a-input v-model:value="framingFormState.framingOutput"/>
               </a-form-item>
+
+              <a-form-item
+                  label="组框不良FramingDefect"
+                  name="framingScrap"
+                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
+              >
+                <a-input v-model:value="framingFormState.framingScrap"/>
+              </a-form-item>
+
               <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
                 <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>
               </a-form-item>

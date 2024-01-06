@@ -35,7 +35,7 @@ console.log(getDateStore.getCurrentDay)
   <!--  </a-row>-->
   <a-row>
     <a-col :span="12">
-      <div>{{ getDateStore.getCurrentDay }} : Floor productivity 二线各个工作站生产力（排版机, 前道EL, 装框, 分档)</div>
+      <div>{{ getDateStore.getCurrentDay }} : Floor productivity 二线各个工作站生产力（排版机, 前道EL, 装框, 分档, 打包)</div>
       <div>
         <OutputChat1 :style="{height:'300px'}"/>
       </div>

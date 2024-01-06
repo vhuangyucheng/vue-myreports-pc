@@ -12,6 +12,12 @@ let line2 = ref("line2");
 let line1 = ref("line1");
 let emptyIcon = ref(true);
 
+import getImprovementList from '../../store/getImprovementList';
+
+const getImprovementListStore = getImprovementList();
+
+
+
 const DateOnChange = (day) => {
   dateValue.value = day
   axios({
@@ -102,31 +108,44 @@ DateOnChange(dateValue.value)
           <a-calendar v-model:value="dateValue" :fullscreen="false" @select="DateOnChange"/>
         </div>
       </a-row>
-        <div style="background-color: #ececec; padding: 10px">
-          <a-row :gutter="18">
-            <a-col :span="12">
-              <a-card title="New line" :bordered="false" style="padding: 0px">
-                <div>1 Shift : <span v-if="line2Value.find(item=>item.shiftId ===getShiftId()+21)"><CheckOutlined/></span>
-                </div>
-                <div>2 Shift : <span v-if="line2Value.find(item=>item.shiftId ===getShiftId()+22)"><CheckOutlined/></span>
-                </div>
-                <div>3 Shift : <span v-if="line2Value.find(item=>item.shiftId ===getShiftId()+23)"><CheckOutlined/></span>
-                </div>
-              </a-card>
-            </a-col>
-            <a-col :span="12">
-              <a-card title="Old line" :bordered="false">
-                <div>1 Shift : <span v-if="line1Value.find(item=>item.shiftId ===getShiftId()+11)"><CheckOutlined/></span>
-                </div>
-                <div>2 Shift : <span v-if="line1Value.find(item=>item.shiftId ===getShiftId()+12)"><CheckOutlined/></span>
-                </div>
-                <div>3 Shift : <span v-if="line1Value.find(item=>item.shiftId ===getShiftId()+13)"><CheckOutlined/></span>
-                </div>
-              </a-card>
-            </a-col>
-          </a-row>
-        </div>
-
+      <div style="background-color: #ececec; padding: 10px">
+        <a-row :gutter="18">
+          <a-col :span="12">
+            <a-card title="New line" :bordered="false" style="padding: 0px">
+              <div>1 Shift : <span v-if="line2Value.find(item=>item.shiftId ===getShiftId()+21)"><CheckOutlined/></span>
+              </div>
+              <div>2 Shift : <span v-if="line2Value.find(item=>item.shiftId ===getShiftId()+22)"><CheckOutlined/></span>
+              </div>
+              <div>3 Shift : <span v-if="line2Value.find(item=>item.shiftId ===getShiftId()+23)"><CheckOutlined/></span>
+              </div>
+            </a-card>
+          </a-col>
+          <a-col :span="12">
+            <a-card title="Old line" :bordered="false">
+              <div>1 Shift : <span v-if="line1Value.find(item=>item.shiftId ===getShiftId()+11)"><CheckOutlined/></span>
+              </div>
+              <div>2 Shift : <span v-if="line1Value.find(item=>item.shiftId ===getShiftId()+12)"><CheckOutlined/></span>
+              </div>
+              <div>3 Shift : <span v-if="line1Value.find(item=>item.shiftId ===getShiftId()+13)"><CheckOutlined/></span>
+              </div>
+            </a-card>
+          </a-col>
+        </a-row>
+      </div>
+      <div style="background-color: #ececec; padding: 10px">
+        <a-row :gutter="18">
+          <a-col :span="12">
+            <a-card title="New line need to improve" :bordered="false" style="padding: 0px">
+              <div>{{ getImprovementListStore.getLine2ImprovementList }}</div>
+            </a-card>
+          </a-col>
+          <a-col :span="12">
+            <a-card title="Old line need to improve" :bordered="false">
+              <div>{{ getImprovementListStore.getLine1ImprovementList }}</div>
+            </a-card>
+          </a-col>
+        </a-row>
+      </div>
     </a-col>
   </a-row>
 </template>
