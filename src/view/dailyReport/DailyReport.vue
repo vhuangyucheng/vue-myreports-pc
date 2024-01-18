@@ -14,11 +14,13 @@ let emptyIcon = ref(true);
 
 import getImprovementList from '../../store/getImprovementList';
 
-const getImprovementListStore = getImprovementList();
-
+let getImprovementListStore = getImprovementList();
 
 
 const DateOnChange = (day) => {
+
+  getImprovementListStore.clear()
+
   dateValue.value = day
   axios({
     url: "/apiStringer/shiftRecord/listShiftRecord",
@@ -133,19 +135,25 @@ DateOnChange(dateValue.value)
         </a-row>
       </div>
       <div style="background-color: #ececec; padding: 10px">
-        <a-row :gutter="18">
+        <a-row :gutter="2">
           <a-col :span="12">
-            <a-card title="New line need to improve" :bordered="false" style="padding: 0px">
+            <a-card title="line#2 need to improve" :bordered="false" style="padding-left: 0px; padding-right: 0px; color: #ae0000">
               <div v-if="getImprovementListStore.getLine2ImprovementList.length > 0">
                 <div v-for="(item, index) in getImprovementListStore.getLine2ImprovementList" :key="index">
-                  <span> {{ item}}</span>
+                  <span> {{ item }}</span>
+                  <a-divider style="height: 2px; background-color: #b2be60"/>
                 </div>
               </div>
             </a-card>
           </a-col>
           <a-col :span="12">
-            <a-card title="Old line need to improve" :bordered="false">
-              <div>{{ getImprovementListStore.getLine1ImprovementList }}</div>
+            <a-card title="line#1 need to improve" :bordered="false" style="padding-left: 0px; padding-right: 0px; color: #ae0000">
+              <div v-if="getImprovementListStore.getLine1ImprovementList.length > 0">
+                <div v-for="(item, index) in getImprovementListStore.getLine1ImprovementList" :key="index">
+                  <span> {{ item }}</span>
+                  <a-divider style="height: 2px; background-color: #b2be60"/>
+                </div>
+              </div>
             </a-card>
           </a-col>
         </a-row>

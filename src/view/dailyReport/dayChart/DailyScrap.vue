@@ -1,6 +1,7 @@
 <script setup>
 import {Column} from '@antv/g2plot';
 import {toRefs, defineProps} from 'vue'
+
 const props = defineProps(['dataFromPa', 'chartName'])
 
 import getImprovementList from '../../../store/getImprovementList';
@@ -8,53 +9,15 @@ import getImprovementList from '../../../store/getImprovementList';
 const getImprovementListStore = getImprovementList();
 
 
-const data = [
-  {
-    name: '来料破片',
-    shiftValue: 'Day',
-    amount: 45,
-  },
-  {
-    name: '返修串破片',
-    shiftValue: 'Day',
-    amount: 88,
-  },
-  {
-    name: '焊机破片',
-    shiftValue: 'Day',
-    amount: 5,
-  },
-  {
-    name: '过焊',
-    shiftValue: 'Day',
-    amount: 2,
-  },
-  {
-    name: '组件破片',
-    shiftValue: 'Night',
-    amount: 0,
-  },
-  {
-    name: '返修串破片',
-    shiftValue: 'Night',
-    amount: 0,
-  },
-  {
-    name: '焊机破片',
-    shiftValue: 'Night',
-    amount: 0,
-  },
-  {
-    name: '焊机破片',
-    shiftValue: 'Night',
-    amount: 0,
-  },
-];
+const data = [];
 
 let data1;
 let dayAmount = ref(0);
+let dayPercentage = ref(0.0);
 let nightAmount = ref(0);
+let nightPercentage = ref(0.0);
 let nnAmount = ref(0);
+let nnPercentage = ref(0.0);
 
 watch(() => props.dataFromPa, (newVal, oldVal) => {
   // console.log('2监听引用类型数据dataList')
@@ -69,15 +32,15 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
     switch (item.shiftId % 10) {
       case 1:
         shiftValue = "Day"
-        dayAmount.value = (item.incomingScrap) + (item.stringerScrap) +(item.repairScrap)+ (item.incidentScrap)
+        dayAmount.value = (item.incomingScrap) + (item.stringerScrap) + (item.repairScrap) + (item.incidentScrap)
         break;
       case 2:
         shiftValue = "Night"
-        nightAmount.value = (item.incomingScrap) + (item.stringerScrap) +(item.repairScrap)+ (item.incidentScrap)
+        nightAmount.value = (item.incomingScrap) + (item.stringerScrap) + (item.repairScrap) + (item.incidentScrap)
         break;
       case 3:
         shiftValue = "NN"
-        nnAmount.value = (item.incomingScrap) + (item.stringerScrap) +(item.repairScrap)+ (item.incidentScrap)
+        nnAmount.value = (item.incomingScrap) + (item.stringerScrap) + (item.repairScrap) + (item.incidentScrap)
         break;
     }
     // let incomingScrap = {
@@ -87,12 +50,12 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
     // }
     let incomingScrap = {
       shift: shiftValue,
-      amount: (item.incomingScrap) ,
+      amount: (item.incomingScrap),
       name: "来料报废incomingScrap"
     }
     let stringerScrap = {
       shift: shiftValue,
-      amount: (item.stringerScrap) ,
+      amount: (item.stringerScrap),
       name: "焊机报废stringerScrap"
     }
     let repairScrap = {
@@ -106,16 +69,28 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
       name: "事故报废incidentScrap"
     }
 
-    data1.push(incomingScrap, stringerScrap,repairScrap,incidentScrap )
+    data1.push(incomingScrap, stringerScrap, repairScrap, incidentScrap)
+
+    const cellsYieldRate = Number(((item.cellsInput - (item.incomingScrap) - (item.stringerScrap) - (item.repairScrap) - (item.incidentScrap)) / item.cellsInput)*100).toFixed(2)
+    //加入improvement list
+    if (props.chartName === "line1") {
+      if (cellsYieldRate < 99.5) {
+        getImprovementListStore.line1ImprovementListPush(shiftValue + " shift Cells consumption Yield Rate : " + cellsYieldRate + "% not up to " + "99.5%");
+      }
+    } else if (props.chartName === "line2") {
+      if (cellsYieldRate < 99.5) {
+        getImprovementListStore.line2ImprovementListPush(shiftValue + " shift Cells consumption Yield Rate : " + cellsYieldRate + "% not up to " + "99.5%");
+      }
+    }
   })
   // console.log(data1)
   stackedColumnPlot.changeData(data1)
 })
 
-let stackedColumnPlot ;
+let stackedColumnPlot;
 
 onMounted(() => {
-  stackedColumnPlot = new Column('line1DailyThursdayScrap'+props.chartName, {
+  stackedColumnPlot = new Column('line1DailyThursdayScrap' + props.chartName, {
     data: data,
     isGroup: true,
     xField: 'shift',
@@ -150,8 +125,10 @@ onMounted(() => {
 
 <template>
   <div>
-    <a-typography-text code>电池片报废Cells Scrap : Day = {{ dayAmount }} ,  Night = {{ nightAmount }} , NN = {{nnAmount}}</a-typography-text>
-    <div :id="'line1DailyThursdayScrap'+props.chartName " :style="{height:'180px'}" />
+    <a-typography-text code>电池片报废Cells Scrap : Day = {{ dayAmount }} , Night = {{ nightAmount }} , NN =
+      {{ nnAmount }}
+    </a-typography-text>
+    <div :id="'line1DailyThursdayScrap'+props.chartName " :style="{height:'180px'}"/>
   </div>
 </template>
 

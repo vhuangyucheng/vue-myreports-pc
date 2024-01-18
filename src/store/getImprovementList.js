@@ -18,6 +18,10 @@ const getImprovementList = defineStore('getImprovementList', {
         line2ImprovementListPush(newAlert) {
             this.improvementList.line2.push(newAlert)
         },
+        clear() {
+            this.improvementList.line1 = []
+            this.improvementList.line2 = []
+        },
     },
 })
 

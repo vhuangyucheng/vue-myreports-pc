@@ -123,6 +123,7 @@ const laminationFormState = reactive({
   laminator1Output: '',
   laminator2Output: '',
   laminator3Output: '',
+  laminationDefect: '',
 });
 
 const trimmingFormState = reactive({
@@ -131,20 +132,21 @@ const trimmingFormState = reactive({
 
 const framingFormState = reactive({
   framingOutput: '',
-  framingScrap: ''
+  framingScrap: '',
+  junctionboxDefect: '',
+  appearanceInspection: '',
 });
 
 const secondELFormState = reactive({
   secondELOutput: '',
-  ivDefect:'',
-  hipotDefect:'',
-  secondelDefect:'',
-  packing:''
+  hipotDefect: '',
+
+
 });
 
 const secondHalfFormState = reactive({
   frameScrap: '',
-  shortFrameScrap:'',
+  shortFrameScrap: '',
   framingGlueScrap: '',
   jboxScrap: '',
   sealantGlueScrap: '',
@@ -152,8 +154,14 @@ const secondHalfFormState = reactive({
   palletScrap: '',
   packingCartonScrap: '',
   packingStrapScrap: '',
-  finishedgoodDegrade:'',
-  finishedgoodScrap:'',
+  finishedgoodDegrade: '',
+  finishedgoodScrap: '',
+  ivDefect: '',
+  secondelDefect: '',
+});
+
+const packingFormState = reactive({
+  packing: ''
 });
 
 const labelOnFinish = values => {
@@ -355,6 +363,7 @@ const laminationOnFinish = values => {
     data: {
       shiftId: getShiftId(),
       laminator1Output: laminationFormState.laminator1Output,
+      laminationDefect: laminationFormState.laminationDefect,
     },
     contentType: "json",
     processData: false,
@@ -404,6 +413,8 @@ const framingOnFinish = values => {
       shiftId: getShiftId(),
       framingOutput: framingFormState.framingOutput,
       framingScrap: framingFormState.framingScrap,
+      appearanceInspection: framingFormState.appearanceInspection,
+      junctionboxDefect: framingFormState.junctionboxDefect,
     },
     contentType: "json",
     processData: false,
@@ -428,10 +439,7 @@ const secondELOnFinish = values => {
     data: {
       shiftId: getShiftId(),
       secondelOutput: secondELFormState.secondELOutput,
-      ivDefect: secondELFormState.ivDefect,
-      hipotDefect: secondELFormState.hipotDefect,
-      secondelDefect: secondELFormState.secondelDefect,
-      packing: secondELFormState.packing,
+
     },
     contentType: "json",
     processData: false,
@@ -466,6 +474,32 @@ const secondHalfOnFinish = values => {
       packingStrap: secondHalfFormState.packingStrapScrap,
       finishedgoodDegrade: secondHalfFormState.finishedgoodDegrade,
       finishedgoodScrap: secondHalfFormState.finishedgoodScrap,
+      ivDefect: secondHalfFormState.ivDefect,
+      secondelDefect: secondHalfFormState.secondelDefect,
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if (response.data.code === '1') {
+      message.success("提交成功 submit succeed", 4)
+    } else {
+      message.error("提交失败 submit failed")
+    }
+  })
+};
+
+const packingOnFinish = values => {
+  if (undefined === shiftValue.value[1]) {
+    message.error("提交前先选择班别 finish shift selection before submit", 3)
+    return;
+  }
+  axios({
+    url: "/apiStringer/shiftRecord/saveAndUpdate",
+    method: "POST",
+    data: {
+      shiftId: getShiftId(),
+      packing: packingFormState.packing,
     },
     contentType: "json",
     processData: false,
@@ -507,7 +541,7 @@ const lockOnClick = () => {
 };
 const getShiftId = () => {
   const month = (dateValue.value.$M + 1) < 10 ? ("0" + (dateValue.value.$M + 1).toString()) : ((dateValue.value.$M + 1).toString())
-  const day = (dateValue.value.$D ) < 10 ? ("0" + (dateValue.value.$D).toString()) : ((dateValue.value.$D).toString())
+  const day = (dateValue.value.$D) < 10 ? ("0" + (dateValue.value.$D).toString()) : ((dateValue.value.$D).toString())
   return Number((dateValue.value.$y).toString() + month + day + (shiftValue.value[1].toString()));
 }
 
@@ -591,17 +625,23 @@ const ShiftOnChange = (value) => {
       laminationFormState.laminator1Output = ''
       laminationFormState.laminator2Output = ''
       laminationFormState.laminator3Output = ''
+      laminationFormState.laminationDefect = ''
 
       trimmingFormState.trimmingOutput = ''
 
       framingFormState.framingOutput = ''
+      framingFormState.framingScrap = ''
+      framingFormState.appearanceInspection = ''
+      framingFormState.junctionboxDefect = ''
 
       secondELFormState.secondELOutput = ''
-      secondELFormState.ivDefect = ''
-      secondELFormState.hipotDefect = ''
-      secondELFormState.secondelDefect = ''
-      secondELFormState.packing = ''
+      secondHalfFormState.ivDefect = ''
+      secondHalfFormState.secondelDefect = ''
 
+      packingFormState.packing = ''
+
+      secondHalfFormState.ivDefect = ''
+      secondHalfFormState.secondelDefect = ''
       secondHalfFormState.frameScrap = ''
       secondHalfFormState.shortFrameScrap = ''
       secondHalfFormState.framingGlueScrap = ''
@@ -673,18 +713,23 @@ const ShiftOnChange = (value) => {
     laminationFormState.laminator1Output = response.data.data.laminator1Output
     laminationFormState.laminator2Output = response.data.data.laminator2Output
     laminationFormState.laminator3Output = response.data.data.laminator3Output
+    laminationFormState.laminationDefect = response.data.data.laminationDefect
 
     trimmingFormState.trimmingOutput = response.data.data.trimmingOutput
 
     framingFormState.framingOutput = response.data.data.framingOutput
     framingFormState.framingScrap = response.data.data.framingScrap
+    framingFormState.appearanceInspection = response.data.data.appearanceInspection
+    framingFormState.junctionboxDefect = response.data.data.junctionboxDefect
 
     secondELFormState.secondELOutput = response.data.data.secondelOutput
-    secondELFormState.ivDefect = response.data.data.ivDefect
-    secondELFormState.hipotDefect = response.data.data.hipotDefect
-    secondELFormState.secondelDefect = response.data.data.secondelDefect
-    secondELFormState.packing = response.data.data.packing
 
+
+
+    packingFormState.packing = response.data.data.packing
+
+    secondHalfFormState.ivDefect = response.data.data.ivDefect
+    secondHalfFormState.secondelDefect = response.data.data.secondelDefect
     secondHalfFormState.frameScrap = response.data.data.framingScrap
     secondHalfFormState.shortFrameScrap = response.data.data.shortFrameScrap
     secondHalfFormState.framingGlueScrap = response.data.data.framingGlueScrap
@@ -751,70 +796,68 @@ const ShiftOnChange = (value) => {
           </div>
         </a-col>
       </a-row>
-<!--      <a-divider style="height: 2px; background-color: #7cb305"/>-->
-<!--      <a-row>-->
-<!--        <a-col :span="24">-->
-<!--          <div>-->
-<!--            <h1 style="color: cornflowerblue">-->
-<!--              上料 Material Feeding A1-->
-<!--            </h1>-->
-<!--            <div>-->
-<!--              <a-form-->
-<!--                  :model="materialFeedingFormState"-->
-<!--                  name="materialFeedingFormState"-->
-<!--                  :label-col="{ span: 16 }"-->
-<!--                  :wrapper-col="{ span: 8 }"-->
-<!--                  autocomplete="off"-->
-<!--                  @finish="materialFeedingOnFinish"-->
-<!--                  @finishFailed="onFinishFailed"-->
-<!--              >-->
+      <!--      <a-divider style="height: 2px; background-color: #7cb305"/>-->
+      <!--      <a-row>-->
+      <!--        <a-col :span="24">-->
+      <!--          <div>-->
+      <!--            <h1 style="color: cornflowerblue">-->
+      <!--              上料 Material Feeding A1-->
+      <!--            </h1>-->
+      <!--            <div>-->
+      <!--              <a-form-->
+      <!--                  :model="materialFeedingFormState"-->
+      <!--                  name="materialFeedingFormState"-->
+      <!--                  :label-col="{ span: 16 }"-->
+      <!--                  :wrapper-col="{ span: 8 }"-->
+      <!--                  autocomplete="off"-->
+      <!--                  @finish="materialFeedingOnFinish"-->
+      <!--                  @finishFailed="onFinishFailed"-->
+      <!--              >-->
 
 
-<!--                <a-form-item-->
-<!--                    label="玻璃不良数GlassDefect"-->
-<!--                    name="glassDefect"-->
-<!--                    :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
-<!--                >-->
-<!--                  <a-input v-model:value="materialFeedingFormState.glassDefect"/>-->
-<!--                </a-form-item>-->
+      <!--                <a-form-item-->
+      <!--                    label="玻璃不良数GlassDefect"-->
+      <!--                    name="glassDefect"-->
+      <!--                    :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
+      <!--                >-->
+      <!--                  <a-input v-model:value="materialFeedingFormState.glassDefect"/>-->
+      <!--                </a-form-item>-->
 
 
-
-<!--                <a-form-item-->
-<!--                    label="EVA报废数（玻璃面）EVAScrap(glass side)(m2)"-->
-<!--                    name="evaglassDefect"-->
-<!--                    :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
-<!--                >-->
-<!--                  <a-input v-model:value="materialFeedingFormState.evaglassDefect"/>-->
-<!--                </a-form-item>-->
-
+      <!--                <a-form-item-->
+      <!--                    label="EVA报废数（玻璃面）EVAScrap(glass side)(m2)"-->
+      <!--                    name="evaglassDefect"-->
+      <!--                    :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
+      <!--                >-->
+      <!--                  <a-input v-model:value="materialFeedingFormState.evaglassDefect"/>-->
+      <!--                </a-form-item>-->
 
 
-<!--                <a-form-item-->
-<!--                    label="背板报废数backsheetScrap(m2)"-->
-<!--                    name="backsheetDefect"-->
-<!--                    :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
-<!--                >-->
-<!--                  <a-input v-model:value="materialFeedingFormState.backsheetDefect"/>-->
-<!--                </a-form-item>-->
+      <!--                <a-form-item-->
+      <!--                    label="背板报废数backsheetScrap(m2)"-->
+      <!--                    name="backsheetDefect"-->
+      <!--                    :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
+      <!--                >-->
+      <!--                  <a-input v-model:value="materialFeedingFormState.backsheetDefect"/>-->
+      <!--                </a-form-item>-->
 
 
-<!--                <a-form-item-->
-<!--                    label="EVA报废数（背板面）EVABacksheetScrap(m2)"-->
-<!--                    name="evabacksheetDefect"-->
-<!--                    :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
-<!--                >-->
-<!--                  <a-input v-model:value="materialFeedingFormState.evabacksheetDefect"/>-->
-<!--                </a-form-item>-->
+      <!--                <a-form-item-->
+      <!--                    label="EVA报废数（背板面）EVABacksheetScrap(m2)"-->
+      <!--                    name="evabacksheetDefect"-->
+      <!--                    :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
+      <!--                >-->
+      <!--                  <a-input v-model:value="materialFeedingFormState.evabacksheetDefect"/>-->
+      <!--                </a-form-item>-->
 
-<!--                <a-form-item :wrapper-col="{ offset: 8, span: 16 }">-->
-<!--                  <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>-->
-<!--                </a-form-item>-->
-<!--              </a-form>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </a-col>-->
-<!--      </a-row>-->
+      <!--                <a-form-item :wrapper-col="{ offset: 8, span: 16 }">-->
+      <!--                  <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>-->
+      <!--                </a-form-item>-->
+      <!--              </a-form>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--        </a-col>-->
+      <!--      </a-row>-->
       <a-divider style="height: 2px; background-color: #7cb305"/>
       <a-row>
         <a-col :span="24">
@@ -1174,20 +1217,20 @@ const ShiftOnChange = (value) => {
                 >
                   <a-input v-model:value="firstHalfScarpFormState.cellsLeft"/>
                 </a-form-item>
-<!--                <a-form-item-->
-<!--                    label="焊带报废数ribbonScrap"-->
-<!--                    name="ribbonScrap"-->
-<!--                    :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
-<!--                >-->
-<!--                  <a-input v-model:value="firstHalfScarpFormState.ribbonScrap"/>-->
-<!--                </a-form-item>-->
-<!--                <a-form-item-->
-<!--                    label="汇流条报废数busbarScrap"-->
-<!--                    name="busbarScrap"-->
-<!--                    :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
-<!--                >-->
-<!--                  <a-input v-model:value="firstHalfScarpFormState.busbarScrap"/>-->
-<!--                </a-form-item>-->
+                <!--                <a-form-item-->
+                <!--                    label="焊带报废数ribbonScrap"-->
+                <!--                    name="ribbonScrap"-->
+                <!--                    :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
+                <!--                >-->
+                <!--                  <a-input v-model:value="firstHalfScarpFormState.ribbonScrap"/>-->
+                <!--                </a-form-item>-->
+                <!--                <a-form-item-->
+                <!--                    label="汇流条报废数busbarScrap"-->
+                <!--                    name="busbarScrap"-->
+                <!--                    :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
+                <!--                >-->
+                <!--                  <a-input v-model:value="firstHalfScarpFormState.busbarScrap"/>-->
+                <!--                </a-form-item>-->
 
                 <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
                   <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>
@@ -1221,6 +1264,14 @@ const ShiftOnChange = (value) => {
                 <a-input v-model:value="laminationFormState.laminator1Output"/>
               </a-form-item>
 
+              <a-form-item
+                  label="层压机不良laminationDefect"
+                  name="laminationDefect"
+                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
+              >
+                <a-input v-model:value="laminationFormState.laminationDefect"/>
+              </a-form-item>
+
 
               <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
                 <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>
@@ -1251,6 +1302,21 @@ const ShiftOnChange = (value) => {
                   :rules="[{ required: true, message: '不能为空cannot empty' }]"
               >
                 <a-input v-model:value="framingFormState.framingOutput"/>
+              </a-form-item>
+
+              <a-form-item
+                  label="外观不良VisualInspectionFail"
+                  name="appearanceInspection"
+                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
+              >
+                <a-input v-model:value="framingFormState.appearanceInspection"/>
+              </a-form-item>
+              <a-form-item
+                  label="接线盒不良JunctionBoxDefect"
+                  name="junctionboxDefect"
+                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
+              >
+                <a-input v-model:value="framingFormState.junctionboxDefect"/>
               </a-form-item>
 
               <a-form-item
@@ -1291,12 +1357,37 @@ const ShiftOnChange = (value) => {
               >
                 <a-input v-model:value="secondELFormState.secondELOutput"/>
               </a-form-item>
+
+
+              <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
+                <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>
+              </a-form-item>
+            </a-form>
+          </div>
+        </a-col>
+      </a-row>
+      <a-divider style="height: 2px; background-color: #7cb305"/>
+      <a-row>
+        <a-col :span="24">
+          <h1 style="color: cornflowerblue">
+            QC Duty
+          </h1>
+          <div>
+            <a-form
+                :model="secondHalfFormState"
+                name="secondHalfFormState"
+                :label-col="{ span: 16 }"
+                :wrapper-col="{ span: 8 }"
+                autocomplete="off"
+                @finish="secondHalfOnFinish"
+                @finishFailed="onFinishFailed"
+            >
               <a-form-item
                   label="IV不良IV Defect"
                   name="ivDefect"
                   :rules="[{ required: true, message: '不能为空cannot empty' }]"
               >
-                <a-input v-model:value="secondELFormState.ivDefect"/>
+                <a-input v-model:value="secondHalfFormState.ivDefect"/>
               </a-form-item>
 
               <a-form-item
@@ -1304,7 +1395,22 @@ const ShiftOnChange = (value) => {
                   name="secondelDefect"
                   :rules="[{ required: true, message: '不能为空cannot empty' }]"
               >
-                <a-input v-model:value="secondELFormState.secondelDefect"/>
+                <a-input v-model:value="secondHalfFormState.secondelDefect"/>
+              </a-form-item>
+              <a-form-item
+                  label="成品降级数量Finished Goods downgrade"
+                  name="finishedgoodDegrade"
+                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
+              >
+                <a-input v-model:value="secondHalfFormState.finishedgoodDegrade"/>
+              </a-form-item>
+
+              <a-form-item
+                  label="成品报废数量Finished Goods scrap"
+                  name="finishedgoodScrap"
+                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
+              >
+                <a-input v-model:value="secondHalfFormState.finishedgoodScrap"/>
               </a-form-item>
 
               <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
@@ -1318,81 +1424,24 @@ const ShiftOnChange = (value) => {
       <a-row>
         <a-col :span="24">
           <h1 style="color: cornflowerblue">
-            后道组长 Duty on second-half leader B0
+            Packing
           </h1>
           <div>
             <a-form
-                :model="secondHalfFormState"
-                name="secondHalfFormState"
+                :model="packingFormState"
+                name="packingFormState"
                 :label-col="{ span: 10 }"
                 :wrapper-col="{ span: 14 }"
                 autocomplete="off"
-                @finish="secondHalfOnFinish"
+                @finish="packingOnFinish"
                 @finishFailed="onFinishFailed"
             >
-
-<!--              <a-form-item-->
-<!--                  label="长边框报废Long FrameScrap:"-->
-<!--                  name="frameScrap"-->
-<!--                  :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
-<!--              >-->
-<!--                <a-input v-model:value="secondHalfFormState.frameScrap"/>-->
-<!--              </a-form-item>-->
-
-<!--              <a-form-item-->
-<!--                  label="短边框报废Short FrameScrap:"-->
-<!--                  name="shortFrameScrap"-->
-<!--                  :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
-<!--              >-->
-<!--                <a-input v-model:value="secondHalfFormState.shortFrameScrap"/>-->
-<!--              </a-form-item>-->
-
-<!--              <a-form-item-->
-<!--                  label="边框胶报废framingGlueScrap:"-->
-<!--                  name="framingGlueScrap"-->
-<!--                  :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
-<!--              >-->
-<!--                <a-input v-model:value="secondHalfFormState.framingGlueScrap"/>-->
-<!--              </a-form-item>-->
-
-<!--              <a-form-item-->
-<!--                  label="线盒报废jboxScrap:"-->
-<!--                  name="jboxScrap"-->
-<!--                  :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
-<!--              >-->
-<!--                <a-input v-model:value="secondHalfFormState.jboxScrap"/>-->
-<!--              </a-form-item>-->
-
-<!--              <a-form-item-->
-<!--                  label="AB胶报废sealantGlueScrap:"-->
-<!--                  name="sealantGlueScrap"-->
-<!--                  :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
-<!--              >-->
-<!--                <a-input v-model:value="secondHalfFormState.sealantGlueScrap"/>-->
-<!--              </a-form-item>-->
-
-<!--              <a-form-item-->
-<!--                  label="护角cornerProtectionScrap:"-->
-<!--                  name="cornerProtectionScrap"-->
-<!--                  :rules="[{ required: true, message: '不能为空cannot empty' }]"-->
-<!--              >-->
-<!--                <a-input v-model:value="secondHalfFormState.cornerProtectionScrap"/>-->
-<!--              </a-form-item>-->
-
               <a-form-item
-                  label="成品降级数量Finished Good degrade"
-                  name="finishedgoodDegrade"
+                  label="打包数量Packing"
+                  name="packing"
                   :rules="[{ required: true, message: '不能为空cannot empty' }]"
               >
-                <a-input v-model:value="secondHalfFormState.finishedgoodDegrade"/>
-              </a-form-item>
-
-              <a-form-item
-                  label="成品报废数量Finished Good scrap"
-                  name="finishedgoodScrap"
-                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
-              >
-                <a-input v-model:value="secondHalfFormState.finishedgoodScrap"/>
+                <a-input v-model:value="packingFormState.packing"/>
               </a-form-item>
 
               <a-form-item :wrapper-col="{ offset: 8, span: 16 }">

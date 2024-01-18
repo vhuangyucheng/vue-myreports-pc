@@ -54,7 +54,7 @@ onMounted(() => {
     yField: 'amount',
     seriesField: 'name',
     /** 设置颜色 */
-    color: ['#f88c24', '#e61c52'],
+    color: ['#f88c24', '#fd1e5a'],
     /** 设置间距 */
     // marginRatio: 0.1,
     label: {
@@ -82,7 +82,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <a-typography-text code>成品降级/ 报废 Finished Goods Degrade/ Scrap</a-typography-text>
+    <a-typography-text code>成品降级/ 报废 Finished Goods Downgrade/ Scrap</a-typography-text>
     <div :id="'dailyOutputDailyDegrade'+props.chartName " :style="{height:'180px'}" />
   </div>
 </template>

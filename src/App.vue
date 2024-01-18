@@ -105,6 +105,10 @@ const itemClick = ({item, key, keyPath}) => {
             <user-outlined/>
             <span class="nav-text">DailyReport</span>
           </a-menu-item>
+          <a-menu-item key="/DailyReportDataTable">
+            <user-outlined/>
+            <span class="nav-text">DailyReportDataTable</span>
+          </a-menu-item>
           <a-menu-item key="/WeeklyReport">
             <user-outlined/>
             <span class="nav-text">WeeklyReport</span>
@@ -154,7 +158,7 @@ const itemClick = ({item, key, keyPath}) => {
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        KPI dashboard 3.3.8, powered by IT department, Updated Packing Data, published on 12/12/2023, email:
+        KPI dashboard 3.4.8, powered by IT department, Updated needs-to-improvement List, published on 01/08/2024, email:
         helpdesk@solarjuiceamerica.com
       </a-layout-footer>
     </a-layout>
