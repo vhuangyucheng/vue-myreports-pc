@@ -100,7 +100,13 @@ DateOnChange(dateValue.value)
         </a-col>
       </a-row>
 
-
+      <a-divider style="height: 2px; background-color: #7cb305"/>
+      <a-row>
+        <a-col :span="24">
+          <a-typography-title :level="2" type="success">未关闭工单Open Tickets</a-typography-title>
+          <ListTicket></ListTicket>
+        </a-col>
+      </a-row>
     </a-col>
     <a-col :span="6">
       <a-row>

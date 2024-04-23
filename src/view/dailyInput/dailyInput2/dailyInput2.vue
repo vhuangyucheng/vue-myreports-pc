@@ -56,6 +56,8 @@ let shiftId;
 const QRCodeFormState = reactive({
   QRCodeStart: '',
   QRCodeEnd: '',
+  QRCodeStart2: '',
+  QRCodeEnd2: '',
   QRCodeAmount: '',
 });
 
@@ -176,6 +178,8 @@ const labelOnFinish = values => {
       shiftId: getShiftId(),
       qrcodeStart: QRCodeFormState.QRCodeStart,
       qrcodeEnd: QRCodeFormState.QRCodeEnd,
+      qrcodeStart2: QRCodeFormState.QRCodeStart2,
+      qrcodeEnd2: QRCodeFormState.QRCodeEnd2,
       qrcodeAmount: QRCodeFormState.QRCodeAmount,
     },
     contentType: "json",
@@ -571,6 +575,8 @@ const ShiftOnChange = (value) => {
       isLock.value = 0
       QRCodeFormState.QRCodeStart = ''
       QRCodeFormState.QRCodeEnd = ''
+      QRCodeFormState.QRCodeStart2 = ''
+      QRCodeFormState.QRCodeEnd2 = ''
       QRCodeFormState.QRCodeAmount = ''
       materialFeedingFormState.glassOutput = ''
       materialFeedingFormState.glassDefect = ''
@@ -659,6 +665,8 @@ const ShiftOnChange = (value) => {
     isLock.value = response.data.data.isLock;
     QRCodeFormState.QRCodeStart = response.data.data.qrcodeStart
     QRCodeFormState.QRCodeEnd = response.data.data.qrcodeEnd
+    QRCodeFormState.QRCodeStart2 = response.data.data.qrcodeStart2
+    QRCodeFormState.QRCodeEnd2 = response.data.data.qrcodeEnd2
     QRCodeFormState.QRCodeAmount = response.data.data.qrcodeAmount
     materialFeedingFormState.glassOutput = response.data.data.glassOutput
     materialFeedingFormState.glassDefect = response.data.data.glassDefect
@@ -778,6 +786,22 @@ const ShiftOnChange = (value) => {
                     :rules="[{ required: true, message: '不能为空cannot empty' }]"
                 >
                   <a-input v-model:value="QRCodeFormState.QRCodeEnd"/>
+                </a-form-item>
+
+                <a-form-item
+                    label="条码开始QRCodeStart2"
+                    name="QRCodeStart2"
+
+                >
+                  <a-input v-model:value="QRCodeFormState.QRCodeStart2"/>
+                </a-form-item>
+
+                <a-form-item
+                    label="条码结束QRCodeEnd2"
+                    name="QRCodeEnd2"
+
+                >
+                  <a-input v-model:value="QRCodeFormState.QRCodeEnd2"/>
                 </a-form-item>
 
                 <a-form-item

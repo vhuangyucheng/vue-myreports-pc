@@ -146,6 +146,17 @@ const itemClick = ({item, key, keyPath}) => {
           </a-menu-item>
         </a-sub-menu>
 
+        <a-sub-menu key="Test">
+          <template #icon>
+            <MailOutlined/>
+          </template>
+          <template #title>Test</template>
+          <a-menu-item key="/Test">
+            <user-outlined/>
+            <span class="nav-text">Test</span>
+          </a-menu-item>
+        </a-sub-menu>
+
       </a-menu>
     </a-layout-sider>
     <a-layout>
@@ -158,7 +169,7 @@ const itemClick = ({item, key, keyPath}) => {
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        KPI dashboard 3.4.8, powered by IT department, Updated needs-to-improvement List, published on 01/08/2024, email:
+        KPI dashboard 5.0.0, powered by IT department, Updated Ticket platform, published on 02/09/2024, email:
         helpdesk@solarjuiceamerica.com
       </a-layout-footer>
     </a-layout>

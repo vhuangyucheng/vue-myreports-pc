@@ -22,6 +22,7 @@ import {values} from "@antv/util";
 
 import getDate from '../../store/getDate';
 import StringerStatistics from "./chat/StringerStatistics.vue";
+import ListTicket from "./chat/ListTicket.vue";
 const getDateStore = getDate();
 console.log(getDateStore.getCurrentDay)
 </script>
@@ -53,7 +54,8 @@ console.log(getDateStore.getCurrentDay)
       </div>
     </a-col>
     <a-col :span="12">
-      <StringerStatistics/>
+<!--      <StringerStatistics/>-->
+      <ListTicket></ListTicket>
     </a-col>
   </a-row>
 
