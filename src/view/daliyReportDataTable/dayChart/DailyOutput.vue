@@ -104,7 +104,7 @@ watch(() => props.dataFromPa, (newVal, oldVal) => {
     }
     let FirstEL = {
       shift: shiftValue,
-      amount: item.laminator1Output,
+      amount: item.firstel2Output,
       type: "productivity",
       col_name: "FirstEL",
     }

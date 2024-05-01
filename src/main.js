@@ -1,8 +1,8 @@
+import 'ant-design-vue/dist/reset.css';
 import {createPinia} from 'pinia'
 import myRouter from './router'
 import {createApp} from 'vue'
 import App from './App.vue'
-import 'ant-design-vue/dist/reset.css';
 import Antd from 'ant-design-vue';
 import print from 'vue3-print-nb'
 const app = createApp(App)
