@@ -27,7 +27,7 @@ const dateConvertor = (date) => {
 const PercentageConvertor = (station) => {
   switch (station) {
     case "line2Stringer":
-      return 99.7
+      return 99.5
     case "line2EL":
       return 93
     case "line1Stringer":
@@ -37,7 +37,7 @@ const PercentageConvertor = (station) => {
     case "line1Onepass":
       return 87.06
     case "line2Onepass":
-      return 90.14
+      return 90.41
   }
 }
 </script>
@@ -80,31 +80,31 @@ const PercentageConvertor = (station) => {
     <tr v-for="(item, index) in dataList" :key="index">
       <td class="tg-f4yw"> {{ dateConvertor(item.shiftId) }}</td>
       <td class="tg-nrix"
-          :style="{ backgroundColor: (100-((((item.stringerScrap + item.repairScrap + item.incidentScrap + item.incomingScrap) / item.cellsInput) * 100).toFixed(2))) < PercentageConvertor(chartName+'Stringer') ? '#fd1e5a' : '#00ae9d' }"
+          :style="{ backgroundColor: (100-((((item.stringerScrap + item.repairScrap + item.incidentScrap + item.incomingScrap) / item.cellsInput) * 100).toFixed(2))) < PercentageConvertor(chartName+'Stringer') ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       > {{ 100-((((item.stringerScrap + item.repairScrap + item.incidentScrap + item.incomingScrap) / item.cellsInput) * 100).toFixed(2)) }}%</td>
       <td class="tg-nrix"
-          :style="{ backgroundColor:  Number((((item.stringer1Output + item.stringer2Output + item.stringer3Output) / (item.stringer1Output + item.stringer2Output + item.stringer3Output + item.stringer1Miswelding + item.stringer1Overwelding + item.stringer1Split + item.stringer1Crack + item.stringer1Others + item.stringer2Miswelding + item.stringer2Overwelding + item.stringer2Split + item.stringer2Crack + item.stringer2Others + item.stringer3Miswelding + item.stringer3Overwelding + item.stringer3Split + item.stringer3Crack + item.stringer3Others)) * 100).toFixed(2)) < 98 ? '#fd1e5a' : '#00ae9d' }"
+          :style="{ backgroundColor:  Number((((item.stringer1Output + item.stringer2Output + item.stringer3Output) / (item.stringer1Output + item.stringer2Output + item.stringer3Output + item.stringer1Miswelding + item.stringer1Overwelding + item.stringer1Split + item.stringer1Crack + item.stringer1Others + item.stringer2Miswelding + item.stringer2Overwelding + item.stringer2Split + item.stringer2Crack + item.stringer2Others + item.stringer3Miswelding + item.stringer3Overwelding + item.stringer3Split + item.stringer3Crack + item.stringer3Others)) * 100).toFixed(2)) < 98 ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       >{{  Number((((item.stringer1Output + item.stringer2Output + item.stringer3Output) / (item.stringer1Output + item.stringer2Output + item.stringer3Output + item.stringer1Miswelding + item.stringer1Overwelding + item.stringer1Split + item.stringer1Crack + item.stringer1Others + item.stringer2Miswelding + item.stringer2Overwelding + item.stringer2Split + item.stringer2Crack + item.stringer2Others + item.stringer3Miswelding + item.stringer3Overwelding + item.stringer3Split + item.stringer3Crack + item.stringer3Others)) * 100).toFixed(2))}}%</td>
       <td class="tg-nrix"
-          :style="{ backgroundColor: Number(((1 - (item.firstel2Defect / item.firstel2Output)) * 100).toFixed(2)) < PercentageConvertor(chartName+'EL') ? '#fd1e5a' : '#00ae9d' }"
+          :style="{ backgroundColor: Number(((1 - (item.firstel2Defect / item.firstel2Output)) * 100).toFixed(2)) < PercentageConvertor(chartName+'EL') ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       >{{Number(((1 - (item.firstel2Defect / item.firstel2Output)) * 100).toFixed(2))}}%</td>
       <td class="tg-nrix"
-          :style="{ backgroundColor: Number(((1 - (item.laminationDefect / item.laminator1Output)) * 100).toFixed(2)) < 100 ? '#fd1e5a' : '#00ae9d' }"
+          :style="{ backgroundColor: Number(((1 - (item.laminationDefect / item.laminator1Output)) * 100).toFixed(2)) < 100 ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       >{{Number(((1 - (item.laminationDefect / item.laminator1Output)) * 100).toFixed(2))}}%</td>
       <td class="tg-nrix"
-          :style="{ backgroundColor: Number(((1 - (item.appearanceInspection / item.framingOutput)) * 100).toFixed(2)) < 99.8 ? '#fd1e5a' : '#00ae9d' }"
+          :style="{ backgroundColor: Number(((1 - (item.appearanceInspection / item.framingOutput)) * 100).toFixed(2)) < 99.8 ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       >{{Number(((1 - (item.appearanceInspection / item.framingOutput)) * 100).toFixed(2))}}%</td>
       <td class="tg-nrix"
-          :style="{ backgroundColor: Number(((1 - (item.framingScrap / item.framingOutput)) * 100).toFixed(2)) < 100 ? '#fd1e5a' : '#00ae9d' }"
+          :style="{ backgroundColor: Number(((1 - (item.framingScrap / item.framingOutput)) * 100).toFixed(2)) < 100 ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       >{{Number(((1 - (item.framingScrap / item.framingOutput)) * 100).toFixed(2))}}%</td>
       <td class="tg-nrix"
-          :style="{ backgroundColor: Number(((1 - (item.junctionboxDefect / item.framingOutput)) * 100).toFixed(2)) < 99.8 ? '#fd1e5a' : '#00ae9d' }"
+          :style="{ backgroundColor: Number(((1 - (item.junctionboxDefect / item.framingOutput)) * 100).toFixed(2)) < 99.8 ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       >{{Number(((1 - (item.junctionboxDefect / item.framingOutput)) * 100).toFixed(2))}}%</td>
       <td class="tg-nrix"
-          :style="{ backgroundColor: Number(((1 - (item.ivDefect / item.secondelOutput)) * 100).toFixed(2)) < 99.8 ? '#fd1e5a' : '#00ae9d' }"
+          :style="{ backgroundColor: Number(((1 - (item.ivDefect / item.secondelOutput)) * 100).toFixed(2)) < 99.8 ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       >{{ Number(((1 - (item.ivDefect / item.secondelOutput)) * 100).toFixed(2))}}%</td>
       <td class="tg-nrix"
-          :style="{ backgroundColor: Number(((1 - (item.secondelDefect / item.secondelOutput)) * 100).toFixed(2)) < 99.8 ? '#fd1e5a' : '#00ae9d' }"
+          :style="{ backgroundColor: Number(((1 - (item.secondelDefect / item.secondelOutput)) * 100).toFixed(2)) < 99.8 ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       >{{Number(((1 - (item.secondelDefect / item.secondelOutput)) * 100).toFixed(2))}}%</td>
       <td class="tg-nrix"
           :style="{ backgroundColor: (((100-((((item.stringerScrap + item.repairScrap + item.incidentScrap + item.incomingScrap) / item.cellsInput) * 100).toFixed(2)))
@@ -116,7 +116,7 @@ const PercentageConvertor = (station) => {
           * (Number(((1 - (item.junctionboxDefect / item.framingOutput)) * 100).toFixed(2)))
           * (Number(((1 - (item.ivDefect / item.secondelOutput)) * 100).toFixed(2)))
           * (Number(((1 - (item.secondelDefect / item.secondelOutput)) * 100).toFixed(2)))
-          * 0.000001 * 0.000001 * 0.0001).toFixed(2)) < PercentageConvertor(chartName+'Onepass') ? '#fd1e5a' : '#00ae9d' }"
+          * 0.000001 * 0.000001 * 0.0001).toFixed(2)) < PercentageConvertor(chartName+'Onepass') ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       >{{
           (((100-((((item.stringerScrap + item.repairScrap + item.incidentScrap + item.incomingScrap) / item.cellsInput) * 100).toFixed(2)))
           * (Number((((item.stringer1Output + item.stringer2Output + item.stringer3Output) / (item.stringer1Output + item.stringer2Output + item.stringer3Output + item.stringer1Miswelding + item.stringer1Overwelding + item.stringer1Split + item.stringer1Crack + item.stringer1Others + item.stringer2Miswelding + item.stringer2Overwelding + item.stringer2Split + item.stringer2Crack + item.stringer2Others + item.stringer3Miswelding + item.stringer3Overwelding + item.stringer3Split + item.stringer3Crack + item.stringer3Others)) * 100).toFixed(2)))

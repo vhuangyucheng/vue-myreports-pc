@@ -116,7 +116,12 @@ function axiosCall() {
 
         return groups;
       }, {});
-      firstNGRate.value = ((1 - (groupedData["A:正常"].count / dataFromBack.length)) * 100).toFixed(1) + '%';
+      console.log(groupedData)
+      firstNGRate.value = 0;
+      dataToShow = []
+      if (groupedData.hasOwnProperty("A:正常")) {
+        firstNGRate.value = ((1 - (groupedData["A:正常"].count / dataFromBack.length)) * 100).toFixed(1) + '%';
+      }
       const dict = {
         "A:虚焊": "虚焊MissWeld",
         "A:其它": "其他Others",

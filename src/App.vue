@@ -182,7 +182,7 @@ const itemClick = ({item, key, keyPath}) => {
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        KPI dashboard 6.0.0, powered by IT department, Updated dashboard, published on 04/23/2024, email:
+        KPI dashboard 6.1.0, powered by IT department, Updated daily report scheme, published on 05/02/2024, email:
         helpdesk@solarjuiceamerica.com
       </a-layout-footer>
     </a-layout>
