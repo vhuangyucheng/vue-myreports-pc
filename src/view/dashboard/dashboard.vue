@@ -22,6 +22,7 @@ import {values} from "@antv/util";
 
 import getDate from '../../store/getDate';
 import StringerStatistics from "./chat/StringerStatistics.vue";
+import ELhourlyChart from "./chat/ELhourlyChart.vue";
 
 const getDateStore = getDate();
 console.log(getDateStore.getCurrentDay)
@@ -42,20 +43,24 @@ console.log(getDateStore.getCurrentDay)
         <OutputChat1 :style="{height:'300px'}"/>
       </div>
     </a-col>
-    <a-divider type="vertical" style="height: 350px; background-color: #7cb305" />
+    <a-divider type="vertical" style="height: 350px; background-color: #7cb305"/>
     <a-col :span="11">
       <ELDefectChat01/>
     </a-col>
   </a-row>
   <a-divider style="height: 2px; background-color: #7cb305"/>
   <a-row>
-    <a-col :span="24">
+    <a-col :span="15">
 
       <div>
         <StringerOutput/>
       </div>
     </a-col>
+    <a-divider type="vertical" style="height: 350px; background-color: #7cb305"/>
+    <a-col :span="8">
+      <ELhourlyChart/>
 
+    </a-col>
   </a-row>
 
 
