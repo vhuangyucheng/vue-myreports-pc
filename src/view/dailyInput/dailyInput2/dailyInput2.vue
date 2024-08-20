@@ -83,6 +83,10 @@ const firstELFormState = reactive({
   firstEL1Output: '',
   firstEL2Output: '',
   firstEL2Defect: '',
+  reworkOutput:'',
+  reworkNgstring:'',
+  repairScrap: '',
+  repairStringScrap:'',
 });
 
 const stringerFormState = reactive({
@@ -113,7 +117,7 @@ const firstHalfScarpFormState = reactive({
   cellsReceive: '',
   cellsInput: '',
   incomingScrap: '',
-  repairScrap: '',
+
   incidentScrap: '',
   stringerScrap: '',
   cellsLeft: '',
@@ -311,6 +315,10 @@ const firstELOnFinish = values => {
       shiftId: getShiftId(),
       firstel2Output: firstELFormState.firstEL2Output,
       firstel2Defect: firstELFormState.firstEL2Defect,
+      reworkOutput: firstELFormState.reworkOutput,
+      reworkNgstring: firstELFormState.reworkNgstring,
+      repairScrap: firstELFormState.repairScrap,
+      repairStringScrap: firstELFormState.repairStringScrap,
     },
     contentType: "json",
     processData: false,
@@ -337,7 +345,7 @@ const firstHalfOnFinish = values => {
       cellsReceive: firstHalfScarpFormState.cellsReceive,
       cellsInput: firstHalfScarpFormState.cellsInput,
       incomingScrap: firstHalfScarpFormState.incomingScrap,
-      repairScrap: firstHalfScarpFormState.repairScrap,
+
       incidentScrap: firstHalfScarpFormState.incidentScrap,
       stringerScrap: firstHalfScarpFormState.stringerScrap,
       cellsLeft: firstHalfScarpFormState.cellsLeft,
@@ -592,9 +600,14 @@ const ShiftOnChange = (value) => {
       bussingFormState.bussingBadmargin = ''
       bussingFormState.bussingBadstringspacing = ''
       bussingFormState.bussingOthers = ''
+
       firstELFormState.firstEL1Output = ''
       firstELFormState.firstEL2Output = ''
       firstELFormState.firstEL2Defect = ''
+      firstELFormState.reworkOutput = ''
+      firstELFormState.reworkNgstring = ''
+      firstELFormState.repairScrap = ''
+      firstELFormState.repairStringScrap = ''
 
       stringerFormState.stringer1Output = ''
       stringerFormState.stringer1Miswelding = ''
@@ -621,7 +634,7 @@ const ShiftOnChange = (value) => {
       firstHalfScarpFormState.cellsReceive = ''
       firstHalfScarpFormState.cellsInput = ''
       firstHalfScarpFormState.incomingScrap = ''
-      firstHalfScarpFormState.repairScrap = ''
+
       firstHalfScarpFormState.incidentScrap = ''
       firstHalfScarpFormState.stringerScrap = ''
       firstHalfScarpFormState.cellsLeft = ''
@@ -685,6 +698,11 @@ const ShiftOnChange = (value) => {
     firstELFormState.firstEL1Output = response.data.data.firstel1Output
     firstELFormState.firstEL2Output = response.data.data.firstel2Output
     firstELFormState.firstEL2Defect = response.data.data.firstel2Defect
+    firstELFormState.reworkOutput = response.data.data.reworkOutput
+    firstELFormState.reworkNgstring = response.data.data.reworkNgstring
+    firstELFormState.repairScrap = response.data.data.repairScrap
+    firstELFormState.repairStringScrap = response.data.data.repairStringScrap
+
 
     stringerFormState.stringer1Output = response.data.data.stringer1Output
     stringerFormState.stringer1Miswelding = response.data.data.stringer1Miswelding
@@ -711,7 +729,7 @@ const ShiftOnChange = (value) => {
     firstHalfScarpFormState.cellsReceive = response.data.data.cellsReceive
     firstHalfScarpFormState.cellsInput = response.data.data.cellsInput
     firstHalfScarpFormState.incomingScrap = response.data.data.incomingScrap
-    firstHalfScarpFormState.repairScrap = response.data.data.repairScrap
+
     firstHalfScarpFormState.incidentScrap = response.data.data.incidentScrap
     firstHalfScarpFormState.stringerScrap = response.data.data.stringerScrap
     firstHalfScarpFormState.cellsLeft = response.data.data.cellsLeft
@@ -1168,6 +1186,38 @@ const ShiftOnChange = (value) => {
                 <a-input v-model:value="firstELFormState.firstEL2Defect"/>
               </a-form-item>
 
+              <a-form-item
+                  label="返修件ReworkModule"
+                  name="reworkOutput"
+                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
+              >
+                <a-input v-model:value="firstELFormState.reworkOutput"/>
+              </a-form-item>
+
+              <a-form-item
+                  label="返修串ReworkNGString"
+                  name="reworkNgstring"
+                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
+              >
+                <a-input v-model:value="firstELFormState.reworkNgstring"/>
+              </a-form-item>
+
+              <a-form-item
+                  label="返修件破片ModuleRepairScrap"
+                  name="repairScrap"
+                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
+              >
+                <a-input v-model:value="firstELFormState.repairScrap"/>
+              </a-form-item>
+
+              <a-form-item
+                  label="返修串破片StringRepairScrap"
+                  name="repairStringScrap"
+                  :rules="[{ required: true, message: '不能为空cannot empty' }]"
+              >
+                <a-input v-model:value="firstELFormState.repairStringScrap"/>
+              </a-form-item>
+
               <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
                 <a-button type="primary" html-type="submit" :disabled="isLock===1">提交Submit</a-button>
               </a-form-item>
@@ -1220,13 +1270,7 @@ const ShiftOnChange = (value) => {
                 >
                   <a-input v-model:value="firstHalfScarpFormState.incomingScrap"/>
                 </a-form-item>
-                <a-form-item
-                    label="返修破片repairScrap"
-                    name="repairScrap"
-                    :rules="[{ required: true, message: '不能为空cannot empty' }]"
-                >
-                  <a-input v-model:value="firstHalfScarpFormState.repairScrap"/>
-                </a-form-item>
+
                 <a-form-item
                     label="生产事故破片incidentScrap"
                     name="incidentScrap"

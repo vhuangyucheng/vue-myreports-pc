@@ -17,7 +17,7 @@ self.setInterval(() => {
 let currentDay;
 let tomorrowDay;
 
-import getDate from '../../../store/getDate';
+import getDate from '../../../../store/getDate';
 
 const getDateStore = getDate();
 

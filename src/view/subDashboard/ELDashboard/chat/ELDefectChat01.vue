@@ -3,7 +3,7 @@
 let firstNGRate = ref(0)
 let dataToShow = []
 
-import getDate from '../../../store/getDate';
+import getDate from '../../../../store/getDate';
 
 const getDateStore = getDate();
 

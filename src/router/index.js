@@ -18,6 +18,9 @@ import Inventory from "../view/inventory/inventory/Inventory.vue";
 import Dashboard from "../view/dashboard/dashboard.vue";
 import Schedule from "../view/plan/schedule/Schedule.vue";
 import Test from "../view/test/Test.vue";
+import ELDashboard from "../view/subDashboard/ELDashboard/ELDashboard.vue";
+import StringerDashboard from "../view/subDashboard/stringerDashboard/StringerDashboard.vue";
+import FramingDashboard from "../view/subDashboard/framingDashboard/FramingDashboard.vue";
 
 
 const myRouter = createRouter({
@@ -111,6 +114,18 @@ const myRouter = createRouter({
     {
       path: '/schedule',
       component: Schedule,
+    },
+    {
+      path: '/ELDashboard',
+      component: ELDashboard,
+    },
+    {
+      path: '/FramingDashboard',
+      component: FramingDashboard,
+    },
+    {
+      path: '/StringerDashboard',
+      component: StringerDashboard,
     },
   ]
 })

@@ -1,28 +1,9 @@
 <script setup>
 import OutputChat1 from "./chat/OutputChat1.vue";
 import ELDefectChat01 from "./chat/ELDefectChat01.vue";
-import DefectChart01 from "./chat/DefectChart01.vue";
-import StringerOutput from "./chat/StringerOutput.vue";
-import DefectChart02 from "./chat/DefectChart02.vue";
-import DefectChart03 from "./chat/DefectChart03.vue";
-import {values} from "@antv/util";
-
-// let date = ref();
-// let currentTime = new Date();
-// const time1 = new Date(); // Replace with your desired time
-// time1.setHours(0);       // Set the hours
-// time1.setMinutes(0);    // Set the minutes
-// const time2 = new Date(); // Replace with your desired time
-// time2.setHours(6);      // Set the hours
-// time2.setMinutes(45);     // Set the minutes
-// if (currentTime <= time2 && currentTime >= time1) {
-//   currentTime = new Date(currentTime.getTime() - 24 * 60 * 60 * 1000);
-// }
-// date.value = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate()
-
-import getDate from '../../store/getDate';
-import StringerStatistics from "./chat/StringerStatistics.vue";
+import getDate from './../../../store/getDate';
 import ELhourlyChart from "./chat/ELhourlyChart.vue";
+import WipChart from "./chat/WipChart.vue";
 
 const getDateStore = getDate();
 console.log(getDateStore.getCurrentDay)
@@ -53,10 +34,10 @@ console.log(getDateStore.getCurrentDay)
     <a-col :span="8">
       <ELhourlyChart/>
     </a-col>
-    <a-divider type="vertical" style="height: 350px; background-color: #7cb305"/>
+    <a-divider type="vertical" style="height: 300px; background-color: #7cb305"/>
     <a-col :span="15">
       <div>
-        <StringerOutput/>
+        <WipChart/>
       </div>
     </a-col>
   </a-row>

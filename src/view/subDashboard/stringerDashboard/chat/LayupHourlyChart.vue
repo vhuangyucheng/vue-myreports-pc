@@ -3,7 +3,7 @@
 let firstNGRate = ref(0)
 let dataToShow = []
 
-import getDate from '../../../store/getDate';
+import getDate from '../../../../store/getDate';
 
 const getDateStore = getDate();
 
@@ -57,7 +57,9 @@ self.setInterval(() => {
   // console.log("EL-defect timer")
 }, 1000 * 60);
 
-
+function getHour(timestampStr) {
+  return new Date(timestampStr).getHours();
+}
 let dataFromBack = [];
 
 function axiosCall() {
@@ -71,7 +73,7 @@ function axiosCall() {
       EndTime: tomorrowDay + " 00:01:00",
       TimesFlag: 7,
       MaxResultCount: 1000,
-      RouteOperations: "EL-1",
+      RouteOperations: "layup",
       LineCodes: "SJC01-01",
       SkipCount: 0
     },
@@ -91,7 +93,7 @@ function axiosCall() {
         EndTime: tomorrowDay + " 00:01:00",
         TimesFlag: 7,
         MaxResultCount: 1000,
-        RouteOperations: "EL-1",
+        RouteOperations: "Layup",
         LineCodes: "SJC01-01",
         SkipCount: 1000
       },
@@ -102,56 +104,39 @@ function axiosCall() {
       dataFromBack = [...dataFromBack, ...response.data.result.items];
       // console.log(dataFromBack)
       // 分shift和原因
-      const groupedData = dataFromBack.reduce((groups, item) => {
-        const key = item.description;
 
-        // Create a new group if it doesn't exist
-        if (!groups[key]) {
-          groups[key] = {shift: item.shiftValue, reason: item.description, count: 0, items: []};
-        }
+// Object to hold hourly counts
+      const hourlyCounts = {};
 
-        // Increment the count and add the item to the group
-        groups[key].count++;
-        groups[key].items.push(item);
-
-        return groups;
-      }, {});
-      // console.log(groupedData)
-      firstNGRate.value = 0;
-      dataToShow = []
-      if (groupedData.hasOwnProperty("A:正常")) {
-        firstNGRate.value = ((1 - (groupedData["A:正常"].count / dataFromBack.length)) * 100).toFixed(1) + '%';
-      }
-      const dict = {
-        "A:虚焊": "虚焊MissWeld",
-        "A:其它": "其他Others",
-        "A:破片": "破片Scrap",
-      };
-      Object.entries(groupedData).forEach(([key, value]) => {
-        if (key !== "A:正常") {
-
-          dataToShow.push({
-            shift: value["shift"], //第几个班： First, Second, Third
-            // reason: dict[value["reason"]],//不良原因
-            reason: value["reason"],//不良原因
-            amount: value["count"],  //这个原因的数量
-          })
+// Count objects by hour
+      dataFromBack.forEach(obj => {
+        const hour = getHour(obj.creationTime);
+        if (hour in hourlyCounts) {
+          hourlyCounts[hour]++;
+        } else {
+          hourlyCounts[hour] = 1;
         }
       });
+
+// Display the hourly counts
+      dataToShow = []
+      for (const hour in hourlyCounts) {
+        // console.log(`Hour ${hour}: ${hourlyCounts[hour]} objects created`);
+        dataToShow.push({
+          hour: hour,//不良原因
+          amount: hourlyCounts[hour],  //这个原因的数量
+        })
+      }
       stackedColumnPlot.changeData(dataToShow)
     })
   })
 };
 
-
-
-
-
 onMounted(() => {
-  stackedColumnPlot = new Column('ELDefectChat01', {
+  stackedColumnPlot = new Column('ELDefectChat04', {
     data: dataToShow,
     // isGroup: true,
-    xField: 'reason',
+    xField: 'hour',
     yField: 'amount',
     colorField: 'seriesField', // 部分图表使用 seriesField
     color: ['#f391a9', '#00ae9d', '#000000'],
@@ -189,15 +174,12 @@ onMounted(() => {
   });
   stackedColumnPlot.render();
 })
-
-
 </script>
 
 <template>
   <div>
-    <div id="chartTitle">First-EL NG Rate 前道EL不良率 ： day早班=“{{ firstNGRate }}”</div>
-    <div id="chartTitle">NG reason breakdown distribution as below 不良原因分布如下图</div>
-    <div id="ELDefectChat01" :style="{height:'300px'}"/>
+    <div id="chartTitle">Layup hourly output</div>
+    <div id="ELDefectChat04" :style="{height:'300px'}"/>
   </div>
 </template>
 

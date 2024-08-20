@@ -17,9 +17,11 @@ self.setInterval(() => {
 let currentDay;
 let tomorrowDay;
 
-import getDate from '../../../store/getDate';
+import getDate from '../../../../store/getDate';
+import getDiff from '../../../../store/getDiff';
 
 const getDateStore = getDate();
+const getDiffStore = getDiff();
 
 
 function dailyTask() {
@@ -82,6 +84,7 @@ function axiosCall() {
     dataFromBack = response.data.result.items;
     // console.log(dataFromBack)
     let dayLayup = 0;
+    let Lamination = 0;
     let dayFirstel = 0;
     let dayFraming = 0;
     let daySorting = 0;
@@ -89,18 +92,21 @@ function axiosCall() {
     dataFromBack.forEach(item => {
           if (item.ShiftValue === 'Day') {
             dayLayup = dayLayup + parseInt(item.Layup);
+            Lamination = Lamination + parseInt(item.Lamination);
             dayFirstel = dayFirstel + parseInt(item["EL-1"]);
             dayFraming = dayFraming + parseInt(item["Framing&JB"]);
             daySorting = daySorting + parseInt(item.Sorting)
             dayPack = dayPack + parseInt(item.Pack);
           } else if (item.ShiftValue === 'Night') {
             dayLayup = dayLayup + parseInt(item.Layup);
+            Lamination = Lamination + parseInt(item.Lamination);
             dayFirstel = dayFirstel + parseInt(item["EL-1"]);
             dayFraming = dayFraming + parseInt(item["Framing&JB"]);
             daySorting = daySorting + parseInt(item.Sorting)
             dayPack = dayPack + parseInt(item.Pack);
           } else if (item.ShiftValue === 'NN') {
             dayLayup = dayLayup + parseInt(item.Layup);
+            Lamination = Lamination + parseInt(item.Lamination);
             dayFirstel = dayFirstel + parseInt(item["EL-1"]);
             dayFraming = dayFraming + parseInt(item["Framing&JB"]);
             daySorting = daySorting + parseInt(item.Sorting)
@@ -109,6 +115,7 @@ function axiosCall() {
         }
     )
 
+    getDiffStore.setWipDiff(Lamination - dayFraming)
     dataOutput = [
       {
         col_name: "Layup",

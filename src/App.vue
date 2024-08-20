@@ -58,13 +58,25 @@ const itemClick = ({item, key, keyPath}) => {
             <MailOutlined/>
           </template>
           <template #title>Line#2</template>
-          <a-menu-item key="/DailyReportDemo02">
-            <user-outlined/>
-            <span class="nav-text">real-time dashboard</span>
-          </a-menu-item>
+<!--          <a-menu-item key="/DailyReportDemo02">-->
+<!--            <user-outlined/>-->
+<!--            <span class="nav-text">real-time dashboard</span>-->
+<!--          </a-menu-item>-->
           <a-menu-item key="/dashboard">
             <user-outlined/>
             <span class="nav-text">dashboard2</span>
+          </a-menu-item>
+          <a-menu-item key="/ELDashboard">
+            <user-outlined/>
+            <span class="nav-text">EL1-Dashboard</span>
+          </a-menu-item>
+          <a-menu-item key="/StringerDashboard">
+            <user-outlined/>
+            <span class="nav-text">StringerDashboard</span>
+          </a-menu-item>
+          <a-menu-item key="/FramingDashboard">
+            <user-outlined/>
+            <span class="nav-text">FramingDashboard</span>
           </a-menu-item>
         </a-sub-menu>
 
@@ -182,7 +194,7 @@ const itemClick = ({item, key, keyPath}) => {
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        KPI dashboard 6.1.0, powered by IT department, Updated daily report scheme, published on 05/02/2024, email:
+        KPI dashboard 6.4.0, powered by IT department, Updated hourly output chart, published on 08/01/2024, email:
         helpdesk@solarjuiceamerica.com
       </a-layout-footer>
     </a-layout>
