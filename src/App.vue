@@ -11,6 +11,7 @@ import {
   ShopOutlined
 } from '@ant-design/icons-vue';
 import DefectInput from "./view/dailyInput/defectInput/DefectInput.vue";
+import WoReport from "./view/woReport/WoReport.vue";
 
 const router = useRouter();
 const itemClick = ({item, key, keyPath}) => {
@@ -78,6 +79,10 @@ const itemClick = ({item, key, keyPath}) => {
             <user-outlined/>
             <span class="nav-text">FramingDashboard</span>
           </a-menu-item>
+          <a-menu-item key="/HourlyDashboard">
+            <user-outlined/>
+            <span class="nav-text">HourlyDashboard</span>
+          </a-menu-item>
         </a-sub-menu>
 
         <!--        <a-sub-menu key="sub02">-->
@@ -101,29 +106,33 @@ const itemClick = ({item, key, keyPath}) => {
             <user-outlined/>
             <span class="nav-text">DailyInput2.0.0</span>
           </a-menu-item>
-          <a-menu-item key="/DefectInput">
-            <user-outlined/>
-            <span class="nav-text">DefectInput</span>
-          </a-menu-item>
-          <a-menu-item key="/IPQCReview">
-            <user-outlined/>
-            <span class="nav-text">IPQCReview</span>
-          </a-menu-item>
+<!--          <a-menu-item key="/DefectInput">-->
+<!--            <user-outlined/>-->
+<!--            <span class="nav-text">DefectInput</span>-->
+<!--          </a-menu-item>-->
+<!--          <a-menu-item key="/IPQCReview">-->
+<!--            <user-outlined/>-->
+<!--            <span class="nav-text">IPQCReview</span>-->
+<!--          </a-menu-item>-->
         </a-sub-menu>
 
         <a-sub-menu key="sub04">
           <template #icon>
             <MailOutlined/>
           </template>
-          <template #title>OutputReport</template>
+          <template #title>Report</template>
 
-          <a-menu-item key="/DailyReport">
+<!--          <a-menu-item key="/DailyReport">-->
+<!--            <user-outlined/>-->
+<!--            <span class="nav-text">DailyReport</span>-->
+<!--          </a-menu-item>-->
+          <a-menu-item key="/DailyReportDataTable">
             <user-outlined/>
             <span class="nav-text">DailyReport</span>
           </a-menu-item>
-          <a-menu-item key="/DailyReportDataTable">
+          <a-menu-item key="/woReport">
             <user-outlined/>
-            <span class="nav-text">DailyReportDataTable</span>
+            <span class="nav-text">WO-Report</span>
           </a-menu-item>
           <a-menu-item key="/WeeklyReport">
             <user-outlined/>
@@ -194,7 +203,7 @@ const itemClick = ({item, key, keyPath}) => {
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        KPI dashboard 6.4.0, powered by IT department, Updated hourly output chart, published on 08/01/2024, email:
+        KPI dashboard 6.5.0, powered by IT department, Updated hourly output chart, published on 08/20/2024, email:
         helpdesk@solarjuiceamerica.com
       </a-layout-footer>
     </a-layout>

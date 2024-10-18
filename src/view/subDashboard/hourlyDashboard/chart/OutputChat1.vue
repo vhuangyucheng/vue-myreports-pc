@@ -17,7 +17,7 @@ self.setInterval(() => {
 let currentDay;
 let tomorrowDay;
 
-import getDate from '../../../store/getDate';
+import getDate from '../../../../store/getDate';
 
 const getDateStore = getDate();
 
@@ -71,8 +71,8 @@ function axiosCall() {
       StartTime: currentDay + " 00:01:00",
       EndTime: tomorrowDay + " 00:01:00",
       TimesFlag: 7,
-      MaxResultCount: 1000
-      // LineCodes: "SJC01-01"
+      MaxResultCount: 1000,
+      LineCodes: "SJC01-01"
 
     },
     contentType: "json",
@@ -80,8 +80,7 @@ function axiosCall() {
     dataType: "json",
   }).then(function (response) {
     dataFromBack = response.data.result.items;
-    console.log(dataFromBack)
-    console.log("11")
+    // console.log(dataFromBack)
     let dayLayup = 0;
     let dayFirstel = 0;
     let dayFraming = 0;

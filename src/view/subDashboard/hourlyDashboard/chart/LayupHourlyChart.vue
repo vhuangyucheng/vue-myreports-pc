@@ -3,7 +3,7 @@
 let firstNGRate = ref(0)
 let dataToShow = []
 
-import getDate from '../../../store/getDate';
+import getDate from '../../../../store/getDate';
 
 const getDateStore = getDate();
 
@@ -83,7 +83,7 @@ function axiosCall() {
       EndTime: tomorrowDay + " 00:01:00",
       TimesFlag: 7,
       MaxResultCount: 1000,
-      RouteOperations: "EL-1",
+      RouteOperations: "layup",
       LineCodes: "SJC01-01",
       SkipCount: 0
     },
@@ -103,7 +103,7 @@ function axiosCall() {
         EndTime: tomorrowDay + " 00:01:00",
         TimesFlag: 7,
         MaxResultCount: 1000,
-        RouteOperations: "EL-1",
+        RouteOperations: "Layup",
         LineCodes: "SJC01-01",
         SkipCount: 1000
       },
@@ -121,7 +121,7 @@ function axiosCall() {
         dataType: "json",
       }).then(function (response) {
         const dataFromBack2 = response.data.data
-        let parseString = dataFromBack2['firstelHourly' + getWeekdayNumber()]
+        let parseString = dataFromBack2['layupHourly' + getWeekdayNumber()]
         let items = parseString.split(',');
         // console.log(dataFromBack)
         // 分shift和原因
@@ -147,9 +147,11 @@ function axiosCall() {
           type: "to target",
         })
 
+
+
         items.forEach(item => {
           let [col_name, amount] = item.split('=');
-          if(hourlyCounts[col_name] === undefined ||  amount >= hourlyCounts[col_name] )
+          if(hourlyCounts[col_name] === undefined ||  amount > hourlyCounts[col_name] )
             dataToShow.push({
               col_name: col_name,
               amount: amount - hourlyCounts[col_name] || parseInt(amount), // Convert amount to an integer
@@ -167,9 +169,9 @@ function axiosCall() {
         }
         // console.log(hourlyCounts)
         //
-        // console.log(dataToShow)
-        // stackedColumnPlot.changeData(dataToShow)
         dataToShow.sort((a, b) => Number(a.col_name) - Number(b.col_name));
+        console.log(dataToShow)
+        // stackedColumnPlot.changeData(dataToShow)
         column.changeData(dataToShow)
       })
 
@@ -221,7 +223,7 @@ function axiosCall() {
 // })
 let column;
 onMounted(() => {
-  column = new Column('ELDefectChat05', {
+  column = new Column('ELDefectChat04', {
     data: dataToShow,
     xField: 'col_name',
     yField: 'amount',
@@ -269,8 +271,8 @@ onMounted(() => {
 
 <template>
   <div>
-    <div id="chartTitle">FirstEL hourly output</div>
-    <div id="ELDefectChat05" :style="{height:'450px'}"/>
+    <div id="chartTitle">Layup hourly output</div>
+    <div id="ELDefectChat04" :style="{height:'450px'}"/>
   </div>
 </template>
 

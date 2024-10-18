@@ -100,7 +100,7 @@ function axiosCall() {
       dataType: "json",
     }).then(function (response) {
       dataFromBack = [...dataFromBack, ...response.data.result.items];
-      // console.log(dataFromBack)
+      console.log(dataFromBack)
       // 分shift和原因
       const groupedData = dataFromBack.reduce((groups, item) => {
         const key = item.description;
@@ -126,6 +126,8 @@ function axiosCall() {
         "A:虚焊": "虚焊MissWeld",
         "A:其它": "其他Others",
         "A:破片": "破片Scrap",
+        "A:短路": "短路Short",
+        "A:隐裂": "隐裂Hide crack",
       };
       Object.entries(groupedData).forEach(([key, value]) => {
         if (key !== "A:正常") {
@@ -133,7 +135,7 @@ function axiosCall() {
           dataToShow.push({
             shift: value["shift"], //第几个班： First, Second, Third
             // reason: dict[value["reason"]],//不良原因
-            reason: value["reason"],//不良原因
+            reason: dict[value["reason"]] || value["reason"] ,//不良原因
             amount: value["count"],  //这个原因的数量
           })
         }
@@ -160,7 +162,7 @@ onMounted(() => {
     xAxis: {
       label: {
         style: {
-          fontSize: 30, // Adjust y-axis label font size
+          fontSize: 15, // Adjust y-axis label font size
           fontWeight: 'bold',
         }
       }

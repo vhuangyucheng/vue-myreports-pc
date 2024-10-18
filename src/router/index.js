@@ -21,6 +21,8 @@ import Test from "../view/test/Test.vue";
 import ELDashboard from "../view/subDashboard/ELDashboard/ELDashboard.vue";
 import StringerDashboard from "../view/subDashboard/stringerDashboard/StringerDashboard.vue";
 import FramingDashboard from "../view/subDashboard/framingDashboard/FramingDashboard.vue";
+import HourlyDashboard from "../view/subDashboard/hourlyDashboard/HourlyDashboard.vue";
+import WoReport from "../view/woReport/WoReport.vue"
 
 
 const myRouter = createRouter({
@@ -126,6 +128,14 @@ const myRouter = createRouter({
     {
       path: '/StringerDashboard',
       component: StringerDashboard,
+    },
+    {
+      path: '/HourlyDashboard',
+      component: HourlyDashboard,
+    },
+    {
+      path: '/woReport',
+      component: WoReport,
     },
   ]
 })

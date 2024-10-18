@@ -1,9 +1,9 @@
 <script setup>
-import OutputChat1 from "./chat/OutputChat1.vue";
-import ELDefectChat01 from "./chat/ELDefectChat01.vue";
 import getDate from './../../../store/getDate';
-import ELhourlyChart from "./chat/ELhourlyChart.vue";
-import WipChart from "./chat/WipChart.vue";
+import FramingHourlyChart from "./chart/FramingHourlyChart.vue";
+import OutputChart from "./chart/OutputChat1.vue";
+import ELhourlyChart from "./chart/ELhourlyChart.vue";
+import LayupHourlyChart from "./chart/LayupHourlyChart.vue";
 
 const getDateStore = getDate();
 console.log(getDateStore.getCurrentDay)
@@ -21,27 +21,30 @@ console.log(getDateStore.getCurrentDay)
       <div id="chartTitle">{{ getDateStore.getCurrentDay }} : Floor productivity 二线各个工作站生产力</div>
       <div id="chartTitle">（排版机, 前道EL, 装框, 分档, 打包)</div>
       <div>
-        <OutputChat1 :style="{height:'300px'}"/>
+        <OutputChart />
       </div>
     </a-col>
-    <a-divider type="vertical" style="height: 350px; background-color: #7cb305"/>
+    <a-divider type="vertical" style="height: 500px; background-color: #7cb305"/>
     <a-col :span="11">
-      <ELDefectChat01/>
+      <div>
+        <LayupHourlyChart :style="{height:'500px'}"/>
+      </div>
     </a-col>
   </a-row>
   <a-divider style="height: 2px; background-color: #7cb305"/>
   <a-row>
-    <a-col :span="8">
-      <ELhourlyChart/>
-    </a-col>
-    <a-divider type="vertical" style="height: 300px; background-color: #7cb305"/>
-    <a-col :span="15">
+    <a-col :span="12">
       <div>
-        <WipChart />
+        <ELhourlyChart/>
+      </div>
+    </a-col>
+    <a-divider type="vertical" style="height: 500px; background-color: #7cb305"/>
+    <a-col :span="11">
+      <div>
+        <FramingHourlyChart/>
       </div>
     </a-col>
   </a-row>
-
 
 </template>
 

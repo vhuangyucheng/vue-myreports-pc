@@ -38,6 +38,26 @@ let packing5 = ref(0)
 let packing6 = ref(0)
 let packing7 = ref(0)
 
+const HourlyFormState = reactive({
+  layupHourly: '',
+  firstelHourly: '',
+  framingHourly: '',
+  sortingHourly: '',
+  packingHourly: '',
+});
+
+const getWeekdayNumber = () => {
+  const date = new Date();
+  const day = date.getDay(); // getDay() returns 0 for Sunday, 1 for Monday, ..., 6 for Saturday
+
+  // Convert to 1 (Monday) to 7 (Sunday) format
+  const weekdayNumber = day === 0 ? 7 : day;
+  console.log(weekdayNumber)
+  return weekdayNumber;
+};
+
+const daySelector = ref(getWeekdayNumber()+"");
+
 const onSubmit1 = (event) => {
   console.log(layup1)
   axios({
@@ -135,7 +155,57 @@ axios({
   packing5.value = dataFromBack.packing5
   packing6.value = dataFromBack.packing6
   packing7.value = dataFromBack.packing7
+  HourlyFormState.layupHourly = dataFromBack['layupHourly'+daySelector.value]
+  HourlyFormState.firstelHourly = dataFromBack['firstelHourly'+daySelector.value]
+  HourlyFormState.framingHourly = dataFromBack['framingHourly'+daySelector.value]
+  HourlyFormState.sortingHourly = dataFromBack['sortingHourly'+daySelector.value]
+  HourlyFormState.packingHourly = dataFromBack['packingHourly'+daySelector.value]
 })
+
+const weekdayOnChange = (event) => {
+  // console.log("weekdayOnChange")
+  axios({
+    url: "/apiStringer/plan/getSchedule",
+    method: "POST",
+    data: {},
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    const dataFromBack = response.data.data
+    HourlyFormState.layupHourly   =   dataFromBack['layupHourly'+daySelector.value]
+    HourlyFormState.firstelHourly = dataFromBack['firstelHourly'+daySelector.value]
+    HourlyFormState.framingHourly = dataFromBack['framingHourly'+daySelector.value]
+    HourlyFormState.sortingHourly = dataFromBack['sortingHourly'+daySelector.value]
+    HourlyFormState.packingHourly = dataFromBack['packingHourly'+daySelector.value]
+  })
+}
+
+const onFinish = values => {
+  axios({
+    url: "/apiStringer/plan/setSchedule",
+    method: "POST",
+    data: {
+      scheduleId: 1,
+      [`layupHourly${daySelector.value}`]   : HourlyFormState.layupHourly  ,
+      [`firstelHourly${daySelector.value}`] : HourlyFormState.firstelHourly,
+      [`framingHourly${daySelector.value}`] : HourlyFormState.framingHourly,
+      [`sortingHourly${daySelector.value}`] : HourlyFormState.sortingHourly,
+      [`packingHourly${daySelector.value}`] : HourlyFormState.packingHourly,
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    if (response.data.code === "1") {
+      message.success("提交成功 submit succeed", 4)
+    }
+  })
+};
+
+const onFinishFailed = errorInfo => {
+  console.log('Failed:', errorInfo);
+};
 
 </script>
 
@@ -513,6 +583,81 @@ axios({
     </a-col>
   </a-row>
   <a-button type="primary" @click="onSubmit1">提交Submit</a-button>
+  <a-divider style="height: 2px; background-color: #7cb305"/>
+  <h1 style="color: cornflowerblue">
+    Hourly Breakdown Target Setup
+  </h1>
+  <a-row>
+    <a-col :span="24">
+      <a-radio-group v-model:value="daySelector" button-style="solid" size="large" @change="weekdayOnChange">
+        <a-radio-button value="1">Monday</a-radio-button>
+        <a-radio-button value="2">Tuesday</a-radio-button>
+        <a-radio-button value="3">Wednesday</a-radio-button>
+        <a-radio-button value="4">Thursday</a-radio-button>
+        <a-radio-button value="5">Friday</a-radio-button>
+        <a-radio-button value="6">Saturday</a-radio-button>
+        <a-radio-button value="7">Sunday</a-radio-button>
+      </a-radio-group>
+      <div>
+      <div> Example: 8=60,9=70,10=66</div>
+        <div>
+          <a-form
+              :model="HourlyFormState"
+              name="HourlyFormState"
+              :label-col="{ span: 3 }"
+              :wrapper-col="{ span: 21 }"
+              autocomplete="off"
+              @finish="onFinish"
+              @finishFailed="onFinishFailed"
+          >
+            <a-form-item
+                label="Layup"
+                name="layupHourly"
+                :rules="[{ required: true, message: '不能为空cannot empty' }]"
+            >
+              <a-input v-model:value="HourlyFormState.layupHourly"/>
+            </a-form-item>
+
+            <a-form-item
+                label="FirstEL"
+                name="firstelHourly"
+                :rules="[{ required: true, message: '不能为空cannot empty' }]"
+            >
+              <a-input v-model:value="HourlyFormState.firstelHourly"/>
+            </a-form-item>
+
+            <a-form-item
+                label="Framing"
+                name="framingHourly"
+                :rules="[{ required: true, message: '不能为空cannot empty' }]"
+            >
+              <a-input v-model:value="HourlyFormState.framingHourly"/>
+            </a-form-item>
+
+            <a-form-item
+                label="Sorting"
+                name="sortingHourly"
+                :rules="[{ required: true, message: '不能为空cannot empty' }]"
+            >
+              <a-input v-model:value="HourlyFormState.sortingHourly"/>
+            </a-form-item>
+
+            <a-form-item
+                label="Packing"
+                name="packingHourly"
+                :rules="[{ required: true, message: '不能为空cannot empty' }]"
+            >
+              <a-input v-model:value="HourlyFormState.packingHourly"/>
+            </a-form-item>
+
+            <a-form-item :wrapper-col="{ offset: 4,span: 16 }">
+              <a-button type="primary" html-type="submit" >提交Submit</a-button>
+            </a-form-item>
+          </a-form>
+        </div>
+      </div>
+    </a-col>
+  </a-row>
 
 </template>
 

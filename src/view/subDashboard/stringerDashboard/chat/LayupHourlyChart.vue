@@ -9,7 +9,6 @@ const getDateStore = getDate();
 
 let currentDay;
 let tomorrowDay;
-let stackedColumnPlot;
 
 function dailyTask() {
   // Your task logic goes here
@@ -60,7 +59,18 @@ self.setInterval(() => {
 function getHour(timestampStr) {
   return new Date(timestampStr).getHours();
 }
+
 let dataFromBack = [];
+
+const getWeekdayNumber = () => {
+  const date = new Date();
+  const day = date.getDay(); // getDay() returns 0 for Sunday, 1 for Monday, ..., 6 for Saturday
+
+  // Convert to 1 (Monday) to 7 (Sunday) format
+  const weekdayNumber = day === 0 ? 7 : day;
+  console.log(weekdayNumber)
+  return weekdayNumber;
+};
 
 function axiosCall() {
   // console.log("currentDay", currentDay)
@@ -102,50 +112,127 @@ function axiosCall() {
       dataType: "json",
     }).then(function (response) {
       dataFromBack = [...dataFromBack, ...response.data.result.items];
-      // console.log(dataFromBack)
-      // 分shift和原因
+      axios({
+        url: "/apiStringer/plan/getSchedule",
+        method: "POST",
+        data: {},
+        contentType: "json",
+        processData: false,
+        dataType: "json",
+      }).then(function (response) {
+        const dataFromBack2 = response.data.data
+        let parseString = dataFromBack2['layupHourly' + getWeekdayNumber()]
+        let items = parseString.split(',');
+        // console.log(dataFromBack)
+        // 分shift和原因
 
-// Object to hold hourly counts
-      const hourlyCounts = {};
+        // Object to hold hourly counts
+        const hourlyCounts = {};
 
-// Count objects by hour
-      dataFromBack.forEach(obj => {
-        const hour = getHour(obj.creationTime);
-        if (hour in hourlyCounts) {
-          hourlyCounts[hour]++;
-        } else {
-          hourlyCounts[hour] = 1;
-        }
-      });
+        // Count objects by hour
+        dataFromBack.forEach(obj => {
+          const hour = getHour(obj.creationTime);
+          if (hour in hourlyCounts) {
+            hourlyCounts[hour]++;
+          } else {
+            hourlyCounts[hour] = 1;
+          }
+        });
 
-// Display the hourly counts
-      dataToShow = []
-      for (const hour in hourlyCounts) {
-        // console.log(`Hour ${hour}: ${hourlyCounts[hour]} objects created`);
+        // Display the hourly counts
+        dataToShow = []
         dataToShow.push({
-          hour: hour,//不良原因
-          amount: hourlyCounts[hour],  //这个原因的数量
+          col_name: '0',//不良原因
+          amount: 0,  //这个原因的数量
+          type: "to target",
         })
-      }
-      stackedColumnPlot.changeData(dataToShow)
+
+        items.forEach(item => {
+          let [col_name, amount] = item.split('=');
+          if(hourlyCounts[col_name] === undefined ||  amount >= hourlyCounts[col_name] )
+            dataToShow.push({
+              col_name: col_name,
+              amount: amount - hourlyCounts[col_name] || parseInt(amount), // Convert amount to an integer
+              type: "to target"
+            });
+        });
+
+        for (const hour in hourlyCounts) {
+          // console.log(`Hour ${hour}: ${hourlyCounts[hour]} objects created`);
+          dataToShow.push({
+            col_name: hour,//不良原因
+            amount: hourlyCounts[hour],  //这个原因的数量
+            type: "productivity",
+          })
+        }
+        // console.log(hourlyCounts)
+        //
+        // console.log(dataToShow)
+        // stackedColumnPlot.changeData(dataToShow)
+        dataToShow.sort((a, b) => Number(a.col_name) - Number(b.col_name));
+        column.changeData(dataToShow)
+      })
+
     })
   })
 };
 
+// onMounted(() => {
+//   stackedColumnPlot = new Column('ELDefectChat04', {
+//     data: dataToShow,
+//     // isGroup: true,
+//     xField: 'hour',
+//     yField: 'amount',
+//     colorField: 'seriesField', // 部分图表使用 seriesField
+//     color: ['#f391a9', '#00ae9d', '#000000'],
+//     /** 设置间距 */
+//     // marginRatio: 0.1,
+//     xAxis: {
+//       label: {
+//         style: {
+//           fontSize: 30, // Adjust y-axis label font size
+//           fontWeight: 'bold',
+//         }
+//       }
+//     },
+//     yAxis: {
+//       label: {
+//         style: {
+//           fontSize: 23, // Adjust y-axis label font size
+//           fontWeight: 'bold',
+//         }
+//       }
+//     },
+//     label: {
+//       // 可手动配置 label 数据标签位置
+//       position: 'top', // 'top', 'middle', 'bottom'
+//       // 可配置附加的布局方法
+//       layout: [
+//         // 柱形图数据标签位置自动调整
+//         {type: 'interval-adjust-position'},
+//         // 数据标签防遮挡
+//         {type: 'interval-hide-overlap'},
+//         // 数据标签文颜色自动调整
+//         {type: 'adjust-color'},
+//       ],
+//     },
+//   });
+//   stackedColumnPlot.render();
+// })
+let column;
 onMounted(() => {
-  stackedColumnPlot = new Column('ELDefectChat04', {
+  column = new Column('ELDefectChat04', {
     data: dataToShow,
-    // isGroup: true,
-    xField: 'hour',
+    xField: 'col_name',
     yField: 'amount',
-    colorField: 'seriesField', // 部分图表使用 seriesField
-    color: ['#f391a9', '#00ae9d', '#000000'],
-    /** 设置间距 */
-    // marginRatio: 0.1,
+    // isGroup: true,
+    isStack: true,
+    seriesField: 'type',
+    // groupField: 'col_name',
     xAxis: {
       label: {
         style: {
-          fontSize: 30, // Adjust y-axis label font size
+          fontSize: 43, // Adjust y-axis label font size
           fontWeight: 'bold',
         }
       }
@@ -159,30 +246,33 @@ onMounted(() => {
       }
     },
     label: {
+
       // 可手动配置 label 数据标签位置
-      position: 'top', // 'top', 'middle', 'bottom'
+      position: 'middle', // 'top', 'bottom', 'middle'
       // 可配置附加的布局方法
       layout: [
-        // 柱形图数据标签位置自动调整
+        // // 柱形图数据标签位置自动调整
         {type: 'interval-adjust-position'},
-        // 数据标签防遮挡
+        // // 数据标签防遮挡
         {type: 'interval-hide-overlap'},
-        // 数据标签文颜色自动调整
+        // // 数据标签文颜色自动调整
         {type: 'adjust-color'},
       ],
     },
+    colorField: 'type', // 部分图表使用 seriesField
+    color: ['#f391a9', '#00ae9d', '#000000'],
   });
-  stackedColumnPlot.render();
+  column.render();
+  // console.log("onMount")
 })
 </script>
 
 <template>
   <div>
     <div id="chartTitle">Layup hourly output</div>
-    <div id="ELDefectChat04" :style="{height:'300px'}"/>
+    <div id="ELDefectChat04" :style="{height:'450px'}"/>
   </div>
 </template>
-
 
 
 <style scoped>

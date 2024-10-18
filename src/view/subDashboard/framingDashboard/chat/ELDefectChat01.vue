@@ -160,7 +160,7 @@ onMounted(() => {
     xAxis: {
       label: {
         style: {
-          fontSize: 30, // Adjust y-axis label font size
+          fontSize: 15, // Adjust y-axis label font size
           fontWeight: 'bold',
         }
       }
