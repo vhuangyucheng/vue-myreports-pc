@@ -1,27 +1,30 @@
 <script setup>
 import {toRefs, defineProps} from 'vue'
 
-const props = defineProps(['dataFromPa', 'chartName'])
+const props = defineProps(['dataFromPa'])
 
 let dataList = ref([])
 
 watch(() => props.dataFromPa, (newVal, oldVal) => {
-  // console.log('new', newVal)
-  // newVal.forEach(item => {
-  //   console.log(item.shiftId)
-  // })
+  console.log('new1', newVal)
+
   dataList.value = newVal
 })
 
 const dateConvertor = (date) => {
-  switch (date % 10) {
-    case 1:
-      return "Day"
-    case 2:
-      return "Night"
-    case 3:
-      return "NN"
+  let temp;
+  let line;
+  let shiftName;
+  let lineMap = {
+    1: "line1",
+    2: "line2"
   }
+  let shiftNameMap = {
+    1:"Day",
+    2:"Night",
+    3:"NN"
+  }
+  return   `${date.toString().substring(0, 4)}-${date.toString().substring(4, 6)}-${date.toString().substring(6, 8)}:`
 }
 </script>
 
@@ -29,7 +32,9 @@ const dateConvertor = (date) => {
   <table class="tg">
     <thead>
     <tr>
-      <th class="tg-grda" colspan="8">(层压前)电池片损耗率<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cell Loss Rate (before lamination)</th>
+      <th class="tg-grda" colspan="8">(层压前)电池片损耗率<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cell Loss Rate (before
+        lamination)
+      </th>
     </tr>
     </thead>
     <tbody>
@@ -53,23 +58,24 @@ const dateConvertor = (date) => {
     <tr v-for="(item, index) in dataList" :key="index">
       <td class="tg-f4yw"> {{ dateConvertor(item.shiftId) }}</td>
       <td class="tg-vxga">{{ item.cellsInput }}</td>
-      <td class="tg-vxga">{{ item.stringerScrap   }}</td>
-      <td class="tg-vxga">{{ item.repairScrap  }}</td>
+      <td class="tg-vxga">{{ item.stringerScrap }}</td>
+      <td class="tg-vxga">{{ item.repairScrap }}</td>
       <td class="tg-vxga">{{ item.incomingScrap }}</td>
-      <td class="tg-vxga">{{ item.stringerScrap + item.repairScrap  + item.incomingScrap }}</td>
+      <td class="tg-vxga">{{ item.stringerScrap + item.repairScrap + item.incomingScrap }}</td>
       <td class="tg-vxga"
           :style="{ backgroundColor: (((item.stringerScrap + item.repairScrap )/item.cellsInput).toFixed(4)*100).toFixed(2) >0.2 ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       >
-        {{ (((item.stringerScrap + item.repairScrap ) / item.cellsInput).toFixed(4) * 100).toFixed(2) }}%
-        ( {{ (((item.stringerScrap  ) / item.cellsInput).toFixed(4) * 100).toFixed(2) }}% +
-        {{ (((item.repairScrap ) / item.cellsInput).toFixed(4) * 100).toFixed(2) }}%)
+        {{ (((item.stringerScrap + item.repairScrap) / item.cellsInput).toFixed(4) * 100).toFixed(2) }}%
+        ( {{ (((item.stringerScrap) / item.cellsInput).toFixed(4) * 100).toFixed(2) }}% +
+        {{ (((item.repairScrap) / item.cellsInput).toFixed(4) * 100).toFixed(2) }}%)
       </td>
       <td class="tg-vxga"
           :style="{ backgroundColor: (((item.incomingScrap) / item.cellsInput).toFixed(4) * 100).toFixed(2) >0.3 ? '#fd1e5a' : '#00ae9d', color: 'white' }"
-      >{{ (((item.incomingScrap) / item.cellsInput).toFixed(4) * 100).toFixed(2) }}%</td>
+      >{{ (((item.incomingScrap) / item.cellsInput).toFixed(4) * 100).toFixed(2) }}%
+      </td>
       <td class="tg-vxga"
           :style="{ backgroundColor: ((((item.stringerScrap + item.repairScrap  + item.incomingScrap) / item.cellsInput) * 100).toFixed(2)) >0.5 ? '#fd1e5a' : '#00ae9d', color: 'white' }">
-        {{ (((item.stringerScrap + item.repairScrap  + item.incomingScrap) / item.cellsInput) * 100).toFixed(2) }}%
+        {{ (((item.stringerScrap + item.repairScrap + item.incomingScrap) / item.cellsInput) * 100).toFixed(2) }}%
       </td>
     </tr>
 

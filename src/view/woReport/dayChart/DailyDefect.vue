@@ -1,27 +1,33 @@
 <script setup>
 import {toRefs, defineProps} from 'vue'
 
-const props = defineProps(['dataFromPa', 'chartName'])
+const props = defineProps(['dataFromPa'])
 
 let dataList = ref([])
 
 watch(() => props.dataFromPa, (newVal, oldVal) => {
-  // console.log('new', newVal)
-  // newVal.forEach(item => {
-  //   console.log(item.shiftId)
-  // })
+  console.log('new2', newVal)
+
   dataList.value = newVal
 })
 
 const dateConvertor = (date) => {
-  switch (date % 10) {
-    case 1:
-      return "Day"
-    case 2:
-      return "Night"
-    case 3:
-      return "NN"
+  let temp;
+  let line;
+  let shiftName;
+  let lineMap = {
+    1: "line1",
+    2: "line2"
   }
+  let shiftNameMap = {
+    1:"Day",
+    2:"Night",
+    3:"NN"
+  }
+  return   `${date.toString().substring(0, 4)}-${date.toString().substring(4, 6)}-${date.toString().substring(6, 8)}:`
+      // + lineMap[Math.floor((date / 10) % 10)] +
+      // "<br>" +
+      // shiftNameMap[date % 10];
 }
 
 const PercentageConvertor = (station) => {
@@ -57,36 +63,43 @@ const PercentageConvertor = (station) => {
       <td class="tg-choe">电池串合格率<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String Yeild Rate</td>
       <td class="tg-choe">层前EL合格率<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EL Before Lamination Yeild Rate</td>
       <td class="tg-choe">层压合格率<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lamination Yeild Rate</td>
-      <td class="tg-choe">层压后外观检Appearance&nbsp;&nbsp;&nbsp;inspection after lamination</td>
+      <td class="tg-choe">层压后外观检<br>&nbsp;&nbsp;&nbsp;Appearance inspection after lamination</td>
       <td class="tg-choe">组框合格率<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Framming Yeild Rate</td>
       <td class="tg-choe">接线盒合格率<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Junction Box Yeild Rate</td>
       <td class="tg-jc84">功率测试合格率<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IV Test Yeild Rate</td>
       <td class="tg-jc84">终检合格率<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Final Inspection Yeild Rate</td>
       <td class="tg-jc84">一次通过率<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;One Time Pass Rate</td>
+      <td class="tg-jc84">组件降级<br>Module Defect</td>
+      <td class="tg-jc84">组件报废<br>Module Scraps</td>
+      <td class="tg-jc84">打包组件<br>Packed Module Output</td>
+
     </tr>
     <tr>
       <td class="tg-lg43">目标值<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target</td>
-      <td class="tg-h8pl">{{ PercentageConvertor(chartName+"Stringer") }}%</td>
+      <td class="tg-h8pl">{{ PercentageConvertor("line2"+"Stringer") }}%</td>
       <td class="tg-h8pl">98.00%</td>
-      <td class="tg-h8pl">{{ PercentageConvertor(chartName+"EL") }}%</td>
+      <td class="tg-h8pl">{{ PercentageConvertor("line2"+"EL") }}%</td>
       <td class="tg-h8pl">100.00%</td>
       <td class="tg-h8pl">99.80%</td>
       <td class="tg-h8pl">100.00%</td>
       <td class="tg-h8pl">99.80%</td>
       <td class="tg-fyjm">99.80%</td>
       <td class="tg-fyjm">99.80%</td>
-      <td class="tg-fyjm">{{ PercentageConvertor(chartName+"Onepass") }}%</td>
+      <td class="tg-fyjm">{{ PercentageConvertor("line2"+"Onepass") }}%</td>
+      <td class="tg-fyjm">0</td>
+      <td class="tg-fyjm">0</td>
+      <td class="tg-fyjm">/</td>
     </tr>
     <tr v-for="(item, index) in dataList" :key="index">
-      <td class="tg-f4yw"> {{ dateConvertor(item.shiftId) }}</td>
+      <td class="tg-f4yw">  <div v-html="dateConvertor(item.shiftId)"></div></td>
       <td class="tg-nrix"
-          :style="{ backgroundColor: (100-((((item.stringerScrap + item.repairScrap + item.incidentScrap + item.incomingScrap) / item.cellsInput) * 100).toFixed(2))) < PercentageConvertor(chartName+'Stringer') ? '#fd1e5a' : '#00ae9d', color: 'white' }"
+          :style="{ backgroundColor: (100-((((item.stringerScrap + item.repairScrap + item.incidentScrap + item.incomingScrap) / item.cellsInput) * 100).toFixed(2))) < PercentageConvertor('line2'+'Stringer') ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       > {{ 100-((((item.stringerScrap + item.repairScrap + item.incidentScrap + item.incomingScrap) / item.cellsInput) * 100).toFixed(2)) }}%</td>
       <td class="tg-nrix"
           :style="{ backgroundColor:  Number((((item.stringer1Output + item.stringer2Output + item.stringer3Output) / (item.stringer1Output + item.stringer2Output + item.stringer3Output + item.stringer1Miswelding + item.stringer1Overwelding + item.stringer1Split + item.stringer1Crack + item.stringer1Others + item.stringer2Miswelding + item.stringer2Overwelding + item.stringer2Split + item.stringer2Crack + item.stringer2Others + item.stringer3Miswelding + item.stringer3Overwelding + item.stringer3Split + item.stringer3Crack + item.stringer3Others)) * 100).toFixed(2)) < 98 ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       >{{  Number((((item.stringer1Output + item.stringer2Output + item.stringer3Output) / (item.stringer1Output + item.stringer2Output + item.stringer3Output + item.stringer1Miswelding + item.stringer1Overwelding + item.stringer1Split + item.stringer1Crack + item.stringer1Others + item.stringer2Miswelding + item.stringer2Overwelding + item.stringer2Split + item.stringer2Crack + item.stringer2Others + item.stringer3Miswelding + item.stringer3Overwelding + item.stringer3Split + item.stringer3Crack + item.stringer3Others)) * 100).toFixed(2))}}%</td>
       <td class="tg-nrix"
-          :style="{ backgroundColor: Number(((1 - (item.firstel2Defect / item.firstel2Output)) * 100).toFixed(2)) < PercentageConvertor(chartName+'EL') ? '#fd1e5a' : '#00ae9d', color: 'white' }"
+          :style="{ backgroundColor: Number(((1 - (item.firstel2Defect / item.firstel2Output)) * 100).toFixed(2)) < PercentageConvertor('line2'+'EL') ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       >{{Number(((1 - (item.firstel2Defect / item.firstel2Output)) * 100).toFixed(2))}}%</td>
       <td class="tg-nrix"
           :style="{ backgroundColor: Number(((1 - (item.laminationDefect / item.laminator1Output)) * 100).toFixed(2)) < 100 ? '#fd1e5a' : '#00ae9d', color: 'white' }"
@@ -116,7 +129,7 @@ const PercentageConvertor = (station) => {
           * (Number(((1 - (item.junctionboxDefect / item.framingOutput)) * 100).toFixed(2)))
           * (Number(((1 - (item.ivDefect / item.secondelOutput)) * 100).toFixed(2)))
           * (Number(((1 - (item.secondelDefect / item.secondelOutput)) * 100).toFixed(2)))
-          * 0.000001 * 0.000001 * 0.0001).toFixed(2)) < PercentageConvertor(chartName+'Onepass') ? '#fd1e5a' : '#00ae9d', color: 'white' }"
+          * 0.000001 * 0.000001 * 0.0001).toFixed(2)) < PercentageConvertor('line2'+'Onepass') ? '#fd1e5a' : '#00ae9d', color: 'white' }"
       >{{
           (((100-((((item.stringerScrap + item.repairScrap + item.incidentScrap + item.incomingScrap) / item.cellsInput) * 100).toFixed(2)))
           * (Number((((item.stringer1Output + item.stringer2Output + item.stringer3Output) / (item.stringer1Output + item.stringer2Output + item.stringer3Output + item.stringer1Miswelding + item.stringer1Overwelding + item.stringer1Split + item.stringer1Crack + item.stringer1Others + item.stringer2Miswelding + item.stringer2Overwelding + item.stringer2Split + item.stringer2Crack + item.stringer2Others + item.stringer3Miswelding + item.stringer3Overwelding + item.stringer3Split + item.stringer3Crack + item.stringer3Others)) * 100).toFixed(2)))
@@ -129,6 +142,11 @@ const PercentageConvertor = (station) => {
           * (Number(((1 - (item.secondelDefect / item.secondelOutput)) * 100).toFixed(2)))
           * 0.000001 * 0.000001 * 0.0001).toFixed(2))
         }}%</td>
+      <td class="tg-nrix"
+          :style="{ backgroundColor: item.finishedgoodDegrade !==0 ? '#fd1e5a' : '#00ae9d', color: 'white' }"> {{ item.finishedgoodDegrade }}</td>
+      <td class="tg-nrix"
+          :style="{ backgroundColor: item.finishedgoodScrap !==0 ? '#fd1e5a' : '#00ae9d', color: 'white' }"> {{ item.finishedgoodScrap }}</td>
+      <td class="tg-nrix"> {{ item.packing }}</td>
     </tr>
     </tbody>
   </table>

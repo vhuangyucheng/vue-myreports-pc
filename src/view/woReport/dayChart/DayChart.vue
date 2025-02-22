@@ -1,46 +1,92 @@
 <script setup>
-import DailyOutput from "./DailyOutput.vue";
-import DailyScrap from "./DailyScrap.vue";
 import {toRefs, defineProps} from 'vue'
 import DailyDefect from "./DailyDefect.vue";
-import DailyDegrade from "./DailyDegrade.vue";
-import Comment from "./Comment.vue";
-
-const props = defineProps(['value1', 'value2'])
+import DayScrap from "./DailyScrap.vue";
+import axios from "axios";
+import {message} from "ant-design-vue";
 
 // console.log(props.value1)
 
-watch(() => props.value1, (newVal, oldVal) => {
-  console.log('1监听引用类型数据dataList')
-  // console.log('new', newVal)
-  // console.log('old', oldVal)
+const selectorOptions = ref([]);
+const selectorInit = ref([]);
+const dataFromPa = ref([]);
+
+const ShiftOnChange = (value) => {
+  console.log(value)
+  listWo(value)
+}
+
+const listWo = (wo)=>{
+  axios({
+    url: "/apiStringer/shiftRecord/listShiftRecordByWo",
+    method: "POST",
+    data: {
+      wo:wo
+    },
+    contentType: "json",
+    processData: false,
+    dataType: "json",
+  }).then(function (response) {
+    console.log(response.data.data)
+    dataFromPa.value = response.data.data
+  })
+}
+
+axios({
+  url: "/apiStringer/setting/listWo",
+  method: "POST",
+  data: {
+  },
+  contentType: "json",
+  processData: false,
+  dataType: "json",
+}).then(function (response) {
+  response.data.data.forEach((value, i) => {
+    selectorOptions.value.push({
+      value : value.woName,
+    });
+  });
 })
+
+axios({
+  url: "/apiStringer/setting/getSetting",
+  method: "POST",
+  data: {
+  },
+  contentType: "json",
+  processData: false,
+  dataType: "json",
+}).then(function (response) {
+  // console.log(response.data.data.currentWo)
+  selectorInit.value.push(response.data.data.currentWo)
+  listWo(response.data.data.currentWo)
+})
+
+
 
 </script>
 
 <template>
   <div>
-    <a-typography-title :level="2" type="success">{{ props.value2 }}</a-typography-title>
-    <a-row justify="space-between" align="bottom">
-      <a-col :span="12">
-        <DailyOutput :dataFromPa="props.value1" :chartName="props.value2"></DailyOutput>
-      </a-col>
-      <a-col :span="12">
-        <DailyDegrade :dataFromPa="props.value1" :chartName="props.value2"/>
-      </a-col>
-    </a-row>
+    <a-flex gap="middle" horizontal justify="flex-start" align="center">
+      <div>当前工单Current WO：</div>
+    <a-select
+        v-model:value="selectorInit"
+        mode="combobox"
+        style="width: 40%"
+        placeholder="Please select"
+        :options="selectorOptions"
+        @change="ShiftOnChange"
+    />
+    </a-flex>
+
+    <a-divider style="height: 2px; background-color: #7cb305"/>
 
     <a-row justify="center" align="top">
       <a-col :span="24">
-        <DailyScrap :dataFromPa="props.value1" :chartName="props.value2"/>
-        <DailyDefect :dataFromPa="props.value1" :chartName="props.value2"/>
-
-      </a-col>
-
-    </a-row>
-    <a-row>
-      <a-col :span="24">
-        <Comment :dataFromPa="props.value1" :chartName="props.value2"/>
+        <DayScrap :dataFromPa="dataFromPa" />
+        <a-divider style="height: 2px; background-color: #7cb305"/>
+        <DailyDefect :dataFromPa="dataFromPa" />
       </a-col>
     </a-row>
   </div>

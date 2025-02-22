@@ -71,8 +71,8 @@ function axiosCall() {
       StartTime: currentDay + " 00:01:00",
       EndTime: tomorrowDay + " 00:01:00",
       TimesFlag: 7,
-      MaxResultCount: 1000
-      // LineCodes: "SJC01-01"
+      MaxResultCount: 1000,
+      LineCodes: "SJC01-01"
 
     },
     contentType: "json",

@@ -4,6 +4,8 @@ import FramingHourlyChart from "./chart/FramingHourlyChart.vue";
 import OutputChart from "./chart/OutputChat1.vue";
 import ELhourlyChart from "./chart/ELhourlyChart.vue";
 import LayupHourlyChart from "./chart/LayupHourlyChart.vue";
+import PackingHourlyChart from "./chart/PackingHourlyChart.vue";
+import SortingHourlyChart from "./chart/SortingHourlyChart.vue";
 
 const getDateStore = getDate();
 console.log(getDateStore.getCurrentDay)
@@ -42,6 +44,20 @@ console.log(getDateStore.getCurrentDay)
     <a-col :span="11">
       <div>
         <FramingHourlyChart/>
+      </div>
+    </a-col>
+  </a-row>
+  <a-divider style="height: 2px; background-color: #7cb305"/>
+  <a-row>
+    <a-col :span="12">
+      <div>
+        <SortingHourlyChart/>
+      </div>
+    </a-col>
+    <a-divider type="vertical" style="height: 500px; background-color: #7cb305"/>
+    <a-col :span="11">
+      <div>
+        <PackingHourlyChart/>
       </div>
     </a-col>
   </a-row>

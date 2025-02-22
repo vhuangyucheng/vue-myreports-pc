@@ -1,6 +1,6 @@
 <script setup>
 import DailyOutput from "./DailyOutput.vue";
-import DailyScrap from "./DailyScrap.vue";
+import DailyScrap from "../../woReport/dayChart/DailyScrap.vue";
 import {toRefs, defineProps} from 'vue'
 import DailyDefect from "./DailyDefect.vue";
 import DailyDegrade from "./DailyDegrade.vue";

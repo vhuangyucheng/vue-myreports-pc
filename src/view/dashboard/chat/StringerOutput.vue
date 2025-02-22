@@ -46,6 +46,8 @@ function axiosCall() {
       NGRateB = shift.ngstringB === 0 ? 0 : (shift.ngstringB / (shift.okstringB + shift.ngstringB) * 100).toFixed(1) + "%"
       NGArray.value.push(NGRateA)
       NGArray.value.push(NGRateB)
+      console.log("NGRateA", NGRateA)
+      console.log("NGRateB", NGRateB)
       return shift
     });
     // console.log(viewList)
